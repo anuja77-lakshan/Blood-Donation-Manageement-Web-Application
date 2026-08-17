@@ -24,7 +24,7 @@ body {
 }
 
 /* Headers*/
-.navigationbar {
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -48,7 +48,7 @@ body {
 .logo span { color: var(--text-primary); }
 .logo.light span { color: #ffffff; }
 
-.navigation-links a {
+.nav-links a {
     text-decoration: none;
     color: var(--text-secondary);
     margin: 0 16px;
@@ -56,7 +56,7 @@ body {
     font-size: 14px;
     transition: color 0.2s ease;
 }
-.navigation-links a.active, .navigation-links a:hover {
+.nav-links a.active, .nav-links a:hover {
     color: var(--blood-red);
 }
 
