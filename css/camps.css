@@ -1,7 +1,7 @@
 :root {
   --primary: #ef3446;
   --primary-hover: #cc141e;
-  --text-dark: #0f172a;
+  --text-dark: #000000;
   --text-muted: #64748b;
   --border-light: #e2e8f0;
 }
@@ -55,10 +55,29 @@ html, body {
   text-decoration: none;
 }
 
-.brand-logo i {
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
   color: var(--primary);
+  text-decoration: none;
 }
 
+.brand-logo-img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  display: block;
+}
+
+.brand-logo-text {
+  font-size: 22px;
+  font-weight: 900;
+  color: black;
+}
 .nav-links {
   display: flex;
   align-items: center;
