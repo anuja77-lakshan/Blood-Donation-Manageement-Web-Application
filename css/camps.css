@@ -110,6 +110,48 @@ html, body {
   cursor: pointer;
 }
 
+/*profile greeting*/
+.user-greeting {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.user-greeting i {
+  font-size: 19px;
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.user-greeting span {
+  display: inline-block;
+  line-height: 1;
+  font-weight: 700;
+  margin-top: 1px;
+}
+
+.user-greeting:hover {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+  color: var(--primary);
+}
+
 /* Main Layout */
 .main-content {
   padding-top: 36px;
@@ -174,7 +216,7 @@ html, body {
   box-shadow: 0 4px 14px rgba(230, 25, 36, 0.3);
   transition: all 0.2s ease;
   white-space: nowrap;
-  margin-top: 50px;
+  margin-top: 41px;
 }
 
 .btn-add:hover {
