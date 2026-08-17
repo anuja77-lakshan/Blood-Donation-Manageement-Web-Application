@@ -1,0 +1,122 @@
+/* Base Styles */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Hero Entrance Animations */
+@keyframes heroEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-image-animate   { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both; }
+.hero-badge-animate   { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
+.hero-title-animate   { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both; }
+.hero-desc-animate    { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.40s both; }
+.hero-actions-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.52s both; }
+
+/* Scroll Reveal */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stagger-1 { transition-delay: 0.08s; }
+.stagger-2 { transition-delay: 0.18s; }
+.stagger-3 { transition-delay: 0.28s; }
+.stagger-4 { transition-delay: 0.38s; }
+
+/* Button & Card Hover Interactions */
+.btn-tactile {
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.2s ease,
+                box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.2s ease;
+}
+
+.btn-tactile:hover {
+    transform: translateY(-1.5px) scale(1.025);
+}
+
+.btn-tactile:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.step-card {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.25s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 28px -6px rgba(15, 17, 21, 0.09), 0 8px 14px -4px rgba(15, 17, 21, 0.05);
+}
+
+/* Mobile Menu Transition */
+#mobile-menu {
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease,
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: top center;
+}
+
+#mobile-menu.menu-closed {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    overflow: hidden;
+}
+
+#mobile-menu.menu-open {
+    max-height: 380px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Accessibility / Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .reveal-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .btn-tactile:hover,
+    .btn-tactile:active,
+    .step-card:hover {
+        transform: none !important;
+    }
+
+    .hero-image-animate,
+    .hero-badge-animate,
+    .hero-title-animate,
+    .hero-desc-animate,
+    .hero-actions-animate {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
