@@ -8,20 +8,6 @@
   --bg-light: #f8fafc;
 }
 
-/* --- [ADDED: Smooth Cross-Document Slide/Scroll Transition] --- */
-@view-transition {
-  navigation: auto;
-}
-
-html {
-  view-transition-name: root;
-}
-
-/* Old page slides out smoothly */
-::view-transition-old(root) {
-  animation: 0.4s cubic-bezier(0.4, 0, 0.2, 1) both slide-out-left;
-}
-
 /* Global Reset and Box Sizing */
 * {
   box-sizing: border-box;
@@ -236,7 +222,6 @@ body {
   margin-top: 4px;
 }
 
-/* [ADDED: File dropzone & upload button styles] */
 .file-dropzone {
   position: relative;
   width: 100%;
