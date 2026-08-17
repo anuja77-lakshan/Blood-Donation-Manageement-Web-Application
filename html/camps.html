@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BloodLink - Upcoming Blood Camps</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/camps.css">
+</head>
+<body>
+
+  <!-- Top Full Width Navbar -->
+  <header class="header-section">
+    <div class="full-screen-container navbar">
+      <a href="#" class="brand-logo">
+        <i class="fa-solid fa-heart"></i> BloodLink
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#" class="active">Camps</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#"><i class="fa-regular fa-circle-user user-profile"></i></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Full Screen Content -->
+  <main class="full-screen-container main-content">
+    
+    <!-- Title & Add Button Row -->
+    <div class="page-title-row">
+      <div class="title-group">
+        <div class="section-tag">Save a Life Today</div>
+        <h1 class="main-heading">UPCOMING BLOOD CAMPS</h1>
+        <p class="sub-text">Browse and register for blood donation camps near you. Help save lives by participating.</p>
+      </div>
+      <a href="../html/add_camps.html" class="btn-add" style="text-decoration: none;">
+        <i class="fa-solid fa-plus"></i> ADD BLOOD CAMPS
+      </a>
+        
+    </div>
+
+    <!-- 100% Full-Width Search Input -->
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="searchInput" placeholder="Search by camp name, organization name or location...">
+    </div>
+
+    <!-- Scrollable Cards Slider with 5 Cards -->
+    <div class="camps-carousel-wrap">
+      <button class="arrow-btn prev" id="prevBtn" title="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+      
+      <div class="camps-slider" id="campsSlider">
+        <!-- Card 1 -->
+        <div class="camp-card">
+          <div class="card-img-wrap">
+            <img src="../images/card1.png" 
+                 alt="City Central Blood Drive" 
+                 onerror="this.src='https://placehold.co/800x400/991b1b/ffffff?text=Blood+Donation+Drive'">
+            <span class="badge badge-today">Today</span>
+            <div class="location-overlay">
+              <i class="fa-solid fa-location-dot"></i> Sri Lanka Red Cross Society, Dharmapala Mawatha, Colombo 07.
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="org-title">Red Cross Society</div>
+            <h3 class="camp-name">City Central Blood Drive</h3>
+            <div class="meta-row">
+              <i class="fa-regular fa-calendar"></i> Aug 22, 2026
+            </div>
+            <div class="meta-row">
+              <i class="fa-regular fa-clock"></i> 8:00 AM – 4:00 PM
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="camp-card">
+          <div class="card-img-wrap">
+            <img src="../images/card2.png" 
+                 alt="Hope & Heal Blood Camp" 
+                 onerror="this.src='https://placehold.co/800x400/065f46/ffffff?text=Hope+%26+Heal+Camp'">
+            <span class="badge badge-open">Open</span>
+            <div class="location-overlay">
+              <i class="fa-solid fa-location-dot"></i> Rajarata University Exam Hall, Mihintale.
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="org-title">Rajarata University Medical Faculty</div>
+            <h3 class="camp-name">Hope & Heal Blood Camp</h3>
+            <div class="meta-row">
+              <i class="fa-regular fa-calendar"></i> Aug 25, 2026
+            </div>
+            <div class="meta-row">
+              <i class="fa-regular fa-clock"></i> 9:00 AM – 5:00 PM
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="camp-card">
+          <div class="card-img-wrap">
+            <img src="../images/card3.png" 
+                 alt="United We Donate Drive" 
+                 onerror="this.src='https://placehold.co/800x400/92400e/ffffff?text=United+We+Donate'">
+            <span class="badge badge-tomorrow">Tomorrow</span>
+            <div class="location-overlay">
+              <i class="fa-solid fa-location-dot"></i> Karapitiya National Hospital, Galle.
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="org-title">National Health Mission</div>
+            <h3 class="camp-name">United We Donate Drive</h3>
+            <div class="meta-row">
+              <i class="fa-regular fa-calendar"></i> Sep 3, 2026
+            </div>
+            <div class="meta-row">
+              <i class="fa-regular fa-clock"></i> 7:30 AM – 3:00 PM
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="camp-card">
+          <div class="card-img-wrap">
+            <img src="../images/card4.png" 
+                 alt="Youth Life Saver Drive" 
+                 onerror="this.src='https://placehold.co/800x400/1e40af/ffffff?text=Youth+Life+Saver'">
+            <span class="badge badge-open">Open</span>
+            <div class="location-overlay">
+              <i class="fa-solid fa-location-dot"></i> Town Hall, Colombo
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="org-title">Rotary Club International</div>
+            <h3 class="camp-name">Youth Life Saver Drive</h3>
+            <div class="meta-row">
+              <i class="fa-regular fa-calendar"></i> Sep 10, 2026
+            </div>
+            <div class="meta-row">
+              <i class="fa-regular fa-clock"></i> 9:00 AM – 4:30 PM
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="camp-card">
+          <div class="card-img-wrap">
+            <img src="../images/card5.png" 
+                 alt="Universal Hope Donation" 
+                 onerror="this.src='https://placehold.co/800x400/854d0e/ffffff?text=Universal+Hope'">
+            <span class="badge badge-yesterday">Yesterday</span>
+            <div class="location-overlay">
+              <i class="fa-solid fa-location-dot"></i> City Center, Kandy
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="org-title">Lions Club Apex</div>
+            <h3 class="camp-name">Universal Hope Donation</h3>
+            <div class="meta-row">
+              <i class="fa-regular fa-calendar"></i> Sep 18, 2026
+            </div>
+            <div class="meta-row">
+              <i class="fa-regular fa-clock"></i> 8:30 AM – 3:30 PM
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="arrow-btn next" id="nextBtn" title="Next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Nearby Camps Map Section -->
+    <div class="map-section">
+      <div class="map-header">
+        <span class="vertical-bar"></span>
+        <h2>NEARBY CAMPS</h2>
+        <span class="sub-map-label">based on your location</span>
+      </div>
+      <div id="map"></div>
+    </div>
+  </main>
+
+  <!-- Contact Bar -->
+  <div class="info-bar">
+    <div class="full-screen-container info-bar-content">
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-solid fa-headset"></i></div>
+        <div class="info-text">
+          <span>Admin</span>
+          <strong>+94 12 345 6789</strong>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-solid fa-droplet"></i></div>
+        <div class="info-text">
+          <span>Blood Bank</span>
+          <strong>+94 12 345 6789</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="full-screen-container footer-grid">
+      <div class="footer-col brand-col">
+        <h3>University Logo</h3>
+        
+        <div class="footer-label">Address</div>
+        <div class="footer-val">Rajarata University, Mihintale, Anuradhapura<br>Sri Lanka.</div>
+
+        <div class="footer-label">Contact</div>
+        <div class="footer-val">+94 12 345 6789</div>
+
+        <div class="footer-label">Email Address</div>
+        <div class="footer-val">lorem@gmail.com</div>
+
+        <div class="footer-label">Find Us On</div>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col links-col">
+        <div class="footer-label header-label">Quick Link</div>
+        <ul class="footer-links">
+          <li><a href="#">lorem ipsum</a></li>
+          <li><a href="#">lorem ipsum</a></li>
+          <li><a href="#">lorem ipsum</a></li>
+          <li><a href="#">lorem ipsum</a></li>
+          <li><a href="#">lorem ipsum</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col help-col">
+        <div class="doc-help-badge">
+          <div class="badge-title">DOC HELP</div>
+          <div class="badge-number">011 123 4567</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Custom JS -->
+  <script src="../js/camps.js"></script>
+</body>
+</html>
