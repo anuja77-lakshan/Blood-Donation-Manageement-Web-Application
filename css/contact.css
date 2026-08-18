@@ -40,66 +40,118 @@ body {
   align-items: center;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 10px;
+  font-size: 24px;
+  font-weight: 800;
+  color: #111;
+  text-decoration: none;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: var(--primary);
   text-decoration: none;
 }
 
 .brand-logo-img {
-  height: 28px;
-  width: auto;
+  width: 45px;
+  height: 45px;
   object-fit: contain;
+  display: block;
 }
 
 .brand-logo-text {
-  font-size: 1.2rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: #0f172a;
-  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: 900;
+  color: black;
 }
-
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 36px;
   list-style: none;
 }
 
 .nav-links a {
   text-decoration: none;
-  font-size: 0.825rem;
-  font-weight: 600;
-  color: #475569;
+  color: #334155;
+  font-weight: 500;
+  font-size: 15px;
   transition: color 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--color-red);
+  color: var(--primary);
 }
 
+.nav-links a.active {
+  border-bottom: 2.5px solid var(--primary);
+  padding-bottom: 4px;
+  font-weight: 600;
+}
+
+.user-profile {
+  font-size: 22px;
+  color: #334155;
+  cursor: pointer;
+}
+
+/*profile greeting*/
 .user-greeting {
-  background-color: #f8fafc;
-  padding: 0.45rem 0.9rem;
-  border-radius: 9999px;
-  border: 1px solid var(--color-bordergray);
-  color: #0f172a !important;
-  font-weight: 600 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1;
+  transition: all 0.2s ease;
 }
 
 .user-greeting i {
-  font-size: 1rem;
-  color: #64748b;
+  font-size: 19px;
+  color: #ef3446 !important;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.user-greeting span {
+  display: inline-block;
+  line-height: 1;
+  font-weight: 700;
+  margin-top: 1px;
 }
 
 .user-greeting:hover {
-  background-color: #f1f5f9;
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+  color: var(--primary);
 }
 
 /* Main Content Layout */
