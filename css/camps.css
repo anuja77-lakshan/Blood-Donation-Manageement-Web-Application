@@ -49,16 +49,6 @@ html, body {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 24px;
-  font-weight: 800;
-  color: #111;
-  text-decoration: none;
-}
-
-.brand-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   font-size: 22px;
   font-weight: 900;
   letter-spacing: 0.5px;
@@ -102,12 +92,6 @@ html, body {
   border-bottom: 2.5px solid var(--primary);
   padding-bottom: 4px;
   font-weight: 600;
-}
-
-.user-profile {
-  font-size: 22px;
-  color: #334155;
-  cursor: pointer;
 }
 
 /*profile greeting*/
@@ -444,144 +428,31 @@ html, body {
   z-index: 1;
 }
 
-/* Contact Bar */
-.info-bar {
-  width: 100%;
-  background-color: #262626;
-  color: white;
-  padding: 20px 0;
-}
-
-.info-bar-content {
-  display: flex;
-  justify-content: center;
-  gap: clamp(40px, 10vw, 150px);
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.info-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #404040;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
-
-.info-text span {
-  display: block;
-  font-size: 12px;
-  color: #a3a3a3;
-}
-
-.info-text strong {
-  font-size: 18px;
-  font-weight: 700;
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .camp-card {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
 }
 
 /* Footer Section */
 .footer-section {
   width: 100%;
   background-color: #000000;
-  color: white;
-  padding: 50px 0 35px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 40px;
-  align-items: end;
-}
-
-.brand-col h3 {
-  font-size: 18px;
-  font-weight: 800;
-  margin-bottom: 16px;
-}
-
-.footer-label {
-  font-size: 11px;
   color: #a3a3a3;
-  font-weight: 800;
-  text-transform: uppercase;
-  margin-top: 14px;
-  margin-bottom: 2px;
+  padding: 24px 0;
+  border-top: 1px solid #1a1a1a;
 }
 
-.footer-label.header-label {
-  margin-top: 0;
-  margin-bottom: 14px;
-  font-size: 13px;
-  color: #ffffff;
-}
-
-.footer-val {
-  font-size: 13px;
-  color: #e5e5e5;
-  line-height: 1.5;
-}
-
-.social-links {
-  display: flex;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.social-links a {
-  color: white;
-  font-size: 15px;
-}
-
-.footer-links {
-  list-style: none;
-}
-
-.footer-links li {
-  margin-bottom: 8px;
-}
-
-.footer-links a {
-  color: #a3a3a3;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.help-col {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.doc-help-badge {
-  background: white;
-  color: #111;
-  padding: 10px 22px;
-  border-radius: 10px;
+.footer-content {
   text-align: center;
 }
 
-.doc-help-badge .badge-title {
-  font-size: 11px;
-  font-weight: 900;
-}
-
-.doc-help-badge .badge-number {
-  font-size: 15px;
-  font-weight: 900;
-}
-
-/* Responsiveness */
-@media (max-width: 1024px) {
-  .camp-card {
-    flex: 0 0 calc((100% - 24px) / 2);
-  }
+.footer-content p {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  margin: 0;
 }
 
 @media (max-width: 768px) {
@@ -591,17 +462,16 @@ html, body {
   .page-title-row {
     flex-direction: column;
   }
-  .footer-grid {
-    grid-template-columns: 1fr;
+  
+  /*Responsive Footer*/
+  .footer-section {
+    padding: 18px 0;
   }
-  .help-col {
-    justify-content: flex-start;
+  .footer-content p {
+    font-size: 12px;
+    line-height: 1.4;
   }
-  .info-bar-content {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
+
   .arrow-btn.prev { left: 4px; }
   .arrow-btn.next { right: 4px; }
 }
