@@ -133,8 +133,7 @@ body {
 
 .user-greeting i {
   font-size: 19px;
-  color: var(--primary);
-  display: inline-flex;
+  color: #ef3446 !important;
   align-items: center;
   justify-content: center;
   line-height: 0;
