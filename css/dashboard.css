@@ -24,11 +24,7 @@ body {
 }
 
 /* Headers*/
-<<<<<<< HEAD
-.navigationbar {
-=======
 .navbar {
->>>>>>> c7135361c701fb00520f0321d799a5570744edbd
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,11 +48,7 @@ body {
 .logo span { color: var(--text-primary); }
 .logo.light span { color: #ffffff; }
 
-<<<<<<< HEAD
 .navigation-links a {
-=======
-.nav-links a {
->>>>>>> c7135361c701fb00520f0321d799a5570744edbd
     text-decoration: none;
     color: var(--text-secondary);
     margin: 0 16px;
@@ -64,11 +56,7 @@ body {
     font-size: 14px;
     transition: color 0.2s ease;
 }
-<<<<<<< HEAD
 .navigation-links a.active, .navigation-links a:hover {
-=======
-.nav-links a.active, .nav-links a:hover {
->>>>>>> c7135361c701fb00520f0321d799a5570744edbd
     color: var(--blood-red);
 }
 
