@@ -7,6 +7,11 @@
     --bloodlink-lightgray: #f8fafc;
     --bloodlink-bordergray: #e2e8f0;
     --font-main: 'Inter', sans-serif;
+    
+    /* Variables added to support the updated navbar design */
+    --primary: #ef3446;
+    --text-dark: #000000;
+    --border-light: #e2e8f0;
 }
 
 /* Base Styles */
@@ -16,7 +21,6 @@
   padding: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
-
 
 html {
     scroll-behavior: smooth;
@@ -43,6 +47,13 @@ ul {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+.full-screen-container {
+  width: 100%;
+  max-width: 100% !important;
+  padding-left: clamp(24px, 4.5vw, 70px);
+  padding-right: clamp(24px, 4.5vw, 70px);
 }
 
 /* Header & Navbar */
@@ -150,6 +161,7 @@ ul {
   border-color: #fca5a5;
   color: var(--primary);
 }
+
 /* Mobile Menu Transition */
 .mobile-menu {
     transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
