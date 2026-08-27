@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Blood Camp - BloodLink</title>
+
+  <!-- Font Awesome Icons for UI Elements -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="../css/add_camps.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="header-section">
+    <div class="full-screen-container navbar">
+      <!-- Website Brand Logo -->
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-heart"></i> BloodLink
+      </a>
+      <!-- Navigation Links -->
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="index.html" class="active">Camps</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#"><i class="fa-regular fa-circle-user user-profile"></i></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="full-screen-container form-main">
+    
+    <!-- Navigation Back Link -->
+    <a href="../html/camps.html" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i> Back to Camps
+    </a>
+
+    <div class="form-wrapper">
+      <!-- Form Header -->
+      <div class="form-header">
+        <div class="section-tag">Camp Registration</div>
+        <h1 class="main-heading">ADD NEW BLOOD CAMP</h1>
+        <p class="sub-text">Fill in the details below to register and publish a new blood donation camp event.</p>
+      </div>
+
+      <!-- Add Camp Form (Pure HTML Submission/Redirection) -->
+      <form action="index.html" method="GET">
+        
+        <!-- Camp Title & Organizing Body -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="campName">Camp Name <span>*</span></label>
+            <input type="text" id="campName" name="campName" placeholder="e.g., City Central Blood Drive" required>
+          </div>
+          <div class="form-group">
+            <label for="orgName">Organization Name <span>*</span></label>
+            <input type="text" id="orgName" name="orgName" placeholder="e.g., Red Cross Society" required>
+          </div>
+        </div>
+
+        <!-- Date, Start Time & End Time -->
+        <div class="form-row three-cols">
+          <div class="form-group">
+            <label for="campDate">Date <span>*</span></label>
+            <input type="date" id="campDate" name="campDate" required>
+          </div>
+          <div class="form-group">
+            <label for="startTime">Start Time <span>*</span></label>
+            <input type="time" id="startTime" name="startTime" required>
+          </div>
+          <div class="form-group">
+            <label for="endTime">End Time <span>*</span></label>
+            <input type="time" id="endTime" name="endTime" required>
+          </div>
+        </div>
+
+        <!-- Location Venue Address -->
+        <div class="form-group full-width">
+          <label for="campLocation">Location / Venue Address <span>*</span></label>
+          <input type="text" id="campLocation" name="campLocation" placeholder="e.g., Community Hall, MG Road, Bengaluru" required>
+        </div>
+
+        <!-- Cover Image upload -->
+        <div class="form-group full-width">
+          <label>Cover Image (Upload)</label>
+          <div class="file-dropzone">
+            <input type="file" id="coverImage" name="coverImage" accept="image/*">
+            <div class="dropzone-content">
+              <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+              <span class="dropzone-title">Click to browse or drag and drop image here</span>
+              <span class="dropzone-hint">PNG, JPG, JPEG, WEBP up to 5MB</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="form-actions">
+          <a href="index.html" class="btn-cancel">Cancel</a>
+          <button type="submit" class="btn-submit">
+            <i class="fa-solid fa-check"></i> Publish Blood Camp
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </main>
+
+</body>
+</html>

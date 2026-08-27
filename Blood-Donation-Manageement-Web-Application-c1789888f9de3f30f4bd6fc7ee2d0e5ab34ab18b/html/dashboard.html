@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloodLink - Dashboard</title>
+    
+    <!--Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS File Set-->
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <!-- Font-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet.js and Map CSS Code -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+    <!--Header-->
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-droplet icon-drop"></i> BLOOD<span>LINK</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="camps.html">Camps</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="user-profile">
+            <span>HI ANUJA!</span>
+            <div class="profile-avatar"><i class="fa-solid fa-user"></i></div>
+        </div>
+    </header>
+
+    <main class="dashboard-wrapper">
+        <!System Metrics Bar-->
+        <section class="overview-section">
+            <p class="tagline">LIVE SYSTEM DASHBOARD</p>
+            <h2 class="title">Donation Network Overview</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="card-top"><span>New Visitors (Today)</span> <i class="fa-regular fa-eye"></i></div>
+                    <div class="card-num">1,240</div>
+                    <span class="trend success">+12.4% vs last week</span>
+                </div>
+                <div class="metric-card">
+                    <div class="card-top"><span>Registered Donors</span> <i class="fa-regular fa-heart"></i></div>
+                    <div class="card-num">4,812</div>
+                    <span class="trend">+48 new registrations today</span>
+                </div>
+                <div class="metric-card highlight-card">
+                    <div class="card-top"><span>Active Camps</span> <i class="fa-regular fa-flag"></i></div>
+                    <div class="card-num">18</div>
+                    <span class="trend">3 ending soon (urgent)</span>
+                </div>
+                <div class="metric-card highlight-card">
+                    <div class="card-top"><span>Public Comments</span> <i class="fa-regular fa-message"></i></div>
+                    <div class="card-num">342</div>
+                    <span class="trend">98% positive sentiment</span>
+                </div>
+            </div>
+        </section>
+
+        <!--Cards for emergancy -->
+        <section class="action-card-banner">
+            <div class="banner-img">
+                <img src="../images/card1.png" alt="Become a Donor">
+            </div>
+            <div class="banner-details">
+                <p class="tagline">JOIN THE REGISTRY</p>
+                <h2>Become a Donor Today & Save Local Lives</h2>
+                <p>Every individual donation can save up to three lives.Our centralized network coordinates directly with regional blood banks,ensuring your contribution lands exactly where the emergency demand is highest.</p>
+                <div class="btn-cluster">
+                    <a href="camps.html" class="btn btn-red">REGISTER AS DONOR</a>
+                    <button class="btn btn-border">CHECK ELIGIBILITY</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="action-card-banner reverse-layout">
+            <div class="banner-img">
+                <img src="../images/card2.png" alt="Urgent Blood Assistance">
+            </div>
+            <div class="banner-details">
+                <p class="tagline emergency-tag">EMERGENCY REQUESTS</p>
+                <h2>Do You Need Urgent Blood Assistance?</h2>
+                <p>If you or a family member requires immediate blood replenishment for critical procedures or urgent surgical intervention, you can post a verified emergency request onto our active campaign network immediately.</p>
+                <div class="btn-cluster">
+                    <a href="#request-area" class="btn btn-red">REQUEST EMERGENCY BLOOD</a>
+                    <button class="btn btn-border">CLINICAL GUIDELINES</button>
+                </div>
+            </div>
+        </section>
+
+        <!--Featured Camps-->
+        <section class="campaign-spotlight">
+            <div class="spotlight-head">
+                <div>
+                    <p class="tagline">ACTIVE COMMUNITY DRIVES</p>
+                    <h2>Featured Camps</h2>
+                </div>
+                <a href="camps.html" class="btn btn-red btn-sm">ALL CAMPS &rarr;</a>
+            </div>
+            <div class="camp-highlight-card">
+                <div class="thumb-wrapper">
+                    <img src="../images/card3.png" alt="Save Lives Event">
+                </div>
+                <div class="info-wrapper">
+                    <span class="urgent-indicator">URGENT DRIVE 2026 - ANURADHAPURA</span>
+                    <h3>Anuradhapura General Mobilization Drive</h3>
+                    <p>This weekend, BLOODLINK is partnering with regional blood banks to launch our largest quarterly donor collection drive. We are targeting high reserves for A+ and O- negative types. Register to reserve a specific time slot or walk in directly.</p>
+                    <div class="btn-cluster">
+                        <a href="camps.html" class="btn btn-red btn-sm">PLEDGE FOR DRIVE</a>
+                        <a href="camps.html" class="link-forward">Learn more about this drive &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Blood level-->
+        <section class="stock-dashboard-section">
+            <p class="tagline text-center">REAL-TIME RESERVE STATUS</p>
+            <h2 class="title text-center">Current Blood Stock Levels</h2>
+            <div class="stock-dashboard-grid">
+                <div class="stock-box">
+                    <div class="box-top"><strong>A+</strong><span class="badge optimal">OPTIMAL</span></div>
+                    <div class="meter"><div class="fill" style="width: 84%;"></div></div>
+                    <span class="meter-num">84%</span>
+                </div>
+                <div class="stock-box">
+                    <div class="box-top"><strong>B+</strong><span class="badge optimal">OPTIMAL</span></div>
+                    <div class="meter"><div class="fill" style="width: 72%;"></div></div>
+                    <span class="meter-num">72%</span>
+                </div>
+                <div class="stock-box">
+                    <div class="box-top"><strong>O+</strong><span class="badge moderate">MODERATE</span></div>
+                    <div class="meter"><div class="fill" style="width: 48%;"></div></div>
+                    <span class="meter-num">48%</span>
+                </div>
+                <div class="stock-box">
+                    <div class="box-top"><strong>AB+</strong><span class="badge optimal">OPTIMAL</span></div>
+                    <div class="meter"><div class="fill" style="width: 90%;"></div></div>
+                    <span class="meter-num">90%</span>
+                </div>
+                <div class="stock-box critical-box">
+                    <div class="box-top"><strong>A-</strong><span class="badge critical">CRITICAL ALERT</span></div>
+                    <div class="meter"><div class="fill fill-critical" style="width: 22%;"></div></div>
+                    <span class="meter-num">22%</span>
+                </div>
+                <div class="stock-box">
+                    <div class="box-top"><strong>B-</strong><span class="badge moderate">MODERATE</span></div>
+                    <div class="meter"><div class="fill" style="width: 35%;"></div></div>
+                    <span class="meter-num">35%</span>
+                </div>
+                <div class="stock-box critical-box">
+                    <div class="box-top"><strong>O-</strong><span class="badge critical">CRITICAL ALERT</span></div>
+                    <div class="meter"><div class="fill fill-critical" style="width: 12%;"></div></div>
+                    <span class="meter-num">12%</span>
+                </div>
+                <div class="stock-box">
+                    <div class="box-top"><strong>AB-</strong><span class="badge stable">STABLE</span></div>
+                    <div class="meter"><div class="fill" style="width: 65%;"></div></div>
+                    <span class="meter-num">65%</span>
+                </div>
+            </div>
+        </section>
+
+        <!--Sri Laanka Map using leaflet js-->
+        <section class="nearby-section">
+            <div class="map-header-flex">
+                <div>
+                    <p class="tagline">INTERACTIVE LOCATOR</p>
+                    <h2 class="title">Find Nearby Camps & Blood Banks</h2>
+                </div>
+                <div class="map-legend">
+                    <span class="legend-item"><span class="dot camp-dot"></span> Blood Donation Camps</span>
+                    <span class="legend-item"><span class="dot hospital-dot"></span> Hospitals / Blood Banks</span>
+                </div>
+            </div>
+            
+            <div id="bloodLinkMap" class="map-render-area"></div>
+        </section>
+    </main>
+
+    <!--Footer section-->
+    <footer class="footer-block" id="contact">
+        <div class="helpline-bar">
+            <span><i class="fa-solid fa-phone"></i> Urgent Helpline Referral System</span>
+            <span>DIRECT DISPATCH: <strong>+94 25 226 6641</strong></span>
+        </div>
+        <div class="footer-content">
+            <div class="f-col main-info">
+                <div class="logo light"><i class="fa-solid fa-droplet"></i> BLOOD<span>LINK</span></div>
+                <p>In collaboration with the Faculty of Technology, Rajarata University of Sri Lanka. Empowering centralized blood network with verified electronic accessibility.</p>
+                <div class="social-row">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="f-col">
+                <h4>CAMPUS LOCATION</h4>
+                <p>Faculty of Technology,<br>Rajarata University of Sri Lanka,<br>Mihintale, Sri Lanka.</p>
+            </div>
+            <div class="f-col">
+                <h4>DIRECT LINE</h4>
+                <p>General Contact: +94 25 226 6641</p>
+                <p>Email: bloodlink@gov.lk</p>
+            </div>
+            <div class="f-col hotline-col">
+                <div class="hotline-card">
+                    <small>Are you facing an immediate emergency?</small>
+                    <span class="phone-digits">1990 (Hotline)</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copy">
+            <p>&copy; 2026 BLOODLINK. Centralized Blood Donation Management System. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!--Leaflet JS Map-->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../js/map.js"></script>
+</body>
+</html>
