@@ -8,7 +8,7 @@
     <!--Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- CSS File Set-->
     <link rel="stylesheet" href="../css/dashboard.css">
@@ -18,23 +18,28 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
-
-    <!--Header-->
-    <header class="navbar">
-        <div class="logo">
-            <i class="fa-solid fa-droplet icon-drop"></i> BLOOD<span>LINK</span>
-        </div>
-        <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="dashboard.html" class="active">Dashboard</a>
-            <a href="camps.html">Camps</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        <div class="user-profile">
-            <span>HI ANUJA!</span>
-            <div class="profile-avatar"><i class="fa-solid fa-user"></i></div>
-        </div>
-    </header>
+    
+<!--Header-->
+  <header class="header-section">
+    <div class="full-screen-container navbar">
+      <a href="../html/dashboard.html" class="brand-logo">
+        <img src="../images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
+        <span class="brand-logo-text">BLOODLINK</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><a href="camps.html">Camps</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+          <a href="#" class="user-greeting">
+            <i class="fa-regular fa-circle-user"></i>
+            <span>Hi Anuja!</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
 
     <main class="dashboard-wrapper">
         <!System Metrics Bar-->
@@ -186,42 +191,58 @@
         </section>
     </main>
 
-    <!--Footer section-->
-    <footer class="footer-block" id="contact">
-        <div class="helpline-bar">
-            <span><i class="fa-solid fa-phone"></i> Urgent Helpline Referral System</span>
-            <span>DIRECT DISPATCH: <strong>+94 25 226 6641</strong></span>
+    <!--Contact Info Bar-Footer -->
+    <div class="info-bar">
+      <div class="info-bar-content">
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+          <div class="info-text">
+            <span>TOLL FREE HELPLINE</span>
+            <strong>1990 / +94 25 226 6641</strong>
+          </div>
         </div>
-        <div class="footer-content">
-            <div class="f-col main-info">
-                <div class="logo light"><i class="fa-solid fa-droplet"></i> BLOOD<span>LINK</span></div>
-                <p>In collaboration with the Faculty of Technology, Rajarata University of Sri Lanka. Empowering centralized blood network with verified electronic accessibility.</p>
-                <div class="social-row">
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="f-col">
-                <h4>CAMPUS LOCATION</h4>
-                <p>Faculty of Technology,<br>Rajarata University of Sri Lanka,<br>Mihintale, Sri Lanka.</p>
-            </div>
-            <div class="f-col">
-                <h4>DIRECT LINE</h4>
-                <p>General Contact: +94 25 226 6641</p>
-                <p>Email: bloodlink@gov.lk</p>
-            </div>
-            <div class="f-col hotline-col">
-                <div class="hotline-card">
-                    <small>Are you facing an immediate emergency?</small>
-                    <span class="phone-digits">1990 (Hotline)</span>
-                </div>
-            </div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="info-text">
+            <span>EMAIL SUPPORT</span>
+            <strong>info@bloodlink.lk</strong>
+          </div>
         </div>
-        <div class="footer-copy">
-            <p>&copy; 2026 BLOODLINK. Centralized Blood Donation Management System. All Rights Reserved.</p>
+      </div>
+    </div>
+
+    <!--Footer Section-->
+    <footer class="footer-section" id="contact">
+      <div class="full-screen-container">
+        <div class="footer-grid">
+          <div class="brand-col">
+            <h3>BLOODLINK</h3>
+            <p class="footer-val">Connecting voluntary blood donors with regional banks & hospitals across Sri Lanka to save lives 24/7.</p>
+            <div class="social-links">
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-twitter"></i></a>
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+          </div>
+
+          <div class="links-col">
+            <p class="footer-label header-label">QUICK LINKS</p>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="dashboard.html">Dashboard</a></li>
+              <li><a href="camps.html">Donation Camps</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div class="help-col">
+            <div class="doc-help-badge">
+              <div class="badge-title">EMERGENCY HOTLINE</div>
+              <div class="badge-number">+94 25 226 6641</div>
+            </div>
+          </div>
         </div>
+      </div>
     </footer>
 
     <!--Leaflet JS Map-->
