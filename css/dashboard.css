@@ -23,58 +23,119 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Container Helper */
+.full-screen-container {
+  width: 100%;
+  max-width: 100% !important;
+  padding-left: clamp(24px, 4.5vw, 70px);
+  padding-right: clamp(24px, 4.5vw, 70px);
+}
+
 /* Headers*/
+.header-section {
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  background: #ffffff;
+}
+
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 8%;
-    background: #ffffff;
-    border-bottom: 1px solid var(--border-color);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 18px;
+  padding-bottom: 18px;
 }
 
-.logo {
-    font-weight: 800;
-    font-size: 20px;
-    color: var(--blood-red);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    letter-spacing: -0.5px;
-}
-.logo span { color: var(--text-primary); }
-.logo.light span { color: #ffffff; }
-
-.navigation-links a {
-    text-decoration: none;
-    color: var(--text-secondary);
-    margin: 0 16px;
-    font-weight: 600;
-    font-size: 14px;
-    transition: color 0.2s ease;
-}
-.navigation-links a.active, .navigation-links a:hover {
-    color: var(--blood-red);
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: var(--blood-red);
+  text-decoration: none;
 }
 
-.user-profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    font-weight: 700;
+.brand-logo-img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  display: block;
 }
-.profile-avatar {
-    width: 32px;
-    height: 32px;
-    background: var(--border-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.brand-logo-text {
+  font-size: 22px;
+  font-weight: 900;
+  color: black;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #334155;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--blood-red);
+}
+
+.nav-links a.active {
+  border-bottom: 2.5px solid var(--blood-red);
+  padding-bottom: 4px;
+  font-weight: 600;
+}
+
+/*profile greeting*/
+.user-greeting {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background-color: #f1f5f9;
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.user-greeting i {
+  font-size: 19px;
+  color: var(--blood-red);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.user-greeting span {
+  display: inline-block;
+  line-height: 1;
+  font-weight: 700;
+  margin-top: 1px;
+}
+
+.user-greeting:hover {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+  color: var(--blood-red);
 }
 
 /* Main Dashboard */
@@ -296,32 +357,135 @@ body {
 }
 
 /* Footer */
-.footer-block {
-    background: #090c10;
-    color: #94a3b8;
+.info-bar {
+  width: 100%;
+  background-color: #262626;
+  color: white;
+  padding: 20px 0;
 }
-.helpline-bar {
-    display: flex;
-    justify-content: space-between;
-    padding: 12px 8%;
-    border-bottom: 1px solid #1e293b;
-    font-size: 13px;
-}
-.footer-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.5fr;
-    gap: 40px;
-    padding: 40px 8%;
-}
-.footer-content p { font-size: 13px; line-height: 1.6; margin-top: 10px; }
-.footer-content h4 { color: #ffffff; font-size: 13px; margin-bottom: 14px; font-weight: 700; }
-.social-row a { color: #ffffff; margin-right: 12px; font-size: 14px; }
 
-.hotline-card {
-    background: #1e293b;
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 4px solid var(--blood-red);
+.info-bar-content {
+  display: flex;
+  justify-content: center;
+  gap: clamp(40px, 10vw, 150px);
 }
-.phone-digits { display: block; color: #ef4444; font-size: 20px; font-weight: 800; margin-top: 4px; }
-.footer-copy { border-top: 1px solid #1e293b; text-align: center; padding: 20px; font-size: 12px; }
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.info-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #404040;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--blood-red);
+}
+
+.info-text span {
+  display: block;
+  font-size: 12px;
+  color: #a3a3a3;
+}
+
+.info-text strong {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.footer-section {
+  width: 100%;
+  background-color: #000000;
+  color: white;
+  padding: 50px 0 35px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  align-items: end;
+}
+
+.brand-col h3 {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.footer-label {
+  font-size: 11px;
+  color: #a3a3a3;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-top: 14px;
+  margin-bottom: 2px;
+}
+
+.footer-label.header-label {
+  margin-top: 0;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: #ffffff;
+}
+
+.footer-val {
+  font-size: 13px;
+  color: #e5e5e5;
+  line-height: 1.5;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.social-links a {
+  color: white;
+  font-size: 15px;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  color: #a3a3a3;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.help-col {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.doc-help-badge {
+  background: white;
+  color: #111;
+  padding: 10px 22px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.doc-help-badge .badge-title {
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--blood-red);
+}
+
+.doc-help-badge .badge-number {
+  font-size: 15px;
+  font-weight: 900;
+}
