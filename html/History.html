@@ -17,29 +17,28 @@
 </head>
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen justify-between">
 
-   <!-- Top Full Width Navbar -->
-  <header class="header-section">
-    <div class="full-screen-container navbar">
-      <a href="../html/home.html" class="brand-logo">
-        <img src="../images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
-        <span class="brand-logo-text">BLOODLINK</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="camps.html" class="active">Camps</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li>
-          <a href="personal-account.html" class="user-greeting">
-            <i class="fa-regular fa-circle-user"></i>
-            <span>Hi, Vishmitha</span>
-          </a>
-        </li>
-      </ul>
+  <!-- Navigation Bar -->
+  <header class="bg-white border-b border-gray-100 py-4 px-8 flex justify-between items-center max-w-7xl mx-auto w-full">
+    <!-- Logo -->
+    <div class="flex items-center space-x-2">
+      <i class="fa-solid fa-heart text-red-600 text-2xl"></i>
+      <span class="text-2xl font-extrabold tracking-wider text-gray-900">BLOODLINK</span>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="hidden md:flex space-x-10 items-center font-bold text-sm tracking-wide">
+      <a href="#" class="text-gray-800 hover:text-red-600">HOME</a>
+      <a href="#" class="text-red-600 border-b-2 border-red-600 pb-1">DASHBOARD</a>
+      <a href="#" class="text-gray-800 hover:text-red-600">CAMPS</a>
+      <a href="#" class="text-gray-800 hover:text-red-600">CONTACT</a>
+    </nav>
+
+    <!-- User Profile Icon -->
+    <div class="w-10 h-10 rounded-full border border-red-500 text-red-600 flex items-center justify-center font-medium text-sm">
+      JD
     </div>
   </header>
 
-   
   <!-- Main Content Container -->
   <main class="max-w-7xl mx-auto w-full px-8 py-8 flex-grow">
     
