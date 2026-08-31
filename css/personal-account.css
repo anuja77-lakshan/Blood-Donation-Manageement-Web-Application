@@ -6,6 +6,7 @@
             --bg-color: #FFFFFF;
             --text-dark: #2D3748;
             --text-light: #A0AEC0;
+            --border-light: #e2e8f0;
         }
             body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -16,22 +17,22 @@
         flex-direction: column;
         min-height: 100vh;
         align-items: center;
-     }
+       }
 
-
-            /* Header & Navbar */
+        /* Header & Navbar */
         .header-section {
         width: 100%;
         border-bottom: 1px solid var(--border-light);
         background: #ffffff;
         }
-
         .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 18px;
-        padding-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        
+            padding: 8px 50px 5px 50px; 
+            width: 100%;
+            box-sizing: border-box; 
         }
 
         .brand-logo {
@@ -41,7 +42,7 @@
         font-size: 22px;
         font-weight: 900;
         letter-spacing: 0.5px;
-        color: var(--primary);
+        color: var(--primary-color);
         text-decoration: none;
         }
 
@@ -74,11 +75,11 @@
 
         .nav-links a:hover,
         .nav-links a.active {
-        color: var(--primary);
+        color: var(--primary-color);
         }
 
         .nav-links a.active {
-        border-bottom: 2.5px solid var(--primary);
+        border-bottom: 2.5px solid var(--primary-color);
         padding-bottom: 4px;
         font-weight: 600;
         }
@@ -103,7 +104,7 @@
 
         .user-greeting i {
         font-size: 19px;
-        color: var(--primary);
+        color: var(--primary-color);
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -122,17 +123,16 @@
         .user-greeting:hover {
         background-color: #fee2e2;
         border-color: #fca5a5;
-        color: var(--primary);
+        color: var(--primary-color);
         }
                 
-
-
             /* Header Section */
             .header {
                 display: flex;
                 align-items: center;
                 gap: 15px;
                 margin-bottom: 30px;
+                margin-top: 30px;
             
             }
 
@@ -327,6 +327,39 @@
         letter-spacing: 0.3px;
         margin: 0;
         }
+
+
+        
+        /* ----------Entrance Animations & Scroll Reveal---------- */
+        .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+        }
+
+        .reveal-on-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        }
+
+        @keyframes heroEntrance {
+        from {
+            opacity: 0;
+            transform: translateY(22px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        }
+
+        /* Entrance delays matching your HTML classes */
+        .hero-badge-animate   { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
+        .hero-title-animate   { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both; }
+        .hero-desc-animate    { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.40s both; }
+        .hero-actions-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.52s both; }
+
 
         @media (max-width: 768px) {
         .camp-card {
