@@ -32,22 +32,6 @@ body {
 }
 
 /* Headers*/
-<<<<<<< HEAD
-<<<<<<< HEAD
-.navigationbar {
-=======
-.navbar {
->>>>>>> 17d5c037098d10a57c1db4d545df1fcaa365b4d5
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 8%;
-    background: #ffffff;
-    border-bottom: 1px solid var(--border-color);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-=======
 .header-section {
   width: 100%;
   border-bottom: 1px solid var(--border-color);
@@ -60,7 +44,6 @@ body {
   align-items: center;
   padding-top: 18px;
   padding-bottom: 18px;
->>>>>>> b5acaabeede743c412a41d178e3a27bd9a788d2b
 }
 
 .brand-logo {
