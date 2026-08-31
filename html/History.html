@@ -1,229 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Blood Donation History - BLOODLINK</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons CDN -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BloodLink - Donation History</title>
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-    body {
+    :root {
+      --primary-red: #e63946;
+      --hover-red: #d62828;
+      --bg-light: #f8f9fa;
+      --text-dark: #1d3557;
+      --text-muted: #6c757d;
+      --border-color: #e9ecef;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
       font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #333;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 8%;
+      background: #fff;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: #111;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    /* Custom Logo Icon Style */
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #4a5568;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a.active {
+      color: var(--primary-red);
+      border-bottom: 2px solid var(--primary-red);
+      padding-bottom: 4px;
+    }
+
+    .user-badge {
+      background-color: #f1f5f9;
+      padding: 8px 16px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #334155;
+      font-size: 0.9rem;
+    }
+
+    .user-badge i {
+      color: var(--primary-red);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .sub-title {
+      color: var(--primary-red);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .main-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 5px;
+    }
+
+    .description {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* Compact Stat Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+    }
+
+    .stat-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.85rem 1.1rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    }
+
+    .stat-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-card-header i {
+      color: var(--primary-red);
+      font-size: 0.95rem;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 4px 0 2px 0;
+    }
+
+    .stat-footer {
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+
+    /* Table Section */
+    .section-header {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-red);
+      margin-bottom: 1.2rem;
+      display: inline-block;
+    }
+
+    .filters-bar {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-input, .filter-select {
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      outline: none;
+      font-size: 0.85rem;
+      color: #334155;
+      background: #fff;
+    }
+
+    .filter-input {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    /* Table Styling */
+    .table-container {
+      overflow-x: auto;
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f8fafc;
+      padding: 12px 16px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #475569;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.88rem;
+      color: #334155;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge-success {
+      background-color: #dcfce7;
+      color: #15803d;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Pre-footer Bar */
+    .contact-bar {
+      background: #111;
+      color: #fff;
+      padding: 1.2rem 8%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 3.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .contact-icon {
+      background: var(--primary-red);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-info small {
+      display: block;
+      color: #94a3b8;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .contact-info span {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    /* Footer Styling */
+    footer {
+      background: #000000;
+      color: #fff;
+      padding: 2.5rem 8% 2rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-brand-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .footer-brand h2 {
+      font-size: 1.3rem;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-brand p {
+      color: #94a3b8;
+      font-size: 0.82rem;
+      max-width: 320px;
+      line-height: 1.5;
+    }
+
+    .footer-links h4 {
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 6px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.82rem;
+    }
+
+    /* Smaller Emergency Box Size */
+    .emergency-box {
+      background: #fff;
+      color: #000;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .emergency-box small {
+      color: var(--primary-red);
+      font-weight: 700;
+      display: block;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .emergency-box span {
+      font-weight: 800;
+      font-size: 0.85rem;
     }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen justify-between">
+<body>
 
-  <!-- Navigation Bar -->
-  <header class="bg-white border-b border-gray-100 py-4 px-8 flex justify-between items-center max-w-7xl mx-auto w-full">
-    <!-- Logo -->
-    <div class="flex items-center space-x-2">
-      <i class="fa-solid fa-heart text-red-600 text-2xl"></i>
-      <span class="text-2xl font-extrabold tracking-wider text-gray-900">BLOODLINK</span>
-    </div>
-
-    <!-- Navigation Links -->
-    <nav class="hidden md:flex space-x-10 items-center font-bold text-sm tracking-wide">
-      <a href="#" class="text-gray-800 hover:text-red-600">HOME</a>
-      <a href="#" class="text-red-600 border-b-2 border-red-600 pb-1">DASHBOARD</a>
-      <a href="#" class="text-gray-800 hover:text-red-600">CAMPS</a>
-      <a href="#" class="text-gray-800 hover:text-red-600">CONTACT</a>
-    </nav>
-
-    <!-- User Profile Icon -->
-    <div class="w-10 h-10 rounded-full border border-red-500 text-red-600 flex items-center justify-center font-medium text-sm">
-      JD
+  <!-- Header and Navigation Bar -->
+  <header class="header-section">
+    <div class="full-screen-container navbar">
+      <a href="../html/dashboard.html" class="brand-logo">
+        <img src="../images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
+        <span class="brand-logo-text">BLOODLINK</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><a href="camps.html">Camps</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+          <a href="#" class="user-greeting">
+            <i class="fa-regular fa-circle-user"></i>
+            <span>Hi Vishmitha!</span>
+          </a>
+        </li>
+      </ul>
     </div>
   </header>
+  <!-- Main Content -->
+  <div class="container">
+    <div class="sub-title">Save Lives. Track Your Impact.</div>
+    <h1 class="main-title">BLOOD DONATION HISTORY</h1>
+    <p class="description">View your previous blood donations and keep track of your contribution.</p>
 
-  <!-- Main Content Container -->
-  <main class="max-w-7xl mx-auto w-full px-8 py-8 flex-grow">
-    
-    <!-- Tagline & Heading -->
-    <div class="mb-8">
-      <div class="flex items-center space-x-2 text-xs font-bold text-red-600 uppercase tracking-widest mb-1">
-        <span class="inline-block w-1 h-3 bg-red-600"></span>
-        <span>Save Lives. Track Your Impact.</span>
+    <!-- Top Stats (Compact Size) -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card-header">
+          Total Donations
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <div class="stat-value">6</div>
+        <div class="stat-footer">Donations completed</div>
       </div>
-      <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">BLOOD DONATION HISTORY</h1>
-      <p class="text-gray-500 text-sm mt-1">View your previous blood donations and keep track of your contribution.</p>
+
+      <div class="stat-card">
+        <div class="stat-card-header">
+          Last Donation
+          <i class="fa-regular fa-calendar-check"></i>
+        </div>
+        <div class="stat-value">12 Aug 2026</div>
+        <div class="stat-footer">Most recent donation</div>
+      </div>
     </div>
 
-    <!-- Stats Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-      
-      <!-- Total Donations Card -->
-      <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm flex flex-col justify-between h-48 relative">
-        <div>
-          <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Donations</h3>
-          <p class="text-4xl font-extrabold text-gray-900 mt-2">6</p>
-        </div>
-        <p class="text-xs text-gray-400">Donations completed</p>
-        <!-- Heart Badge -->
-        <div class="absolute top-6 right-6 w-8 h-8 bg-red-50 rounded-full flex items-center justify-center">
-          <i class="fa-solid fa-heart text-red-500 text-sm"></i>
-        </div>
-      </div>
+    <!-- History Data Table Section -->
+    <div class="section-header">YOUR DONATION HISTORY</div>
 
-      <!-- Last Donation Card -->
-      <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm flex flex-col justify-between h-48 relative">
-        <div>
-          <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider">Last Donation</h3>
-          <p class="text-3xl font-extrabold text-gray-900 mt-2">12 Aug 2026</p>
-        </div>
-        <p class="text-xs text-gray-400">Most recent donation</p>
-        <!-- Calendar Badge -->
-        <div class="absolute top-6 right-6 border border-gray-200 rounded-md overflow-hidden text-center text-[10px] w-8">
-          <div class="bg-red-500 text-white font-bold py-0.5 text-[8px]">July</div>
-          <div class="bg-white text-gray-800 font-bold py-0.5">17</div>
-        </div>
-      </div>
-
+    <div class="filters-bar">
+      <input type="text" class="filter-input" placeholder="Search donation history...">
+      <select class="filter-select">
+        <option>Filter by Date</option>
+      </select>
+      <select class="filter-select">
+        <option>Status: Completed</option>
+      </select>
+      <select class="filter-select">
+        <option>Blood Group: All</option>
+      </select>
     </div>
 
-    <!-- History Section Header -->
-    <div class="border-b border-red-500 pb-2 mb-6">
-      <h2 class="text-lg font-bold text-gray-900 tracking-wide">YOUR DONATION HISTORY</h2>
-    </div>
-
-    <!-- Filters Section -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-      
-      <!-- Search Bar -->
-      <div class="relative">
-        <i class="fa-regular fa-eye absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
-        <input 
-          type="text" 
-          placeholder="Search donation history..." 
-          class="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-red-500 text-gray-600 bg-white"
-        />
-      </div>
-
-      <!-- Filter by Date -->
-      <div class="relative">
-        <select class="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white appearance-none focus:outline-none">
-          <option>Filter by Date</option>
-        </select>
-        <i class="fa-solid fa-caret-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs"></i>
-      </div>
-
-      <!-- Status Filter -->
-      <div class="relative">
-        <select class="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white appearance-none focus:outline-none">
-          <option>Status: Completed</option>
-        </select>
-        <i class="fa-solid fa-caret-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs"></i>
-      </div>
-
-      <!-- Blood Group Filter -->
-      <div class="relative">
-        <select class="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white appearance-none focus:outline-none">
-          <option>Blood Group: All</option>
-        </select>
-        <i class="fa-solid fa-caret-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs"></i>
-      </div>
-
-    </div>
-
-    <!-- Data Table -->
-    <div class="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm">
-      <table class="w-full text-left border-collapse">
+    <div class="table-container">
+      <table>
         <thead>
-          <tr class="bg-gray-50 text-xs font-bold text-gray-500 uppercase tracking-wider border-b border-gray-100">
-            <th class="py-4 px-6">Date</th>
-            <th class="py-4 px-6">Location</th>
-            <th class="py-4 px-6">Donation Camp / Blood Bank</th>
-            <th class="py-4 px-6 text-center">Status</th>
+          <tr>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Donation Camp / Blood Bank</th>
+            <th>Status</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-gray-100 text-xs md:text-sm">
-          
-          <!-- Row 1 -->
-          <tr class="hover:bg-gray-50">
-            <td class="py-4 px-6 font-bold text-gray-900">12 Aug 2026</td>
-            <td class="py-4 px-6 text-gray-700">Rajarata University</td>
-            <td class="py-4 px-6 text-gray-700">University Blood Donation Camp</td>
-            <td class="py-4 px-6 text-center">
-              <span class="bg-green-100 text-green-700 font-semibold px-4 py-1.5 rounded-full text-xs">Completed</span>
-            </td>
+        <tbody>
+          <tr>
+            <td>12 Aug 2026</td>
+            <td>Colombo</td>
+            <td>National Blood Transfusion Service</td>
+            <td><span class="badge-success">Completed</span></td>
           </tr>
-
-          <!-- Row 2 -->
-          <tr class="hover:bg-gray-50">
-            <td class="py-4 px-6 font-bold text-gray-900">18 May 2026</td>
-            <td class="py-4 px-6 text-gray-700">Anuradhapura Blood Bank</td>
-            <td class="py-4 px-6 text-gray-700">Blood Donation Drive</td>
-            <td class="py-4 px-6 text-center">
-              <span class="bg-green-100 text-green-700 font-semibold px-4 py-1.5 rounded-full text-xs">Completed</span>
-            </td>
+          <tr>
+            <td>15 Feb 2026</td>
+            <td>Kandy</td>
+            <td>Kandy General Hospital Camp</td>
+            <td><span class="badge-success">Completed</span></td>
           </tr>
-
-          <!-- Row 3 -->
-          <tr class="hover:bg-gray-50">
-            <td class="py-4 px-6 font-bold text-gray-900">20 Jan 2026</td>
-            <td class="py-4 px-6 text-gray-700">Community Hall</td>
-            <td class="py-4 px-6 text-gray-700">Community Blood Drive</td>
-            <td class="py-4 px-6 text-center">
-              <span class="bg-green-100 text-green-700 font-semibold px-4 py-1.5 rounded-full text-xs">Completed</span>
-            </td>
+          <tr>
+            <td>10 Aug 2025</td>
+            <td>Galle</td>
+            <td>Karapitiya Blood Bank</td>
+            <td><span class="badge-success">Completed</span></td>
           </tr>
-
-          <!-- Row 4 -->
-          <tr class="hover:bg-gray-50">
-            <td class="py-4 px-6 font-bold text-gray-900">15 Sep 2025</td>
-            <td class="py-4 px-6 text-gray-700">Teaching Hospital</td>
-            <td class="py-4 px-6 text-gray-700">Blood Donation Camp</td>
-            <td class="py-4 px-6 text-center">
-              <span class="bg-green-100 text-green-700 font-semibold px-4 py-1.5 rounded-full text-xs">Completed</span>
-            </td>
-          </tr>
-
         </tbody>
       </table>
     </div>
+  </div>
 
-  </main>
+  <!-- Helpline Contact Bar -->
+  <div class="contact-bar">
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+      <div class="contact-info">
+        <small>Toll Free Helpline</small>
+        <span>1990 / +94 25 226 6641</span>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+      <div class="contact-info">
+        <small>Email Support</small>
+        <span>info@bloodlink.lk</span>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
-  <footer class="bg-slate-950 text-white py-10 px-8 mt-12">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-xs">
-      
-      <!-- Left Column: Logo & Address -->
-      <div>
-        <div class="flex items-center space-x-2 mb-4">
-          <i class="fa-solid fa-heart text-red-600 text-lg"></i>
-          <span class="text-xl font-extrabold tracking-wider">BLOODLINK</span>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-brand-header">
+          <svg class="brand-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 15C50 15 30 40 30 55C30 66.0457 38.9543 75 50 75C61.0457 75 70 66.0457 70 55C70 40 50 15 50 15Z" stroke="#e63946" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M50 40C46 40 42 44 42 49C42 54 50 60 50 60C50 60 58 54 58 49C58 44 54 40 50 40Z" fill="#e63946"/>
+            <path d="M20 50C20 50 20 70 30 80C35 85 42 88 50 88C58 88 65 85 70 80C80 70 80 50 80 50" stroke="#e63946" stroke-width="6" stroke-linecap="round"/>
+            <path d="M15 55L28 68" stroke="#e63946" stroke-width="6" stroke-linecap="round"/>
+            <path d="M85 55L72 68" stroke="#e63946" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <h2>BLOODLINK</h2>
         </div>
-        <p class="font-bold text-sm text-gray-200">RAJARATA UNIVERSITY OF SRI LANKA</p>
-        <p class="text-gray-400 mt-1">Mihintale, Anuradhapura, Sri Lanka.</p>
-        <p class="text-gray-400 mt-3">Emergency Contact Support (24/7):</p>
+        <p>Connecting voluntary blood donors with regional banks & hospitals across Sri Lanka to save lives 24/7.</p>
       </div>
-
-      <!-- Middle Column: Quick Links -->
-      <div>
-        <h4 class="font-bold text-sm text-white mb-4 uppercase tracking-wider">Quick Links</h4>
-        <ul class="space-y-2 text-gray-300">
-          <li><a href="#" class="hover:text-white">Home</a></li>
-          <li><a href="#" class="hover:text-white">Dashboard</a></li>
-          <li><a href="#" class="hover:text-white">Blood Camps</a></li>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Donation Camps</a></li>
+          <li><a href="#">Contact Us</a></li>
         </ul>
       </div>
-
-      <!-- Right Column: Connect With Us -->
-      <div>
-        <h4 class="font-bold text-sm text-white mb-4 uppercase tracking-wider">Connect With Us</h4>
-        <p class="text-gray-400 mb-4 leading-relaxed">Join our community drives and stay updated on local camps.</p>
-        <div class="flex space-x-4 text-gray-300 text-sm">
-          <a href="#" class="hover:text-white"><i class="fa-solid fa-heart"></i></a>
-          <a href="#" class="hover:text-white"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" class="hover:text-white"><i class="fa-brands fa-twitter"></i></a>
-          <a href="#" class="hover:text-white"><i class="fa-brands fa-linkedin-in"></i></a>
-        </div>
+      <div class="emergency-box">
+        <small>Emergency Hotline</small>
+        <span>+94 25 226 6641</span>
       </div>
-
     </div>
   </footer>
 
