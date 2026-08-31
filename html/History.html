@@ -3,332 +3,461 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>BloodLink - Donation History</title>
-  <!-- Google Fonts & Font Awesome Icons -->
+
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
+
     :root {
-      --primary-red: #e63946;
-      --hover-red: #d62828;
-      --bg-light: #f8f9fa;
-      --text-dark: #1d3557;
-      --text-muted: #6c757d;
-      --border-color: #e9ecef;
+      --primary: #ef3348;
+      --text-dark: #071936;
+      --text-light: #60708a;
+      --border-light: #dce4ef;
+      --background: #f7f9fc;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
+      box-sizing: border-box;
     }
 
     body {
-      background-color: #ffffff;
-      color: #333;
+      font-family: 'Inter', sans-serif;
+      background: var(--background);
+      color: var(--text-dark);
     }
 
-    /* Navbar styling */
+
+    /* =====================================
+       NAVBAR
+    ===================================== */
+
+    .header-section {
+      width: 100%;
+      background: #ffffff;
+      border-bottom: 1px solid #dce4ef;
+    }
+
+    .full-screen-container {
+      width: 100%;
+      max-width: 1400px;
+      margin: auto;
+      padding-left: 65px;
+      padding-right: 65px;
+    }
+
     .navbar {
+      height: 82px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 8%;
-      background: #fff;
-      border-bottom: 1px solid var(--border-color);
+      justify-content: space-between;
     }
 
-    .brand {
+
+    /* Logo */
+
+    .brand-logo {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-weight: 800;
-      font-size: 1.4rem;
-      color: #111;
       text-decoration: none;
-      letter-spacing: 0.5px;
     }
 
-    /* Custom Logo Icon Style */
-    .brand-icon {
-      width: 32px;
-      height: 32px;
+    .brand-logo-img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
     }
+
+    .brand-logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      color: #050505;
+      letter-spacing: 0.2px;
+    }
+
+
+    /* Navigation */
 
     .nav-links {
       display: flex;
-      gap: 2rem;
-      list-style: none;
       align-items: center;
+      gap: 36px;
+      list-style: none;
     }
 
     .nav-links a {
       text-decoration: none;
-      color: #4a5568;
-      font-weight: 600;
-      font-size: 0.95rem;
+      color: #071936;
+      font-size: 15px;
+      font-weight: 500;
+      transition: 0.2s ease;
     }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+
+    /* Dashboard active */
 
     .nav-links a.active {
-      color: var(--primary-red);
-      border-bottom: 2px solid var(--primary-red);
-      padding-bottom: 4px;
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 6px;
     }
 
-    .user-badge {
-      background-color: #f1f5f9;
-      padding: 8px 16px;
-      border-radius: 20px;
-      display: flex;
+
+    /* User */
+
+    .user-greeting {
+      display: flex !important;
       align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      color: #334155;
-      font-size: 0.9rem;
+      gap: 9px;
+
+      padding: 11px 16px;
+
+      background: #f3f6fa;
+      border: 1px solid #dce4ef;
+
+      border-radius: 30px;
+
+      font-weight: 700 !important;
+      color: #071936 !important;
     }
 
-    .user-badge i {
-      color: var(--primary-red);
+    .user-greeting i {
+      color: var(--primary);
+      font-size: 18px;
     }
 
-    /* Main Container */
+    .user-greeting:hover {
+      background: #feecee;
+      border-color: #f7a4ad;
+      color: var(--primary) !important;
+    }
+
+
+    /* =====================================
+       MAIN CONTENT
+    ===================================== */
+
     .container {
-      max-width: 1200px;
-      margin: 2.5rem auto;
-      padding: 0 1.5rem;
+      max-width: 1250px;
+      margin: auto;
+      padding: 45px 30px 55px;
     }
+
+
+    /* Small red heading */
 
     .sub-title {
-      color: var(--primary-red);
-      font-size: 0.8rem;
+      color: #61748f;
+      font-size: 13px;
       font-weight: 700;
+      letter-spacing: 0.4px;
+      margin-bottom: 8px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 5px;
     }
 
+
+    /* Main title */
+
     .main-title {
-      font-size: 2rem;
+      font-size: 32px;
       font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 5px;
+      color: var(--text-dark);
+      margin-bottom: 9px;
     }
 
     .description {
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
+      color: #61748f;
+      font-size: 14px;
+      margin-bottom: 30px;
     }
 
-    /* Compact Stat Cards */
+
+    /* =====================================
+       STAT CARDS
+    ===================================== */
+
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
-      margin-bottom: 2.5rem;
-      max-width: 700px;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 38px;
     }
 
     .stat-card {
       background: #ffffff;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--border-light);
       border-radius: 10px;
-      padding: 0.85rem 1.1rem;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+      padding: 21px;
     }
 
     .stat-card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+
+      font-size: 13px;
+      color: #60708a;
+      font-weight: 600;
     }
 
     .stat-card-header i {
-      color: var(--primary-red);
-      font-size: 0.95rem;
+      color: #60708a;
+      font-size: 17px;
     }
 
     .stat-value {
-      font-size: 1.5rem;
+      font-size: 29px;
       font-weight: 800;
-      color: #0f172a;
-      margin: 4px 0 2px 0;
+      color: var(--text-dark);
+      margin-top: 10px;
+      margin-bottom: 5px;
     }
 
     .stat-footer {
-      font-size: 0.78rem;
-      color: #94a3b8;
+      font-size: 12px;
+      color: #718198;
     }
 
-    /* Table Section */
+
+    /* =====================================
+       HISTORY SECTION
+    ===================================== */
+
     .section-header {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #0f172a;
-      padding-bottom: 8px;
-      border-bottom: 2px solid var(--primary-red);
-      margin-bottom: 1.2rem;
-      display: inline-block;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 17px;
     }
+
+
+    /* Filters */
 
     .filters-bar {
       display: flex;
-      gap: 0.8rem;
-      margin-bottom: 1.2rem;
-      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
     }
 
-    .filter-input, .filter-select {
-      padding: 8px 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
+    .filter-input,
+    .filter-select {
+      height: 42px;
+
+      background: #ffffff;
+
+      border: 1px solid #cfd9e6;
+      border-radius: 7px;
+
+      padding: 0 13px;
+
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+
+      color: #52637b;
+
       outline: none;
-      font-size: 0.85rem;
-      color: #334155;
-      background: #fff;
     }
 
     .filter-input {
       flex: 1;
-      min-width: 200px;
     }
 
-    /* Table Styling */
+    .filter-input:focus,
+    .filter-select:focus {
+      border-color: var(--primary);
+    }
+
+
+    /* =====================================
+       TABLE
+    ===================================== */
+
     .table-container {
-      overflow-x: auto;
-      background: #fff;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      overflow: hidden;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      text-align: left;
+    }
+
+    thead {
+      background: #f7f9fc;
     }
 
     th {
-      background-color: #f8fafc;
-      padding: 12px 16px;
-      font-size: 0.8rem;
+      text-align: left;
+      padding: 17px 20px;
+
+      font-size: 12px;
       font-weight: 700;
-      color: #475569;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--border-color);
+
+      color: #53657e;
+
+      border-bottom: 1px solid var(--border-light);
     }
 
     td {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--border-color);
-      font-size: 0.88rem;
-      color: #334155;
+      padding: 18px 20px;
+
+      font-size: 13px;
+      color: #52637b;
+
+      border-bottom: 1px solid #edf1f6;
     }
 
     tr:last-child td {
       border-bottom: none;
     }
 
-    .badge-success {
-      background-color: #dcfce7;
-      color: #15803d;
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-size: 0.8rem;
-      font-weight: 600;
+    tr:hover td {
+      background: #fafbfc;
     }
 
-    /* Pre-footer Bar */
+
+    /* Completed badge */
+
+    .badge-success {
+      display: inline-block;
+
+      background: #dcfce7;
+      color: #15803d;
+
+      padding: 6px 12px;
+
+      border-radius: 20px;
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+
+    /* =====================================
+       CONTACT BAR
+    ===================================== */
+
     .contact-bar {
-      background: #111;
-      color: #fff;
-      padding: 1.2rem 8%;
+      background: #0b172b;
+
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 3.5rem;
+
+      gap: 120px;
+
+      padding: 25px 30px;
+
+      color: #ffffff;
     }
 
     .contact-item {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 13px;
     }
 
     .contact-icon {
-      background: var(--primary-red);
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
+
       border-radius: 50%;
+
+      background: var(--primary);
+
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
     }
 
     .contact-info small {
-      display: block;
-      color: #94a3b8;
-      font-size: 0.72rem;
-      text-transform: uppercase;
+      font-size: 10px;
+      color: #9aa8ba;
     }
 
     .contact-info span {
-      font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 13px;
+      font-weight: 600;
     }
 
-    /* Footer Styling */
+
+    /* =====================================
+       FOOTER
+    ===================================== */
+
     footer {
-      background: #000000;
-      color: #fff;
-      padding: 2.5rem 8% 2rem;
+      background: #020817;
+      color: #ffffff;
+      padding: 42px 50px;
     }
 
     .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-      margin-bottom: 1.5rem;
+      max-width: 1250px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+
+      gap: 70px;
     }
 
-    .footer-brand {
-      display: flex;
-      flex-direction: column;
-    }
+
+    /* Footer Brand */
 
     .footer-brand-header {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
+      gap: 10px;
+
+      margin-bottom: 14px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
     }
 
     .footer-brand h2 {
-      font-size: 1.3rem;
-      letter-spacing: 0.5px;
+      font-size: 20px;
+      font-weight: 800;
     }
 
     .footer-brand p {
-      color: #94a3b8;
-      font-size: 0.82rem;
-      max-width: 320px;
-      line-height: 1.5;
+      max-width: 500px;
+
+      color: #8d9aad;
+
+      font-size: 12px;
+      line-height: 1.7;
     }
 
+
+    /* Footer Links */
+
     .footer-links h4 {
-      margin-bottom: 10px;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 14px;
+      margin-bottom: 15px;
     }
 
     .footer-links ul {
@@ -336,189 +465,679 @@
     }
 
     .footer-links li {
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
 
     .footer-links a {
-      color: #94a3b8;
       text-decoration: none;
-      font-size: 0.82rem;
+      color: #8d9aad;
+      font-size: 12px;
     }
 
-    /* Smaller Emergency Box Size */
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+
+
+    /* Emergency */
+
     .emergency-box {
-      background: #fff;
-      color: #000;
-      padding: 6px 12px;
-      border-radius: 6px;
-      text-align: center;
-      display: inline-block;
+      border-left: 3px solid var(--primary);
+      padding-left: 17px;
     }
 
     .emergency-box small {
-      color: var(--primary-red);
-      font-weight: 700;
       display: block;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      color: #8d9aad;
+      font-size: 10px;
+      margin-bottom: 7px;
     }
 
     .emergency-box span {
-      font-weight: 800;
-      font-size: 0.85rem;
+      font-size: 15px;
+      font-weight: 700;
     }
+
+
+    /* =====================================
+       RESPONSIVE
+    ===================================== */
+
+    @media (max-width: 900px) {
+
+      .full-screen-container {
+        padding-left: 25px;
+        padding-right: 25px;
+      }
+
+      .nav-links {
+        gap: 18px;
+      }
+
+      .contact-bar {
+        gap: 50px;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+
+    @media (max-width: 700px) {
+
+      .navbar {
+        height: auto;
+        padding-top: 18px;
+        padding-bottom: 18px;
+
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filters-bar {
+        flex-direction: column;
+      }
+
+      .contact-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .table-container {
+        overflow-x: auto;
+      }
+
+      table {
+        min-width: 750px;
+      }
+    }
+
   </style>
+
 </head>
+
+
 <body>
 
-  <!-- Header and Navigation Bar -->
+
+  <!-- =====================================
+       NAVBAR
+  ===================================== -->
+
   <header class="header-section">
+
     <div class="full-screen-container navbar">
-      <a href="../html/dashboard.html" class="brand-logo">
-        <img src="../images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
-        <span class="brand-logo-text">BLOODLINK</span>
+
+
+      <!-- BloodLink Logo -->
+
+      <a href="../html/home.html" class="brand-logo">
+
+        <img
+          src="../images/bloodlink_logo.png"
+          alt="BloodLink Logo"
+          class="brand-logo-img"
+        >
+
+        <span class="brand-logo-text">
+          BLOODLINK
+        </span>
+
       </a>
+
+
+      <!-- Navigation -->
+
       <ul class="nav-links">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="dashboard.html" class="active">Dashboard</a></li>
-        <li><a href="camps.html">Camps</a></li>
-        <li><a href="contact.html">Contact</a></li>
+
         <li>
-          <a href="#" class="user-greeting">
-            <i class="fa-regular fa-circle-user"></i>
-            <span>Hi Vishmitha!</span>
+          <a href="home.html">
+            Home
           </a>
         </li>
+
+        <li>
+          <a href="dashboard.html" class="active">
+            Dashboard
+          </a>
+        </li>
+
+        <li>
+          <a href="camps.html">
+            Camps
+          </a>
+        </li>
+
+        <li>
+          <a href="contact.html">
+            Contact
+          </a>
+        </li>
+
+        <li>
+
+          <a
+            href="personal-account.html"
+            class="user-greeting"
+          >
+
+            <i class="fa-regular fa-circle-user"></i>
+
+            <span>
+              Hi Vishmitha!
+            </span>
+
+          </a>
+
+        </li>
+
       </ul>
+
     </div>
+
   </header>
-  <!-- Main Content -->
-  <div class="container">
-    <div class="sub-title">Save Lives. Track Your Impact.</div>
-    <h1 class="main-title">BLOOD DONATION HISTORY</h1>
-    <p class="description">View your previous blood donations and keep track of your contribution.</p>
 
-    <!-- Top Stats (Compact Size) -->
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-card-header">
-          Total Donations
-          <i class="fa-solid fa-heart"></i>
-        </div>
-        <div class="stat-value">6</div>
-        <div class="stat-footer">Donations completed</div>
+
+
+  <!-- =====================================
+       MAIN CONTENT
+  ===================================== -->
+
+  <main>
+
+    <div class="container">
+
+
+      <!-- Page Heading -->
+
+      <div class="sub-title">
+        YOUR DONATION JOURNEY
       </div>
 
-      <div class="stat-card">
-        <div class="stat-card-header">
-          Last Donation
-          <i class="fa-regular fa-calendar-check"></i>
+      <h1 class="main-title">
+        BLOOD DONATION HISTORY
+      </h1>
+
+      <p class="description">
+        View your previous blood donations and keep track of your contribution.
+      </p>
+
+
+
+      <!-- =====================================
+           STAT CARDS
+      ===================================== -->
+
+      <div class="stats-grid">
+
+
+        <!-- Total Donations -->
+
+        <div class="stat-card">
+
+          <div class="stat-card-header">
+
+            <span>
+              Total Donations
+            </span>
+
+            <i class="fa-solid fa-heart"></i>
+
+          </div>
+
+          <div class="stat-value">
+            6
+          </div>
+
+          <div class="stat-footer">
+            Donations completed
+          </div>
+
         </div>
-        <div class="stat-value">12 Aug 2026</div>
-        <div class="stat-footer">Most recent donation</div>
+
+
+
+        <!-- Last Donation -->
+
+        <div class="stat-card">
+
+          <div class="stat-card-header">
+
+            <span>
+              Last Donation
+            </span>
+
+            <i class="fa-regular fa-calendar-check"></i>
+
+          </div>
+
+          <div class="stat-value">
+            12 Aug 2026
+          </div>
+
+          <div class="stat-footer">
+            Most recent donation
+          </div>
+
+        </div>
+
       </div>
+
+
+
+      <!-- =====================================
+           DONATION HISTORY
+      ===================================== -->
+
+      <div class="section-header">
+        YOUR DONATION HISTORY
+      </div>
+
+
+
+      <!-- Filters -->
+
+      <div class="filters-bar">
+
+        <input
+          type="text"
+          class="filter-input"
+          placeholder="Search donation history..."
+        >
+
+
+        <select class="filter-select">
+
+          <option>
+            Filter by Date
+          </option>
+
+        </select>
+
+
+        <select class="filter-select">
+
+          <option>
+            Status: Completed
+          </option>
+
+        </select>
+
+
+        <select class="filter-select">
+
+          <option>
+            Blood Group: All
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- =====================================
+           HISTORY TABLE
+      ===================================== -->
+
+      <div class="table-container">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Date
+              </th>
+
+              <th>
+                Location
+              </th>
+
+              <th>
+                Donation Camp / Blood Bank
+              </th>
+
+              <th>
+                Status
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+
+            <!-- Donation 01 -->
+
+            <tr>
+
+              <td>
+                12 Aug 2026
+              </td>
+
+              <td>
+                Colombo
+              </td>
+
+              <td>
+                National Blood Transfusion Service
+              </td>
+
+              <td>
+
+                <span class="badge-success">
+                  Completed
+                </span>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- Donation 02 -->
+
+            <tr>
+
+              <td>
+                15 Feb 2026
+              </td>
+
+              <td>
+                Kandy
+              </td>
+
+              <td>
+                Kandy General Hospital Camp
+              </td>
+
+              <td>
+
+                <span class="badge-success">
+                  Completed
+                </span>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- Donation 03 -->
+
+            <tr>
+
+              <td>
+                10 Aug 2025
+              </td>
+
+              <td>
+                Galle
+              </td>
+
+              <td>
+                Karapitiya Blood Bank
+              </td>
+
+              <td>
+
+                <span class="badge-success">
+                  Completed
+                </span>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- Donation 04 -->
+
+            <tr>
+
+              <td>
+                22 Mar 2025
+              </td>
+
+              <td>
+                Badulla
+              </td>
+
+              <td>
+                Badulla General Hospital
+              </td>
+
+              <td>
+
+                <span class="badge-success">
+                  Completed
+                </span>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
     </div>
 
-    <!-- History Data Table Section -->
-    <div class="section-header">YOUR DONATION HISTORY</div>
+  </main>
 
-    <div class="filters-bar">
-      <input type="text" class="filter-input" placeholder="Search donation history...">
-      <select class="filter-select">
-        <option>Filter by Date</option>
-      </select>
-      <select class="filter-select">
-        <option>Status: Completed</option>
-      </select>
-      <select class="filter-select">
-        <option>Blood Group: All</option>
-      </select>
-    </div>
 
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Location</th>
-            <th>Donation Camp / Blood Bank</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>12 Aug 2026</td>
-            <td>Colombo</td>
-            <td>National Blood Transfusion Service</td>
-            <td><span class="badge-success">Completed</span></td>
-          </tr>
-          <tr>
-            <td>15 Feb 2026</td>
-            <td>Kandy</td>
-            <td>Kandy General Hospital Camp</td>
-            <td><span class="badge-success">Completed</span></td>
-          </tr>
-          <tr>
-            <td>10 Aug 2025</td>
-            <td>Galle</td>
-            <td>Karapitiya Blood Bank</td>
-            <td><span class="badge-success">Completed</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 
-  <!-- Helpline Contact Bar -->
+  <!-- =====================================
+       CONTACT BAR
+  ===================================== -->
+
   <div class="contact-bar">
+
+
     <div class="contact-item">
-      <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
-      <div class="contact-info">
-        <small>Toll Free Helpline</small>
-        <span>1990 / +94 25 226 6641</span>
+
+      <div class="contact-icon">
+        <i class="fa-solid fa-phone"></i>
       </div>
+
+      <div class="contact-info">
+
+        <small>
+          Toll Free Helpline
+        </small>
+
+        <span>
+          1990 / +94 25 226 6641
+        </span>
+
+      </div>
+
     </div>
+
+
+
     <div class="contact-item">
-      <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-      <div class="contact-info">
-        <small>Email Support</small>
-        <span>info@bloodlink.lk</span>
+
+      <div class="contact-icon">
+        <i class="fa-solid fa-envelope"></i>
       </div>
+
+      <div class="contact-info">
+
+        <small>
+          Email Support
+        </small>
+
+        <span>
+          info@bloodlink.lk
+        </span>
+
+      </div>
+
     </div>
+
+
   </div>
 
-  <!-- Footer -->
+
+
+  <!-- =====================================
+       FOOTER
+  ===================================== -->
+
   <footer>
+
     <div class="footer-content">
+
+
+      <!-- Brand -->
+
       <div class="footer-brand">
+
         <div class="footer-brand-header">
-          <svg class="brand-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 15C50 15 30 40 30 55C30 66.0457 38.9543 75 50 75C61.0457 75 70 66.0457 70 55C70 40 50 15 50 15Z" stroke="#e63946" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M50 40C46 40 42 44 42 49C42 54 50 60 50 60C50 60 58 54 58 49C58 44 54 40 50 40Z" fill="#e63946"/>
-            <path d="M20 50C20 50 20 70 30 80C35 85 42 88 50 88C58 88 65 85 70 80C80 70 80 50 80 50" stroke="#e63946" stroke-width="6" stroke-linecap="round"/>
-            <path d="M15 55L28 68" stroke="#e63946" stroke-width="6" stroke-linecap="round"/>
-            <path d="M85 55L72 68" stroke="#e63946" stroke-width="6" stroke-linecap="round"/>
+
+          <svg
+            class="brand-icon"
+            viewBox="0 0 100 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+
+            <path
+              d="M50 15C50 15 30 40 30 55C30 66.0457 38.9543 75 50 75C61.0457 75 70 66.0457 70 55C70 40 50 15 50 15Z"
+              stroke="#e63946"
+              stroke-width="6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <path
+              d="M50 40C46 40 42 44 42 49C42 54 50 60 50 60C50 60 58 54 58 49C58 44 54 40 50 40Z"
+              fill="#e63946"
+            />
+
+            <path
+              d="M20 50C20 50 20 70 30 80C35 85 42 88 50 88C58 88 65 85 70 80C80 70 80 50 80 50"
+              stroke="#e63946"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+
+            <path
+              d="M15 55L28 68"
+              stroke="#e63946"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+
+            <path
+              d="M85 55L72 68"
+              stroke="#e63946"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+
           </svg>
-          <h2>BLOODLINK</h2>
+
+          <h2>
+            BLOODLINK
+          </h2>
+
         </div>
-        <p>Connecting voluntary blood donors with regional banks & hospitals across Sri Lanka to save lives 24/7.</p>
+
+
+        <p>
+          Connecting voluntary blood donors with regional banks & hospitals
+          across Sri Lanka to save lives 24/7.
+        </p>
+
       </div>
+
+
+
+      <!-- Quick Links -->
+
       <div class="footer-links">
-        <h4>Quick Links</h4>
+
+        <h4>
+          Quick Links
+        </h4>
+
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Donation Camps</a></li>
-          <li><a href="#">Contact Us</a></li>
+
+          <li>
+            <a href="#">
+              Home
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Dashboard
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Donation Camps
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Contact Us
+            </a>
+          </li>
+
         </ul>
+
       </div>
+
+
+
+      <!-- Emergency -->
+
       <div class="emergency-box">
-        <small>Emergency Hotline</small>
-        <span>+94 25 226 6641</span>
+
+        <small>
+          Emergency Hotline
+        </small>
+
+        <span>
+          +94 25 226 6641
+        </span>
+
       </div>
+
+
     </div>
+
   </footer>
+
 
 </body>
 </html>
