@@ -3,14 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const map = L.map('bloodLinkMap').setView([7.8731, 80.7718], 8);
 
     // OpenStreetMap Tile Layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+    
+    // Size Refresh for Map rendaring
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 250);
 
     //Custom HTML Icons for Leaflet
     const campIcon = L.divIcon({
         className: 'custom-pin',
-        html: '<div style="background-color:#d32f2f; color:white; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.3);"><i class="fa-solid fa-tent"></i></div>',
+        html: '<div style="background-color:#ef3446; color:white; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.3);"><i class="fa-solid fa-tent"></i></div>',
         iconSize: [30, 30],
         iconAnchor: [15, 15]
     });
@@ -87,12 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
     //Adding Camp Marks
     donationCamps.forEach(camp => {
         const popupContent = `
-            <div style="font-family:sans-serif; padding:5px;">
-                <span style="color:#d32f2f; font-size:10px; font-weight:bold; text-transform:uppercase;">Donation Camp</span>
-                <h4 style="margin:4px 0; font-size:14px;">${camp.title}</h4>
-                <p style="margin:2px 0; font-size:12px; color:#555;"><strong>Date:</strong> ${camp.date}</p>
-                <p style="margin:2px 0; font-size:12px; color:#555;"><strong>Venue:</strong> ${camp.location}</p>
-                <a href="camps.html" style="display:inline-block; margin-top:6px; font-size:11px; color:#d32f2f; font-weight:bold;">Pledge for Drive &rarr;</a>
+            <div style="font-family:'Inter', sans-serif; padding:5px;">
+                <span style="color:#ef3446; font-size:10px; font-weight:bold; text-transform:uppercase;">Donation Camp</span>
+                <h4 style="margin:4px 0; font-size:14px; color:#0f172a;">${camp.title}</h4>
+                <p style="margin:2px 0; font-size:12px; color:#64748b;"><strong>Date:</strong> ${camp.date}</p>
+                <p style="margin:2px 0; font-size:12px; color:#64748b;"><strong>Venue:</strong> ${camp.location}</p>
+                <a href="camps.html" style="display:inline-block; margin-top:6px; font-size:11px; color:#ef3446; font-weight:bold; text-decoration:none;">Pledge for Drive &rarr;</a>
             </div>
         `;
         L.marker(camp.coords, { icon: campIcon }).addTo(map).bindPopup(popupContent);
@@ -101,11 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //Adding Hospital Marks
     hospitals.forEach(hosp => {
         const popupContent = `
-            <div style="font-family:sans-serif; padding:5px;">
+            <div style="font-family:'Inter', sans-serif; padding:5px;">
                 <span style="color:#0284c7; font-size:10px; font-weight:bold; text-transform:uppercase;">Blood Bank / Hospital</span>
-                <h4 style="margin:4px 0; font-size:14px;">${hosp.name}</h4>
-                <p style="margin:2px 0; font-size:12px; color:#555;"><strong>Facility:</strong> ${hosp.type}</p>
-                <p style="margin:2px 0; font-size:12px; color:#555;"><strong>Contact:</strong> ${hosp.contact}</p>
+                <h4 style="margin:4px 0; font-size:14px; color:#0f172a;">${hosp.name}</h4>
+                <p style="margin:2px 0; font-size:12px; color:#64748b;"><strong>Facility:</strong> ${hosp.type}</p>
+                <p style="margin:2px 0; font-size:12px; color:#64748b;"><strong>Contact:</strong> ${hosp.contact}</p>
             </div>
         `;
         L.marker(hosp.coords, { icon: hospitalIcon }).addTo(map).bindPopup(popupContent);
