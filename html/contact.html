@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - BloodLink</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="../css/contact.css" />
+</head>
+<body>
+
+  <header class="header-section">
+    <div class="full-screen-container navbar">
+      <a href="../html/home.html" class="brand-logo">
+        <img src="../images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
+        <span class="brand-logo-text">BLOODLINK</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="camps.html">Camps</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li>
+          <a href="personal-account.html" class="user-greeting">
+            <i class="fa-regular fa-circle-user"></i>
+            <span>Hi, senith</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <section class="hero-section">
+      <h1 class="hero-title">GET IN TOUCH WITH <span class="text-red">BLOODLINK.</span></h1>
+      <p class="hero-subtitle">
+        Connecting voluntary donors, patients, blood banks and camp organizers across <strong>Sri Lanka.</strong>
+      </p>
+    </section>
+
+    <div class="contact-grid">
+      
+      <div class="channels-column">
+        <div class="section-badge">CONTACT CHANNELS</div>
+        <h2 class="section-title">REACH US DIRECTLY</h2>
+        <div class="accent-line"></div>
+
+        <div class="contact-cards-list">
+          
+          <a href="mailto:support@bloodlink.lk" class="contact-card">
+            <div class="card-icon-box">
+              <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="card-content">
+              <span class="card-label">EMAIL</span>
+              <span class="card-value">support@bloodlink.lk</span>
+            </div>
+          </a>
+
+          <a href="tel:+94112345678" class="contact-card">
+            <div class="card-icon-box">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="card-content">
+              <span class="card-label">PHONE</span>
+              <span class="card-value">+94 11 234 5678</span>
+            </div>
+          </a>
+
+          <a href="https://www.bloodlink.lk" target="_blank" class="contact-card">
+            <div class="card-icon-box">
+              <i class="fa-solid fa-globe"></i>
+            </div>
+            <div class="card-content">
+              <span class="card-label">WEBSITE</span>
+              <span class="card-value">www.bloodlink.lk</span>
+            </div>
+          </a>
+
+          <div class="contact-card">
+            <div class="card-icon-box">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="card-content">
+              <span class="card-label">LOCATION</span>
+              <span class="card-value">Rajarata University, Sri Lanka</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="social-section">
+          <span class="social-label">FOLLOW OUR NETWORK</span>
+          <div class="social-icons-group">
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-container">
+        <div class="section-badge">ONLINE INQUIRY</div>
+        <h2 class="section-title">SEND US A MESSAGE</h2>
+        <div class="dark-accent-line"></div>
+
+        <form id="contactForm" class="contact-form">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">FIRST NAME <span class="required-star">*</span></label>
+              <input type="text" id="firstName" name="firstName" placeholder="First name" required />
+            </div>
+            <div class="form-group">
+              <label for="lastName">LAST NAME <span class="required-star">*</span></label>
+              <input type="text" id="lastName" name="lastName" placeholder="Last name" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">EMAIL ADDRESS <span class="required-star">*</span></label>
+            <input type="email" id="email" name="email" placeholder="bloodlink@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="message">MESSAGE <span class="required-star">*</span></label>
+            <textarea id="message" name="message" rows="5" placeholder="How can we help you or how would you like to contribute?" required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">SUBMIT MESSAGE</button>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <section class="emergency-banner">
+    <div class="emergency-container">
+      <div class="emergency-text-group">
+        <div class="emergency-icon-circle">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <div>
+          <h3 class="emergency-title">FOR EMERGENCIES CALL US</h3>
+          <p class="emergency-desc">
+            For urgent blood requests, please contact our emergency dispatch hotline directly.
+          </p>
+        </div>
+      </div>
+
+      <div class="emergency-actions">
+        <a href="tel:+94112345678" class="emergency-call-btn">
+          <i class="fa-solid fa-phone"></i>
+          CALL NOW
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="full-screen-container footer-content">
+      <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

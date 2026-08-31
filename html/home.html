@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BloodLink is a nationwide blood management system connecting voluntary donors with hospitals and patients in real time.">
+    <title>BloodLink - Blood Management System</title>
+    
+    <!-- Font Awesome Icons (Added to match Camps page) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">   
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/home.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="header-section">
+        <div class="full-screen-container navbar">
+            <a href="home.html" class="brand-logo">
+                <img src="../images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
+                <span class="brand-logo-text">BLOODLINK</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="home.html" class="active">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="camps.html">Camps</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li>
+                    <a href="personal-account.html" class="user-greeting">
+                        <i class="fa-regular fa-circle-user"></i>
+                        <span>#</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="mobile-menu menu-closed">
+            <nav class="mobile-nav">
+                <a href="#home">Home</a>
+                <a href="#dashboard">Dashboard</a>
+                <a href="#camps">Camps</a>
+                <a href="#contact">Contact</a>
+                <div class="mobile-auth">
+                    <a href="#login" class="btn btn-outline">Login</a>
+                    <a href="#register" class="btn btn-primary">Register</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="container hero-grid">
+                
+                <!-- Left Column: Image Wrapper -->
+                <div class="hero-image-wrapper reveal-on-scroll">
+                    <img src="../images/homemain.png" alt="Blood">
+                </div>
+
+                <!-- Right Column: Content -->
+                <div class="hero-content">
+                    <div class="hero-badge hero-badge-animate">
+                        <span>Blood Donation Management System</span>
+                    </div>
+                    
+                    <div class="hero-title-box hero-title-animate">
+                        <h1>Your Blood<br>Saves Lives.</h1>
+                    </div>
+
+                    <div class="hero-desc-box hero-desc-animate">
+                        <p>
+                            Every two seconds someone needs blood. Register as a donor today, find a drive near you, and track your impact in real time.
+                        </p>
+                    </div>
+
+                    <div class="hero-actions hero-actions-animate">
+                        <a href="#login" class="btn btn-pill btn-outline-black btn-tactile">Login</a>
+                        <a href="#register" class="btn btn-pill btn-primary btn-tactile">Register &rarr;</a>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Section 01: Why Donate -->
+        <section id="why-donate" class="info-section reveal-on-scroll container">
+            <div class="info-grid">
+                <div class="info-text">
+                    <span class="section-number">01</span>
+                    <h2>Why Donate<br>Blood?</h2>
+                    <p>Every two seconds in this country someone needs blood. A single donation can save up to three lives — for surgery patients, trauma victims, and people with chronic conditions like cancer and sickle cell disease.</p>
+                    <blockquote class="highlight-quote">Your 45 minutes can change everything for a family waiting in an emergency room.</blockquote>
+                    <a href="#why-donate" class="learn-more">Learn More &rarr;</a>
+                </div>
+                <div class="info-image">
+                    <img src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=800&auto=format&fit=crop" alt="Blood donation process">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 02: Who Can Donate -->
+        <section id="eligibility" class="info-section reveal-on-scroll container">
+            <div class="info-grid reverse-grid"> 
+                <div class="info-text">
+                    <span class="section-number">02</span>
+                    <h2>Who Can<br>Donate?</h2>
+                    <p>Most healthy adults aged 17–65 who weigh at least 50 kg are eligible. You can donate whole blood every 56 days. Our quick pre-screening checks haemoglobin, blood pressure, and pulse before every session.</p>
+                    <blockquote class="highlight-quote">Not sure if you qualify? Take our 2-minute eligibility check online before booking.</blockquote>
+                    <a href="#eligibility" class="learn-more">Learn More &rarr;</a>
+                </div>
+                <div class="info-image">
+                    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=800&auto=format&fit=crop" alt="Medical testing">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 03: Trusted Network -->
+        <section id="network" class="info-section reveal-on-scroll container">
+            <div class="info-grid">
+                <div class="info-text">
+                    <span class="section-number">03</span>
+                    <h2>Trusted<br>Nationwide<br>Network</h2>
+                    <p>BloodLink partners with over 420 hospitals, 90 community blood banks, and 600+ volunteer drive organizers across the country. Real-time inventory data ensures every unit is routed where it is needed most.</p>
+                    <blockquote class="highlight-quote">All collected blood is screened, typed, and processed within 24 hours.</blockquote>
+                    <a href="#network" class="learn-more">Learn More &rarr;</a>
+                </div>
+                <div class="info-image">
+                    <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=800&auto=format&fit=crop" alt="Brain anatomy model">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 04: How To Donate -->
+        <section id="how-it-works" class="steps-section reveal-on-scroll container">
+            <h2>How To Donate</h2>
+            <div class="steps-grid">
+                
+                <!-- Step 1 -->
+                <div class="step-card stagger-1">
+                    <div class="step-header">
+                        <span class="step-number">01</span>
+                        <div class="step-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step-body">
+                        <h3>Register Online</h3>
+                        <p>Create your donor profile with your health history and contact details in under 5 minutes.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card stagger-2">
+                    <div class="step-header">
+                        <span class="step-number">02</span>
+                        <div class="step-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step-body">
+                        <h3>Book A Slot</h3>
+                        <p>Choose from nearby donation drives or walk-in centres that fit your schedule.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-card stagger-3">
+                    <div class="step-header">
+                        <span class="step-number">03</span>
+                        <div class="step-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step-body">
+                        <h3>Donate</h3>
+                        <p>The whole process takes 45–60 minutes including a short rest and refreshments.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step-card stagger-4">
+                    <div class="step-header">
+                        <span class="step-number">04</span>
+                        <div class="step-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <circle cx="12" cy="12" r="6"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step-body">
+                        <h3>Track Your Impact</h3>
+                        <p>Receive real-time updates when your donation is matched and used to save a life.</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <a href="#register" class="btn btn-dark btn-tactile btn-pill">
+                Start Your Registration &rarr;
+            </a>
+        </section>
+        
+    </main>
+
+    <!-- Emergency Banner -->
+    <section id="emergency" class="emergency-section reveal-on-scroll">
+        <div class="container emergency-container">
+            <div class="emergency-info">
+                <h3>Emergency Blood Request</h3>
+                <p>For urgent blood requests, please contact our emergency dispatch directly or submit your details online.</p>
+            </div>
+            <div class="emergency-actions">
+                <a href="tel:+18005550199" class="btn btn-white btn-tactile btn-pill">Call Now</a>
+                <a href="#emergency-request" class="btn btn-outline-white btn-tactile btn-pill">Add Request</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Embedded Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', () => {
+                    const isOpen = mobileMenu.classList.toggle('menu-open');
+                    mobileMenu.classList.toggle('menu-closed', !isOpen);
+                    menuToggle.setAttribute('aria-expanded', isOpen);
+                });
+
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.remove('menu-open');
+                        mobileMenu.classList.add('menu-closed');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+
+            // Scroll Reveal Animations
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(element => {
+                revealObserver.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

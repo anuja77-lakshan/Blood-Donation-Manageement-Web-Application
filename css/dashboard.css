@@ -24,7 +24,11 @@ body {
 }
 
 /* Headers*/
+<<<<<<< HEAD
 .navigationbar {
+=======
+.navbar {
+>>>>>>> 17d5c037098d10a57c1db4d545df1fcaa365b4d5
     display: flex;
     justify-content: space-between;
     align-items: center;
