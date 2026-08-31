@@ -491,3 +491,87 @@ body {
   font-size: 15px;
   font-weight: 900;
 }
+/*Added new popup and transsitions to dashboard*/
+
+/*Button popup and new tackticle press effect*/
+.btn, .btn-pill, .btn-tactile {
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease !important;
+}
+
+.btn:hover, .btn-tactile:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(239, 52, 70, 0.2);
+}
+
+.btn:active, .btn-tactile:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/*Cards popup*/
+.metric-card, 
+.action-card-banner, 
+.camp-highlight-card, 
+.stock-box {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.metric-card:hover,
+.stock-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px -4px rgba(15, 17, 21, 0.08);
+}
+
+.action-card-banner:hover,
+.camp-highlight-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.06);
+}
+
+/*Icon popup*/
+.card-top i,
+.info-icon,
+.step-icon,
+.user-greeting i {
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.metric-card:hover .card-top i,
+.user-greeting:hover i,
+.info-item:hover .info-icon {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/*Page Smooth and Entrance Animations*/
+@keyframes entrancePop {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard-wrapper > section {
+    animation: entrancePop 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/*Staggered loading for sections*/
+.overview-section { animation-delay: 0.1s; }
+.action-card-banner { animation-delay: 0.2s; }
+.campaign-spotlight { animation-delay: 0.3s; }
+.stock-dashboard-section { animation-delay: 0.4s; }
+.nearby-section { animation-delay: 0.5s; }
+
+/*Scroll transforms*/
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
