@@ -32,7 +32,7 @@
         <li><a href="camps.html" class="active">Camps</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li>
-          <a href="personal-account.html" class="user-greeting">
+          <a href="personal_account.html" class="user-greeting">
             <i class="fa-regular fa-circle-user"></i>
             <span>Hi, Pasan</span>
           </a>
@@ -47,24 +47,23 @@
     <!-- Title & Add Button Row -->
     <div class="page-title-row">
       <div class="title-group">
-        <div class="section-tag">Save a Life Today</div>
-        <h1 class="main-heading">UPCOMING BLOOD CAMPS</h1>
-        <p class="sub-text">Browse and register for blood donation camps near you. Help save lives by participating.</p>
+        <div class="section-tag hero-badge-animate">Save a Life Today</div>
+        <h1 class="main-heading hero-title-animate">UPCOMING BLOOD CAMPS</h1>
+        <p class="sub-text hero-desc-animate">Browse and register for blood donation camps near you. Help save lives by participating.</p>
       </div>
-      <a href="../html/add_camps.html" class="btn-add" style="text-decoration: none;">
+      <a href="../html/add_camps.html" class="btn-add hero-actions-animate" style="text-decoration: none;">
         <i class="fa-solid fa-plus"></i> ADD BLOOD CAMPS
       </a>
-        
     </div>
 
     <!-- 100% Full-Width Search Input -->
-    <div class="search-box">
+    <div class="search-box hero-desc-animate">
       <i class="fa-solid fa-magnifying-glass"></i>
       <input type="text" id="searchInput" placeholder="Search by camp name, organization name or location...">
     </div>
 
     <!-- Scrollable Cards Slider with 5 Cards -->
-    <div class="camps-carousel-wrap">
+    <div class="camps-carousel-wrap reveal-on-scroll">
       <button class="arrow-btn prev" id="prevBtn" title="Previous"><i class="fa-solid fa-chevron-left"></i></button>
       
       <div class="camps-slider" id="campsSlider">
@@ -188,13 +187,13 @@
     </div>
 
     <!-- Nearby Camps Map Section -->
-    <div class="map-section">
+    <div class="map-section reveal-on-scroll">
       <div class="map-header">
         <span class="vertical-bar"></span>
         <h2>NEARBY CAMPS</h2>
         <span class="sub-map-label">based on your location</span>
       </div>
-      <div id="map"></div>
+      <div id="bloodLinkMap"></div>
     </div>
   </main>
 
@@ -208,6 +207,7 @@
   <!-- Leaflet Map JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Custom JS -->
+  <script src="../js/map.js"></script>
   <script src="../js/camps.js"></script>
 </body>
 </html>
