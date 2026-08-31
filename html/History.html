@@ -50,6 +50,7 @@
       letter-spacing: 0.5px;
     }
 
+    /* Brand Logo Icon Updated */
     .brand i {
       color: var(--primary-red);
       font-size: 1.6rem;
@@ -120,20 +121,20 @@
       font-size: 0.95rem;
     }
 
-    /* --- Compact Stat Cards --- */
+    /* Compact Stat Cards */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.2rem;
       margin-bottom: 2.5rem;
-      max-width: 750px; /* limits overall max width if desired */
+      max-width: 700px;
     }
 
     .stat-card {
       background: #ffffff;
       border: 1px solid var(--border-color);
       border-radius: 10px;
-      padding: 0.85rem 1.1rem; /* Reduced Padding */
+      padding: 0.85rem 1.1rem;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
     }
 
@@ -142,7 +143,7 @@
       justify-content: space-between;
       align-items: center;
       color: var(--text-muted);
-      font-size: 0.75rem; /* Smaller font */
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -154,7 +155,7 @@
     }
 
     .stat-value {
-      font-size: 1.5rem; /* Reduced number size from 2.2rem */
+      font-size: 1.5rem;
       font-weight: 800;
       color: #0f172a;
       margin: 4px 0 2px 0;
@@ -293,6 +294,7 @@
     .footer-content {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
       gap: 2rem;
       margin-bottom: 1.5rem;
@@ -332,25 +334,28 @@
       font-size: 0.82rem;
     }
 
+    /* Smaller Emergency Box Size */
     .emergency-box {
       background: #fff;
       color: #000;
-      padding: 10px 18px;
-      border-radius: 8px;
+      padding: 6px 12px; /* Decreased Padding */
+      border-radius: 6px;
       text-align: center;
+      display: inline-block;
     }
 
     .emergency-box small {
       color: var(--primary-red);
       font-weight: 700;
       display: block;
-      font-size: 0.68rem;
+      font-size: 0.65rem; /* Smaller Font */
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .emergency-box span {
       font-weight: 800;
-      font-size: 1rem;
+      font-size: 0.85rem; /* Smaller Phone Number Size */
     }
   </style>
 </head>
@@ -359,7 +364,7 @@
   <!-- Header Navigation -->
   <nav class="navbar">
     <a href="#" class="brand">
-      <i class="fa-solid fa-droplet"></i> BLOODLINK
+      <i class="fa-solid fa-hand-holding-medical"></i> BLOODLINK
     </a>
     <ul class="nav-links">
       <li><a href="#">Home</a></li>
@@ -368,7 +373,7 @@
       <li><a href="#">Contact</a></li>
     </ul>
     <div class="user-badge">
-      <i class="fa-regular fa-user-circle"></i> Hi Anuja!
+      <i class="fa-regular fa-user-circle"></i> Hi Vishmitha!
     </div>
   </nav>
 
