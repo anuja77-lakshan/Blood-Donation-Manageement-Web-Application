@@ -43,8 +43,8 @@
                 <a href="../html/camps.html">Camps</a>
                 <a href="../html/contact.html">Contact</a>
                 <div class="mobile-auth">
-                    <a href="../html/login-registrer.html#login" class="btn btn-outline">Login</a>
-                    <a href="../html/login-registrer.html#register" class="btn btn-primary">Register</a>
+                    <a href="login-registrer.php#login" class="btn btn-outline">Login</a>
+                    <a href="login-registrer.php#register" class="btn btn-primary">Register</a>
                 </div>
             </nav>
         </div>
