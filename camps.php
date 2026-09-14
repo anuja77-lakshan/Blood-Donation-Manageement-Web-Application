@@ -1,3 +1,8 @@
+<?php
+session_start();
+// Check if user is logged in, otherwise default to Guest
+$user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Guest';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +41,7 @@
         <li>
           <a href="personal-account.php" class="user-greeting">
             <i class="fa-regular fa-circle-user"></i>
-            <span>Hi, Pasan</span>
+            <span>Hi, <?php echo htmlspecialchars($user_display_name); ?></span>
           </a>
         </li>
       </ul>
@@ -56,7 +61,7 @@
         <a href="contact.php">Contact</a>
         <a href="personal-account.php" class="mobile-user-link">
           <i class="fa-regular fa-circle-user"></i>
-          <span>Hi, senith</span>
+          <span>Hi, <?php echo htmlspecialchars($user_display_name); ?></span>
         </a>
       </nav>
     </div>
