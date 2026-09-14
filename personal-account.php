@@ -1,3 +1,21 @@
+<?php
+session_start();
+require 'db.php';
+
+
+if(!isset($_SESSION['user_email'])){
+    header("Location: index.html");
+    exit();
+}
+
+$email = $_SESSION['user_email'];
+
+
+$sql = "SELECT * FROM users WHERE email = '$email'";
+$result = mysqli_query($conn, $sql);
+$user = mysqli_fetch_assoc($result);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +49,7 @@
         <li>
           <a href="personal-account.html" class="user-greeting">
             <i class="fa-regular fa-circle-user"></i>
-            <span>Hi,Dushan</span>
+           <span>Hi, <?php echo $user['full_name']; ?></span>
           </a>
         </li>
       </ul>
@@ -49,7 +67,7 @@
                 <i class="fa-solid fa-user"></i>
             </div>
             <div class="welcome-text">
-                <h2 class="main-heading hero-title-animate"> Hello, Dushan!</h2>
+               <h2 class="main-heading hero-title-animate"> Hello, <?php echo $user['full_name']; ?>!</h2>
                 <p class="sub-text hero-desc-animate">Welcome to your LifeSaver dashboard</p>
             </div>
         </div>
@@ -59,22 +77,21 @@
         <div class="user-card">
             <div class="personal-details">
                 <h3>Donor Information</h3>
-                <p><span>Full Name:</span> D.M.D.E.Bandara</p>
-                <p><span>Date of Birth:</span> 2004/08/03</p>
-                <p><span>Gender:</span> Male</p>
-                <p><span>NIC/Passport Number:</span> 2005082478</p>
-                <p><span>Phone:</span> 077 123 4567</p>
-                <p><span>Location:</span> Colombo 07, Sri Lanka</p>
-                <p><span>Email address:</span> dushan083@gmail.com</p>
-                <p><span>District:</span> Horana</p>
-
+                <p><span>Full Name:</span> <?php echo $user['full_name']; ?></p>
+                <p><span>Date of Birth:</span> <?php echo $user['dob']; ?></p>
+                <p><span>Gender:</span> <?php echo $user['gender']; ?></p>
+                <p><span>NIC/Passport Number:</span> <?php echo $user['nic']; ?></p>
+                <p><span>Phone:</span> <?php echo $user['phone']; ?></p>
+                <p><span>Location:</span> <?php echo $user['location']; ?></p>
+                <p><span>Email address:</span> <?php echo $user['email']; ?></p>
+                <p><span>District:</span> <?php echo $user['district']; ?></p>
             </div>
         </div>
         <div class="user-card">
         <div class="personal-details">
             <h3>Blood Donation Information</h3>
-            <p><span>Blood Group:</span> O+</p>
-            <p><span>Weight:</span> 60</p>
+            <p><span>Blood Group:</span> <?php echo $user['blood_group']; ?></p>
+            <p><span>Weight:</span> <?php echo $user['weight']; ?></p>
             <p><span>Last Donation Date:</span> 2026/08/24</p>
             <p><span>Last health Screening date:</span> 2026/08/08</p>
             <p><span>Total number of donation:</span> 4</p>
@@ -103,10 +120,16 @@
                 QR Code
             </a>
         </div><br>
-       
+        <!-- Details Update -->
+        <label>Full Name:</label>
+        <input type="text" id="full_name" name="full_name" value="<?php echo $user['full_name']; ?>"><br><br>
+        
+        <label>Phone:</label>
+        <input type="text" id="phone" name="phone" value="<?php echo $user['phone']; ?>"><br><br>
+      
            <!--Log out Button-->
          <div class="button-container hero-actions-animate">
-          <a href="#" class="logout-btn button">Log Out</a>
+          <a href="logout.php" class="logout-btn button">Log Out</a>
         </div>
     </div>
    </main>
