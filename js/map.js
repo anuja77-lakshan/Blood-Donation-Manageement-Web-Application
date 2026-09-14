@@ -3,10 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const map = L.map('bloodLinkMap').setView([7.8731, 80.7718], 8);
 
     // OpenStreetMap Tile Layer
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-    
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
+    maxZoom: 18
+}).addTo(map);
+
     // Size Refresh for Map rendaring
     setTimeout(() => {
         map.invalidateSize();
