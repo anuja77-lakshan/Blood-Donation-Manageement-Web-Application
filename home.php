@@ -19,30 +19,12 @@
 </head>
 <body>
 
-<<<<<<< HEAD
    <header class="header-section">
     <div class="full-screen-container navbar">
       <a href="home.php" class="brand-logo">
         <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
-=======
-    <!-- Header & Navigation -->
-    <header class="header-section">
-        <div class="full-screen-container navbar">
-            <a href="home.php" class="brand-logo">
-                <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
-                <span class="brand-logo-text">BLOODLINK</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="home.php" class="active">Home</a></li>
-                <li><a href="dashboard.php">Dashboard</a></li>
-                <li><a href="camps.php">Camps</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                
-            </ul>
-        </div>
->>>>>>> e2814f937cb88d501255bef59f493acf322c1f9d
 
       <!-- Desktop Navigation -->
       <ul class="nav-links">
@@ -75,7 +57,7 @@
         
         <!-- Hero Section -->
         <section id="home" class="hero-section">
-            <div class="full-screen-container hero-grid">
+            <div class="container hero-grid">
                 
                 <!-- Left Column: Image Wrapper -->
                 <div class="hero-image-wrapper reveal-on-scroll">
@@ -108,7 +90,7 @@
         </section>
 
         <!-- Section 01: Why Donate -->
-        <section id="why-donate" class="info-section reveal-on-scroll full-screen-container">
+        <section id="why-donate" class="info-section reveal-on-scroll container">
             <div class="info-grid">
                 <div class="info-text">
                     <span class="section-number">01</span>
@@ -124,7 +106,7 @@
         </section>
 
         <!-- Section 02: Who Can Donate -->
-        <section id="eligibility" class="info-section reveal-on-scroll full-screen-container">
+        <section id="eligibility" class="info-section reveal-on-scroll container">
             <div class="info-grid reverse-grid"> 
                 <div class="info-text">
                     <span class="section-number">02</span>
@@ -140,7 +122,7 @@
         </section>
 
         <!-- Section 03: Trusted Network -->
-        <section id="network" class="info-section reveal-on-scroll full-screen-container">
+        <section id="network" class="info-section reveal-on-scroll container">
             <div class="info-grid">
                 <div class="info-text">
                     <span class="section-number">03</span>
@@ -156,7 +138,7 @@
         </section>
         
         <!-- Section 04: How To Donate -->
-        <section id="how-it-works" class="steps-section reveal-on-scroll full-screen-container">
+        <section id="how-it-works" class="steps-section reveal-on-scroll container">
             <h2>How To Donate</h2>
             <div class="steps-grid">
                 
@@ -236,6 +218,7 @@
     </main>
 
 
+
     <!-- Embedded Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -286,11 +269,5 @@
             });
         });
     </script>
-
-    <footer class="footer-section">
-        <div class="full-screen-container footer-content">
-            <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>
