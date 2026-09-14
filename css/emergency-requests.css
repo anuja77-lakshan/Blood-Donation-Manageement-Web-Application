@@ -1,0 +1,182 @@
+:root {
+    --primary: #ef3446;
+    --text-dark: #000000;
+    --border-light: #e2e8f0;
+}
+
+body { 
+    font-family: 'Inter', sans-serif; 
+}
+
+/* navbar stuff */
+.header-section {
+    width: 100%;
+    border-bottom: 1px solid var(--border-light);
+    background: #ffffff;
+}
+
+.full-screen-container {
+    width: 100%;
+    max-width: 100% !important;
+    padding-left: clamp(24px, 4.5vw, 70px);
+    padding-right: clamp(24px, 4.5vw, 70px);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.brand-logo-img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    display: block;
+}
+
+.brand-logo-text {
+    font-size: 22px;
+    font-weight: 900;
+    color: black;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #334155;
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary);
+}
+
+.nav-links a.active {
+    border-bottom: 2.5px solid var(--primary);
+    padding-bottom: 4px;
+    font-weight: 600;
+}
+
+/* right side user button */
+.user-greeting {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 14px;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+    transition: all 0.2s ease;
+}
+
+.user-greeting i {
+    font-size: 19px;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.user-greeting span {
+    display: inline-block;
+    line-height: 1;
+    font-weight: 700;
+    margin-top: 1px;
+}
+
+.user-greeting:hover {
+    background-color: #fee2e2;
+    border-color: #fca5a5;
+    color: var(--primary);
+}
+
+/* custom animations for the emergency icons */
+.pulse-animation {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .7; transform: scale(1.05); }
+}
+
+/* make the scrollbar look nicer */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1; 
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; 
+}
+
+/* footer styling */
+.footer-section {
+    width: 100%;
+    background-color: #000000;
+    color: #a3a3a3;
+    padding: 24px 0;
+    border-top: 1px solid #1a1a1a;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.footer-content p {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    margin: 0;
+}
+
+/* make footer smaller on mobile */
+@media (max-width: 768px) {
+    .footer-section {
+        padding: 18px 0;
+    }
+    .footer-content p {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+}

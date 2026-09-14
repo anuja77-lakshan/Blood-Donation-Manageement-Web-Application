@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urgent Blood Requests - BloodLink</title>
+    
+    <!-- load tailwind and setup our custom colors -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blood: {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            500: '#ef4444',
+                            600: '#ef3446',
+                            700: '#d92636',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- fonts and icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- link our custom styles -->
+    <link rel="stylesheet" href="../css/emergency-requests.css">
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+
+    <!-- top navbar -->
+    <header class="header-section shadow-sm sticky top-0 z-50">
+        <div class="full-screen-container navbar">
+            <a href="home.html" class="brand-logo">
+                <img src="../images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
+                <span class="brand-logo-text">BLOODLINK</span>
+            </a>
+            <ul class="nav-links hidden md:flex">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="camps.html">Camps</a></li>
+                <li><a href="../contact.php">Contact</a></li>
+                <li>
+                    <a href="personal-account.html" class="user-greeting">
+                        <i class="fa-regular fa-circle-user"></i>
+                        <span>#</span>
+                    </a>
+                </li>
+            </ul>
+            <!-- mobile menu button -->
+            <button class="md:hidden text-gray-700 hover:text-blood-600 text-2xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl">
+        
+        <!-- page heading -->
+        <div class="mb-8 border-l-4 border-blood-600 pl-4">
+            <h1 class="text-3xl font-black text-gray-900 uppercase tracking-tight">Emergency Blood Requests</h1>
+            <p class="text-gray-600 mt-1">Connecting critical hospital patients with life-saving donors instantly.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-1 space-y-6">
+                <!-- form to post a new request -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-blood-600"></div>
+                    <h3 class="text-lg font-bold mb-4 text-blood-700 flex items-center gap-2 uppercase tracking-wide">
+                        <i class="fa-solid fa-truck-medical"></i> Post Urgent Request
+                    </h3>
+                    <form id="newRequestForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Patient Name</label>
+                            <input type="text" id="patientName" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all" placeholder="e.g. John Doe">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Blood Type</label>
+                                <select id="bloodType" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all bg-white">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Units</label>
+                                <input type="number" id="units" min="1" max="20" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all" placeholder="e.g. 2">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Urgency Level</label>
+                            <select id="urgency" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all bg-white">
+                                <option value="High" class="text-orange-600 font-semibold">High (Within 24h)</option>
+                                <option value="Critical" class="text-red-600 font-bold" selected>Critical (Immediate)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Hospital / Location</label>
+                            <div class="relative">
+                                <i class="fa-solid fa-hospital absolute left-3 top-2.5 text-gray-400 text-sm"></i>
+                                <input type="text" id="location" required class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all" placeholder="City General Hospital">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Contact Number</label>
+                            <div class="relative">
+                                <i class="fa-solid fa-phone absolute left-3 top-2.5 text-gray-400 text-sm"></i>
+                                <input type="tel" id="contact" required class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all" placeholder="+1 234 567 8900">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Notes (Optional)</label>
+                            <textarea id="notes" rows="2" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all resize-none" placeholder="Specific instructions..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full mt-2 py-3 bg-blood-600 text-white rounded-full hover:bg-blood-700 transition-colors font-bold shadow-md flex items-center justify-center gap-2 uppercase text-sm tracking-wide">
+                            <i class="fa-solid fa-paper-plane"></i> Submit Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div class="flex justify-between items-end mb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 uppercase tracking-tight">Live Emergency Feed</h2>
+                        <p class="text-sm text-gray-500 font-medium">Real-time requests from hospitals and individuals.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <!-- filter dropdown -->
+                        <select id="bloodTypeFilter" class="bg-white border border-gray-300 text-gray-700 text-sm font-semibold rounded-lg focus:ring-blood-500 focus:border-blood-500 block p-2 outline-none shadow-sm" onchange="filterRequests()">
+                            <option value="all">All Types</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- where the requests will show up -->
+                <div id="requestsFeed" class="space-y-4 max-h-[650px] overflow-y-auto custom-scrollbar pr-2 pb-4">
+                    <div class="text-center py-10 text-gray-400">
+                        <i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i>
+                        <p>Loading emergency requests...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- bottom footer -->
+    <footer class="footer-section mt-auto">
+        <div class="full-screen-container footer-content">
+            <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- link our script -->
+    <script src="../js/emergency-requests.js"></script>
+</body>
+</html>
