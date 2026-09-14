@@ -20,12 +20,14 @@
 <body>
 
   <!-- Top Full Width Navbar -->
-  <header class="header-section">
+ <header class="header-section">
     <div class="full-screen-container navbar">
       <a href="home.php" class="brand-logo">
         <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
+
+      <!-- Desktop Navigation -->
       <ul class="nav-links">
         <li><a href="home.php">Home</a></li>
         <li><a href="dashboard.php">Dashboard</a></li>
@@ -38,6 +40,25 @@
           </a>
         </li>
       </ul>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Drawer -->
+    <div id="mobile-menu" class="mobile-menu menu-closed">
+      <nav class="mobile-nav">
+        <a href="home.php">Home</a>
+        <a href="dashboard.php">Dashboard</a>
+        <a href="camps.php">Camps</a>
+        <a href="contact.php">Contact</a>
+        <a href="personal-account.php" class="mobile-user-link">
+          <i class="fa-regular fa-circle-user"></i>
+          <span>Hi, senith</span>
+        </a>
+      </nav>
     </div>
   </header>
 
@@ -94,6 +115,27 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Custom JS -->
   <script src="js/map.js"></script>
+  
   <script src="js/camps.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = mobileMenu.classList.toggle('menu-open');
+          mobileMenu.classList.toggle('menu-closed', !isOpen);
+          
+          const icon = menuToggle.querySelector('i');
+          if (isOpen) {
+            icon.classList.replace('fa-bars', 'fa-xmark');
+          } else {
+            icon.classList.replace('fa-xmark', 'fa-bars');
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

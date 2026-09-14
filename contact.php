@@ -22,12 +22,12 @@
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
       <ul class="nav-links">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="camps.html">Camps</a></li>
+        <li><a href="home.php">Home</a></li>
+        <li><a href="dashboard.php">Dashboard</a></li>
+        <li><a href="camps.php">Camps</a></li>
         <li><a href="contact.php" class="active">Contact</a></li>
         <li>
-          <a href="personal-account.html" class="user-greeting">
+          <a href="personal-account.php" class="user-greeting">
             <i class="fa-regular fa-circle-user"></i>
             <span>Hi, senith</span>
           </a>
