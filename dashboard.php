@@ -54,6 +54,15 @@ $resRequests = $conn->query("SELECT COUNT(*) as total FROM emergency_requests");
 if ($resRequests && $row = $resRequests->fetch_assoc()) {
     $requestCount = $row['total'];
 }
+
+// Fetch Featured Camps from Database (Recent/Upcoming 3 Camps)
+$featuredCamps = [];
+$resFeatured = $conn->query("SELECT * FROM blood_camps ORDER BY camp_date ASC LIMIT 3");
+if ($resFeatured && $resFeatured->num_rows > 0) {
+    while ($camp = $resFeatured->fetch_assoc()) {
+        $featuredCamps[] = $camp;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,6 +82,99 @@ if ($resRequests && $row = $resRequests->fetch_assoc()) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Leaflet.js and Map CSS Code -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+      /* Modern Featured Camps Grid Styling */
+      .camps-grid-custom {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 20px;
+          margin-top: 20px;
+      }
+      .featured-camp-card {
+          background: #ffffff;
+          border: 1px solid #f1f5f9;
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          display: flex;
+          flex-direction: column;
+      }
+      .featured-camp-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      }
+      .camp-card-header {
+          background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+          padding: 16px 20px;
+          color: #ffffff;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+      .camp-card-header h3 {
+          margin: 0;
+          font-size: 16px;
+          font-weight: 700;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 200px;
+      }
+      .camp-date-badge {
+          background: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(4px);
+          padding: 4px 10px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+      }
+      .camp-card-body {
+          padding: 20px;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+      }
+      .camp-info-row {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          font-size: 14px;
+          color: #475569;
+      }
+      .camp-info-row i {
+          color: #ef4444;
+          margin-top: 3px;
+          width: 16px;
+      }
+      .camp-card-footer {
+          padding: 14px 20px;
+          border-top: 1px solid #f1f5f9;
+          background: #fafafa;
+      }
+      .btn-camp-view {
+          display: block;
+          text-align: center;
+          background: #ffffff;
+          color: #dc2626;
+          border: 1px solid #fca5a5;
+          padding: 8px 14px;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 13px;
+          text-decoration: none;
+          transition: all 0.2s;
+      }
+      .btn-camp-view:hover {
+          background: #dc2626;
+          color: #ffffff;
+      }
+    </style>
 </head>
 <body>
 
@@ -84,12 +186,12 @@ if ($resRequests && $row = $resRequests->fetch_assoc()) {
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
       <ul class="nav-links">
-        <li><a href="html/home.html">Home</a></li>
+        <li><a href="home.php">Home</a></li>
         <li><a href="dashboard.php" class="active">Dashboard</a></li>
-        <li><a href="html/camps.html">Camps</a></li>
-        <li><a href="html/contact.html">Contact</a></li>
+        <li><a href="camps.php">Camps</a></li>
+        <li><a href="contact.php">Contact</a></li>
         <li>
-          <a href="#" class="user-greeting">
+          <a href="personal-account.php" class="user-greeting">
             <i class="fa-regular fa-circle-user"></i>
             <span><?php echo htmlspecialchars($userName); ?></span>
           </a>
@@ -119,14 +221,14 @@ if ($resRequests && $row = $resRequests->fetch_assoc()) {
                 </div>
 
                 <!-- 3. Active Camps Card -->
-                <a href="html/camps.html" class="metric-card highlight-card">
+                <a href="camps.php" class="metric-card highlight-card">
                     <div class="card-top"><span>Active Camps</span> <i class="fa-regular fa-flag"></i></div>
                     <div class="card-num"><?php echo number_format($campCount); ?></div>
                     <span class="trend">Click here for more...</span>
                 </a>
 
                 <!-- 4. Emergency Requests Card -->
-                <a href="html/emergency-requests.html" class="metric-card highlight-card">
+                <a href="emergency-requests.php" class="metric-card highlight-card">
                     <div class="card-top"><span>Emergency Requests</span> <i class="fa-regular fa-message"></i></div>
                     <div class="card-num"><?php echo number_format($requestCount); ?></div>
                     <span class="trend">Add or review requests</span>
@@ -144,7 +246,7 @@ if ($resRequests && $row = $resRequests->fetch_assoc()) {
                 <h2>Become a Donor Today & Save Local Lives</h2>
                 <p>Every individual donation can save up to three lives. Our centralized network coordinates directly with regional blood banks, ensuring your contribution lands exactly where the emergency demand is highest.</p>
                 <div class="btn-cluster">
-                    <a href="html/login-register.html" class="btn btn-red">REGISTER AS DONOR</a>
+                    <a href="login-register.php" class="btn btn-red">REGISTER AS DONOR</a>
                     <a href="https://www.who.int/campaigns/world-blood-donor-day/2018/who-can-give-blood" class="btn btn-border" target="_blank">CHECK ELIGIBILITY</a>
                 </div>
             </div>
@@ -159,25 +261,66 @@ if ($resRequests && $row = $resRequests->fetch_assoc()) {
                 <h2>Do You Need Urgent Blood Assistance?</h2>
                 <p>If you or a family member requires immediate blood replenishment for critical procedures or urgent surgical intervention, you can post a verified emergency request onto our active campaign network immediately.</p>
                 <div class="btn-cluster">
-                    <a href="html/emergency-requests.html" class="btn btn-red">REQUEST EMERGENCY BLOOD</a>
+                    <a href="emergency-requests.php" class="btn btn-red">REQUEST EMERGENCY BLOOD</a>
                     <a href="contact.php" class="btn btn-border" target="_blank">CONTACT FOR CLINICAL GUIDELINES</a>
                 </div>
             </div>
         </section>
 
-        <!--Featured Camps-->
+        <!--Featured Camps (Dynamic Cards from Database)-->
         <section class="campaign-spotlight">
             <div class="spotlight-head">
                 <div>
                     <p class="tagline">ACTIVE COMMUNITY DRIVES</p>
                     <h2>Featured Camps</h2>
                 </div>
-                <a href="html/camps.html" class="btn btn-red btn-sm">ALL CAMPS &rarr;</a>
+                <a href="camps.php" class="btn btn-red btn-sm">ALL CAMPS &rarr;</a>
             </div>
-            <div class="camp-highlight-card">
-                <div class="thumb-wrapper">
-                    <img src="images/card3.png" alt="Save Lives Event">
-                </div>
+            
+            <div class="camps-grid-custom">
+                <?php if (!empty($featuredCamps)): ?>
+                    <?php foreach ($featuredCamps as $camp): 
+                        $cName = isset($camp['camp_name']) ? $camp['camp_name'] : (isset($camp['name']) ? $camp['name'] : 'Blood Donation Drive');
+                        $cDate = isset($camp['camp_date']) ? $camp['camp_date'] : (isset($camp['date']) ? $camp['date'] : 'Upcoming');
+                        $cLoc = isset($camp['location']) ? $camp['location'] : 'Local Community Center';
+                        $cContact = isset($camp['contact_no']) ? $camp['contact_no'] : (isset($camp['contact']) ? $camp['contact'] : '1990');
+                        $cOrg = isset($camp['organization']) ? $camp['organization'] : 'Red Cross / BloodLink';
+                    ?>
+                        <div class="featured-camp-card">
+                            <div class="camp-card-header">
+                                <h3><?php echo htmlspecialchars($cName); ?></h3>
+                                <div class="camp-date-badge">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    <span><?php echo htmlspecialchars($cDate); ?></span>
+                                </div>
+                            </div>
+                            <div class="camp-card-body">
+                                <div class="camp-info-row">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <span><?php echo htmlspecialchars($cLoc); ?></span>
+                                </div>
+                                <div class="camp-info-row">
+                                    <i class="fa-solid fa-sitemap"></i>
+                                    <span>Organized by: <strong><?php echo htmlspecialchars($cOrg); ?></strong></span>
+                                </div>
+                                <div class="camp-info-row">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <span>Helpline: <?php echo htmlspecialchars($cContact); ?></span>
+                                </div>
+                            </div>
+                            <div class="camp-card-footer">
+                                <a href="camps.php" class="btn-camp-view">View Details & Register &rarr;</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="featured-camp-card" style="grid-column: 1 / -1; padding: 30px; text-align: center;">
+                        <i class="fa-solid fa-campground" style="font-size: 36px; color: #cbd5e1; margin-bottom: 10px;"></i>
+                        <h4 style="margin: 0 0 8px 0; color: #475569;">No Active Camps Found</h4>
+                        <p style="margin: 0 0 15px 0; color: #64748b; font-size: 14px;">Organize or add a blood donation drive to see it listed here.</p>
+                        <a href="camps.php" class="btn btn-red btn-sm" style="display: inline-block;">Add Blood Camp</a>
+                    </div>
+                <?php endif; ?>
             </div>
         </section>
 
@@ -246,59 +389,13 @@ if ($resRequests && $row = $resRequests->fetch_assoc()) {
         </section>
     </main>
 
-    <!--Contact Info Bar-->
-    <div class="info-bar">
-      <div class="info-bar-content">
-        <div class="info-item">
-          <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
-          <div class="info-text">
-            <span>TOLL FREE HELPLINE</span>
-            <strong>1990 / +94 25 226 6641</strong>
-          </div>
-        </div>
-        <div class="info-item">
-          <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
-          <div class="info-text">
-            <span>EMAIL SUPPORT</span>
-            <strong>info@bloodlink.lk</strong>
-          </div>
-        </div>
-      </div>
+
+    <!-- Footer -->
+  <footer class="footer-section">
+    <div class="full-screen-container footer-content">
+      <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
     </div>
-
-    <!--Footer Section-->
-    <footer class="footer-section" id="contact">
-      <div class="full-screen-container">
-        <div class="footer-grid">
-          <div class="brand-col">
-            <h3>BLOODLINK</h3>
-            <p class="footer-val">Connecting voluntary blood donors with regional banks & hospitals across Sri Lanka to save lives 24/7.</p>
-            <div class="social-links">
-              <a href="#"><i class="fa-brands fa-facebook"></i></a>
-              <a href="#"><i class="fa-brands fa-twitter"></i></a>
-              <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-          </div>
-
-          <div class="links-col">
-            <p class="footer-label header-label">QUICK LINKS</p>
-            <ul class="footer-links">
-              <li><a href="html/home.html">Home</a></li>
-              <li><a href="dashboard.php">Dashboard</a></li>
-              <li><a href="html/camps.html">Donation Camps</a></li>
-              <li><a href="html/contact.html">Contact Us</a></li>
-            </ul>
-          </div>
-
-          <div class="help-col">
-            <div class="doc-help-badge">
-              <div class="badge-title">EMERGENCY HOTLINE</div>
-              <div class="badge-number">+94 25 226 6641</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+  </footer>
 
     <!--Leaflet JS Map-->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
