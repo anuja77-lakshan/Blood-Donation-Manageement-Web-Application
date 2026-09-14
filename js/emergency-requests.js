@@ -153,7 +153,7 @@ function renderRequests() {
     // if no requests match the filter, show a friendly message
     if (filteredRequests.length === 0) {
         feedContainer.innerHTML = `
-            <div class="text-center py-12 bg-white rounded-xl border border-dashed border-gray-300">
+            <div class="text-center py-12 bg-white rounded-xl border border-dashed border-gray-300 animate-fade-in-up">
                 <i class="fa-solid fa-face-smile-beam text-4xl text-gray-300 mb-3"></i>
                 <h3 class="text-lg font-medium text-gray-600">No active requests</h3>
                 <p class="text-gray-400 text-sm mt-1">There are currently no urgent requests for this blood type.</p>
@@ -163,15 +163,18 @@ function renderRequests() {
     }
 
     // draw a card for each request
-    filteredRequests.forEach(req => {
+    filteredRequests.forEach((req, index) => {
         const isCritical = req.urgency === 'Critical';
         const urgencyColor = isCritical ? 'text-red-600 bg-red-50 border-red-200' : 'text-orange-600 bg-orange-50 border-orange-200';
         const urgencyIcon = isCritical ? 'fa-triangle-exclamation pulse-animation' : 'fa-clock';
         const typeStyle = getBloodTypeColor(req.bloodType);
+        
+        // Stagger the animation delay so they load one after another beautifully
+        const animationDelay = (index * 0.1) + 0.3; 
 
         // the html structure of a single request card
         const cardHTML = `
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow relative overflow-hidden group">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow relative overflow-hidden group animate-fade-in-up" style="animation-delay: ${animationDelay}s;">
                 <div class="flex flex-col sm:flex-row justify-between gap-4">
                     
                     <div class="flex sm:flex-col items-center sm:items-start gap-4 sm:gap-2 sm:w-24 shrink-0">
