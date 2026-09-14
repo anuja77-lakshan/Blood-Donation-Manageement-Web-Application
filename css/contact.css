@@ -6,6 +6,12 @@
 }
 
 :root {
+  --primary: #ef3446;
+  --primary-hover: #cc141e;
+  --text-dark: #000000;
+  --text-muted: #64748b;
+  --border-light: #e2e8f0;
+
   --color-red: #ef3446;
   --color-darkred: #d92636;
   --color-dark: #0f1115;
@@ -14,17 +20,23 @@
   --color-bordergray: #e2e8f0;
 }
 
-body {
+html, body {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   background-color: #ffffff;
-  color: #1e293b;
+  color: var(--text-dark);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-/* Top Full Width Navbar */
-.header-section {
+/* Full Screen Container (Matching Camps & Home standard) */
+.full-screen-container {
   width: 100%;
+<<<<<<< HEAD
   border-bottom: 1px solid var(--color-bordergray);
   background: #ffffff;
   position: sticky;
@@ -37,6 +49,18 @@ body {
   max-width: 100% !important;
   padding-left: clamp(24px, 4.5vw, 70px);
   padding-right: clamp(24px, 4.5vw, 70px);
+=======
+  max-width: 100% !important;
+  padding-left: clamp(24px, 4.5vw, 70px);
+  padding-right: clamp(24px, 4.5vw, 70px);
+}
+
+/* Header & Navbar */
+.header-section {
+  width: 100%;
+  border-bottom: 1px solid var(--border-light);
+  background: #ffffff;
+>>>>>>> d71c95b (contact and home page navigation bar, footer, and padding updated)
 }
 
 .navbar {
@@ -97,12 +121,15 @@ body {
   font-weight: 600;
 }
 
+<<<<<<< HEAD
 .user-profile {
   font-size: 22px;
   color: #334155;
   cursor: pointer;
 }
 
+=======
+>>>>>>> d71c95b (contact and home page navigation bar, footer, and padding updated)
 /* Profile greeting */
 .user-greeting {
   display: inline-flex;
@@ -123,7 +150,11 @@ body {
 
 .user-greeting i {
   font-size: 19px;
+<<<<<<< HEAD
   color: #ef3446 !important;
+=======
+  color: var(--primary);
+>>>>>>> d71c95b (contact and home page navigation bar, footer, and padding updated)
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -211,9 +242,8 @@ body {
 
 /* Main Content Layout */
 .main-content {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 3.5rem 1.5rem 6rem;
+  padding-top: 3.5rem;
+  padding-bottom: 6rem;
 }
 
 .hero-section {
@@ -493,9 +523,6 @@ body {
 }
 
 .emergency-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -599,6 +626,7 @@ body {
 }
 
 @media (max-width: 768px) {
+<<<<<<< HEAD
   .nav-links {
     display: none;
   }
@@ -629,6 +657,8 @@ body {
     text-align: center;
   }
 
+=======
+>>>>>>> d71c95b (contact and home page navigation bar, footer, and padding updated)
   .footer-section {
     padding: 18px 0;
   }
@@ -637,6 +667,7 @@ body {
     font-size: 12px;
     line-height: 1.4;
   }
+<<<<<<< HEAD
 }
 
 @media (max-width: 480px) {
@@ -656,4 +687,6 @@ body {
   .emergency-call-btn {
     width: 100%;
   }
+=======
+>>>>>>> d71c95b (contact and home page navigation bar, footer, and padding updated)
 }

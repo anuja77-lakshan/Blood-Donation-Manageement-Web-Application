@@ -29,7 +29,7 @@
         <li>
           <a href="personal-account.php" class="user-greeting">
             <i class="fa-regular fa-circle-user"></i>
-            <span>Hi, senith</span>
+            <span>Hi, Pasan</span>
           </a>
         </li>
       </ul>
@@ -55,7 +55,7 @@
     </div>
   </header>
 
-  <main class="main-content">
+  <main class="full-screen-container main-content">
     
     <section class="hero-section reveal-on-scroll">
       <h1 class="hero-title">GET IN TOUCH WITH <span class="text-red">BLOODLINK.</span></h1>
@@ -167,7 +167,7 @@
   </main>
 
   <section class="emergency-banner reveal-on-scroll">
-    <div class="emergency-container">
+    <div class="full-screen-container emergency-container">
       <div class="emergency-text-group">
         <div class="emergency-icon-circle">
           <i class="fa-solid fa-triangle-exclamation"></i>
