@@ -10,9 +10,7 @@
     
     /* Variables added to support the updated navbar design */
     --primary: #ef3446;
-    --primary-hover: #cc141e;
     --text-dark: #000000;
-    --text-muted: #64748b;
     --border-light: #e2e8f0;
 }
 
@@ -24,22 +22,14 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-html, body {
-  width: 100vw;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  background-color: #ffffff;
-  color: var(--text-dark);
-}
-
 html {
     scroll-behavior: smooth;
 }
 
 body {
     font-family: var(--font-main);
+    color: var(--bloodlink-dark);
+    background-color: #ffffff;
     line-height: 1.6;
 }
 
@@ -51,20 +41,19 @@ ul {
     list-style: none;
 }
 
-/* Matching Exact Full-Screen Outer Container Padding */
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 .full-screen-container {
   width: 100%;
   max-width: 100% !important;
   padding-left: clamp(24px, 4.5vw, 70px);
   padding-right: clamp(24px, 4.5vw, 70px);
-}
-
-/* Deprecated Inner Container mapped to Full Width Standard */
-.container {
-    width: 100%;
-    max-width: 100% !important;
-    padding-left: clamp(24px, 4.5vw, 70px);
-    padding-right: clamp(24px, 4.5vw, 70px);
 }
 
 /* Header & Navbar */
@@ -105,7 +94,6 @@ ul {
   font-weight: 900;
   color: black;
 }
-
 .nav-links {
   display: flex;
   align-items: center;
@@ -132,7 +120,7 @@ ul {
   font-weight: 600;
 }
 
-/* Profile greeting */
+/*profile greeting*/
 .user-greeting {
   display: inline-flex;
   align-items: center;
@@ -255,6 +243,7 @@ ul {
 
 /* Left Side: Image Wrapper */
 .hero-image-wrapper {
+  
     padding: 4px;
     border-radius: 5px;
 }
@@ -283,6 +272,7 @@ ul {
     margin-bottom: 20px;
 }
 
+/* The red line before the badge text */
 .hero-badge::before {
     content: "";
     display: block;
@@ -340,6 +330,7 @@ ul {
     margin-bottom: 20px;
 }
 
+/* Pill shape buttons */
 .btn-pill {
     border-radius: 30px !important;
     padding: 12px 30px;
@@ -347,6 +338,7 @@ ul {
     letter-spacing: 1px;
 }
 
+/* Specific button style for the black outline */
 .btn-outline-black {
     background-color: transparent;
     border: 2px solid var(--bloodlink-dark);
@@ -384,8 +376,7 @@ ul {
 
 /* ---------- Steps Section ---------- */
 .steps-section {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding: 80px 0;
     text-align: center;
 }
 
@@ -522,8 +513,7 @@ ul {
 
 /* ---------- Info Sections ---------- */
 .info-section {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding: 80px 0; 
     border-bottom: 1px solid var(--bloodlink-bordergray);
 }
 
@@ -540,7 +530,7 @@ ul {
 .section-number {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #94a3b8; 
+    color: #94a3b8;
     margin-bottom: 10px;
     display: block;
 }
@@ -615,26 +605,6 @@ ul {
     gap: 15px;
 }
 
-/* Footer Section (Exact Match to Camps) */
-.footer-section {
-  width: 100%;
-  background-color: #000000;
-  color: #a3a3a3;
-  padding: 24px 0;
-  border-top: 1px solid #1a1a1a;
-}
-
-.footer-content {
-  text-align: center;
-}
-
-.footer-content p {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  margin: 0;
-}
-
 /* ---------- Animations & Scroll Reveal ---------- */
 .reveal-on-scroll {
     opacity: 0;
@@ -682,19 +652,38 @@ ul {
 }
 
 @media (max-width: 768px) {
-<<<<<<< HEAD
     .nav-links { display: none; }
     .mobile-toggle { display: block; }
     .mobile-menu { display: block; }
-=======
->>>>>>> e2814f937cb88d501255bef59f493acf322c1f9d
     .hero-title-box h1 { font-size: 2.5rem; }
     .emergency-container { flex-direction: column; text-align: center; }
-    .footer-section {
-        padding: 18px 0;
-    }
-    .footer-content p {
-        font-size: 12px;
-        line-height: 1.4;
-    }
+
+    /*Responsive Footer*/
+  .footer-section {
+    padding: 18px 0;
+  }
+  .footer-content p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+}
+
+/* Footer Section */
+.footer-section {
+  width: 100%;
+  background-color: #000000;
+  color: #a3a3a3;
+  padding: 24px 0;
+  border-top: 1px solid #1a1a1a;
+}
+
+.footer-content {
+  text-align: center;
+}
+
+.footer-content p {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  margin: 0;
 }
