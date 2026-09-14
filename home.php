@@ -214,6 +214,13 @@
         
     </main>
 
+    <!-- Footer -->
+    <footer class="footer-section">
+      <div class="full-screen-container footer-content">
+        <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
+      </div>
+    </footer>
+
     <!-- Embedded Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
