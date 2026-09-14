@@ -27,24 +27,11 @@
                 <span class="brand-logo-text">BLOODLINK</span>
             </a>
             <ul class="nav-links">
-<<<<<<< HEAD:home.php
                 <li><a href="home.php" class="active">Home</a></li>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="camps.php">Camps</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 
-=======
-                <li><a href="home.html" class="active">Home</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="camps.html">Camps</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li>
-                    <a href="personal-account.html" class="user-greeting">
-                        <i class="fa-regular fa-circle-user"></i>
-                        <span>Hi, Pasan</span>
-                    </a>
-                </li>
->>>>>>> d71c95b (contact and home page navigation bar, footer, and padding updated):html/home.html
             </ul>
         </div>
 
@@ -227,23 +214,6 @@
         
     </main>
 
-<<<<<<< HEAD:home.php
-
-=======
-    <!-- Emergency Banner -->
-    <section id="emergency" class="emergency-section reveal-on-scroll">
-        <div class="full-screen-container emergency-container">
-            <div class="emergency-info">
-                <h3>Emergency Blood Request</h3>
-                <p>For urgent blood requests, please contact our emergency dispatch directly or submit your details online.</p>
-            </div>
-            <div class="emergency-actions">
-                <a href="tel:+18005550199" class="btn btn-white btn-tactile btn-pill">Call Now</a>
-                <a href="#emergency-request" class="btn btn-outline-white btn-tactile btn-pill">Add Request</a>
-            </div>
-        </div>
-    </section>
->>>>>>> d71c95b (contact and home page navigation bar, footer, and padding updated):html/home.html
 
     <!-- Embedded Scripts -->
     <script>
