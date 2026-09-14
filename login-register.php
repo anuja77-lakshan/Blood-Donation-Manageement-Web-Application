@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloodLink - Register & Log in</title>
-    <link rel="stylesheet" href="../css/login_registrer.css">
+    <link rel="stylesheet" href="css/login-register.css">
 </head>
 <body>
     
@@ -12,7 +12,7 @@
         <!-- Logo Area -->
         <header class="logo-area">
            
-            <img src="../images/bloodlink_logo.png" alt="BloodLink Logo">
+            <img src="images/bloodlink_logo.png" alt="BloodLink Logo">
             <h1>BLOODLINK</h1>
         </header>
 
@@ -115,6 +115,6 @@
     </div>
 
     <!-- Custom JS Link -->
-    <script src="../js/login_registrer.js"></script>
+    <script src="js/login-register.js"></script>
 </body>
 </html>
