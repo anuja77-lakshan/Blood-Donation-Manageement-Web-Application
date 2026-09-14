@@ -17,7 +17,7 @@
 
   <header class="header-section">
     <div class="full-screen-container navbar">
-      <a href="home.html" class="brand-logo">
+      <a href="home.php" class="brand-logo">
         <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
@@ -29,7 +29,7 @@
         <li>
           <a href="personal-account.php" class="user-greeting">
             <i class="fa-regular fa-circle-user"></i>
-            <span>Hi, Pasan</span>
+            <span>Hi, senith</span>
           </a>
         </li>
       </ul>
@@ -43,11 +43,11 @@
     <!-- Mobile Dropdown menu -->
     <div id="mobile-menu" class="mobile-menu menu-closed">
       <nav class="mobile-nav">
-        <a href="home.html">Home</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="camps.html">Camps</a>
+        <a href="home.php">Home</a>
+        <a href="dashboard.php">Dashboard</a>
+        <a href="camps.php">Camps</a>
         <a href="contact.php" class="active">Contact</a>
-        <a href="personal-account.html" class="mobile-user-link">
+        <a href="personal-account.php" class="mobile-user-link">
           <i class="fa-regular fa-circle-user"></i>
           <span>Hi, senith</span>
         </a>
@@ -55,7 +55,7 @@
     </div>
   </header>
 
-  <main class="full-screen-container main-content">
+  <main class="main-content">
     
     <section class="hero-section reveal-on-scroll">
       <h1 class="hero-title">GET IN TOUCH WITH <span class="text-red">BLOODLINK.</span></h1>
@@ -167,7 +167,7 @@
   </main>
 
   <section class="emergency-banner reveal-on-scroll">
-    <div class="full-screen-container emergency-container">
+    <div class="emergency-container">
       <div class="emergency-text-group">
         <div class="emergency-icon-circle">
           <i class="fa-solid fa-triangle-exclamation"></i>
