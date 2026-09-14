@@ -6,6 +6,12 @@
 }
 
 :root {
+  --primary: #ef3446;
+  --primary-hover: #cc141e;
+  --text-dark: #000000;
+  --text-muted: #64748b;
+  --border-light: #e2e8f0;
+
   --color-red: #ef3446;
   --color-darkred: #d92636;
   --color-dark: #0f1115;
@@ -14,24 +20,19 @@
   --color-bordergray: #e2e8f0;
 }
 
-body {
+html, body {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   background-color: #ffffff;
-  color: #1e293b;
+  color: var(--text-dark);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
-/* Top Full Width Navbar */
-.header-section {
-  width: 100%;
-  border-bottom: 1px solid var(--color-bordergray);
-  background: #ffffff;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
+/* Full Screen Container (Matching Camps & Home standard) */
 .full-screen-container {
   width: 100%;
   max-width: 100% !important;
@@ -39,12 +40,25 @@ body {
   padding-right: clamp(24px, 4.5vw, 70px);
 }
 
-.navbar {
+/* Header & Navbar */
+.header-section {
+  width: 100%;
+  border-bottom: 1px solid var(--border-light);
+  background: #ffffff;
+}
+
+.header-section .full-screen-container.navbar,
+.header-section .navbar {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: clamp(24px, 4.5vw, 70px) !important;
+  padding-right: clamp(24px, 4.5vw, 70px) !important;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  margin: 0 !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 18px;
-  padding-bottom: 18px;
 }
 
 .brand-logo {
@@ -97,12 +111,6 @@ body {
   font-weight: 600;
 }
 
-.user-profile {
-  font-size: 22px;
-  color: #334155;
-  cursor: pointer;
-}
-
 /* Profile greeting */
 .user-greeting {
   display: inline-flex;
@@ -123,7 +131,7 @@ body {
 
 .user-greeting i {
   font-size: 19px;
-  color: #ef3446 !important;
+  color: var(--primary);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -211,9 +219,8 @@ body {
 
 /* Main Content Layout */
 .main-content {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 3.5rem 1.5rem 6rem;
+  padding-top: 3.5rem;
+  padding-bottom: 6rem;
 }
 
 .hero-section {
@@ -493,9 +500,6 @@ body {
 }
 
 .emergency-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -599,36 +603,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .mobile-toggle {
-    display: block;
-  }
-
-  .main-content {
-    padding: 2.5rem 1rem 4rem;
-  }
-
-  .hero-title {
-    font-size: 1.75rem;
-  }
-
-  .form-container {
-    padding: 1.5rem;
-  }
-
-  .emergency-container {
-    text-align: center;
-  }
-
-  .emergency-text-group {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
   .footer-section {
     padding: 18px 0;
   }
@@ -636,24 +610,5 @@ body {
   .footer-content p {
     font-size: 12px;
     line-height: 1.4;
-  }
-}
-
-@media (max-width: 480px) {
-  .brand-logo-text {
-    font-size: 18px;
-  }
-
-  .brand-logo-img {
-    width: 38px;
-    height: 38px;
-  }
-
-  .hero-title {
-    font-size: 1.5rem;
-  }
-
-  .emergency-call-btn {
-    width: 100%;
   }
 }
