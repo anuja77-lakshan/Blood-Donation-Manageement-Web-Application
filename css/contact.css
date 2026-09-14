@@ -9,7 +9,7 @@
   --color-red: #ef3446;
   --color-darkred: #d92636;
   --color-dark: #0f1115;
-  --color-graytext: ##64748b;
+  --color-graytext: #64748b;
   --color-lightgray: #f8fafc;
   --color-bordergray: #e2e8f0;
 }
@@ -19,25 +19,24 @@ body {
   color: #1e293b;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* Top Full Width Navbar */
 .header-section {
   width: 100%;
-  background-color: #ffffff;
   border-bottom: 1px solid var(--color-bordergray);
+  background: #ffffff;
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
-.full-screen-container.navbar {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 1rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.full-screen-container {
+  width: 100%;
+  max-width: 100% !important;
+  padding-left: clamp(24px, 4.5vw, 70px);
+  padding-right: clamp(24px, 4.5vw, 70px);
 }
 
 .navbar {
@@ -52,20 +51,10 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 24px;
-  font-weight: 800;
-  color: #111;
-  text-decoration: none;
-}
-
-.brand-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   font-size: 22px;
   font-weight: 900;
   letter-spacing: 0.5px;
-  color: var(--primary);
+  color: var(--color-red);
   text-decoration: none;
 }
 
@@ -81,6 +70,7 @@ body {
   font-weight: 900;
   color: black;
 }
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -98,11 +88,11 @@ body {
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--primary);
+  color: var(--color-red);
 }
 
 .nav-links a.active {
-  border-bottom: 2.5px solid var(--primary);
+  border-bottom: 2.5px solid var(--color-red);
   padding-bottom: 4px;
   font-weight: 600;
 }
@@ -113,7 +103,7 @@ body {
   cursor: pointer;
 }
 
-/*profile greeting*/
+/* Profile greeting */
 .user-greeting {
   display: inline-flex;
   align-items: center;
@@ -126,7 +116,7 @@ body {
   text-decoration: none;
   font-size: 14px;
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--color-dark);
   line-height: 1;
   transition: all 0.2s ease;
 }
@@ -134,6 +124,7 @@ body {
 .user-greeting i {
   font-size: 19px;
   color: #ef3446 !important;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 0;
@@ -151,7 +142,71 @@ body {
 .user-greeting:hover {
   background-color: #fee2e2;
   border-color: #fca5a5;
-  color: var(--primary);
+  color: var(--color-red);
+}
+
+/* Mobile Hamburger Toggle */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--color-dark);
+  cursor: pointer;
+  padding: 6px;
+}
+
+/* Mobile Dropdown Drawer */
+.mobile-menu {
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  overflow: hidden;
+  background: #ffffff;
+  border-top: 1px solid var(--color-bordergray);
+}
+
+.menu-closed {
+  max-height: 0;
+  opacity: 0;
+}
+
+.menu-open {
+  max-height: 380px;
+  opacity: 1;
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 16px clamp(24px, 4.5vw, 70px) 20px;
+  gap: 12px;
+}
+
+.mobile-nav a {
+  text-decoration: none;
+  color: #334155;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+}
+
+.mobile-nav a:hover,
+.mobile-nav a.active {
+  color: var(--color-red);
+}
+
+.mobile-user-link {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-dark) !important;
+  margin-top: 6px;
+  font-weight: 700 !important;
+}
+
+.mobile-user-link i {
+  color: var(--color-red);
+  font-size: 18px;
 }
 
 /* Main Content Layout */
@@ -239,7 +294,7 @@ body {
   margin-bottom: 2rem;
 }
 
-/*  Left Column: Reach Us Directly */
+/* Left Column: Reach Us Directly */
 .contact-cards-list {
   display: flex;
   flex-direction: column;
@@ -504,66 +559,6 @@ body {
   background-color: #f1f5f9;
 }
 
-/* Footer */
-.footer {
-  background-color: #000000;
-  color: #ffffff;
-}
-
-/* Top Dual Hotline Bar */
-.hotline-bar {
-  background-color: #050505;
-  border-bottom: 1px solid #1a1a1a;
-  padding: 1.25rem 0;
-}
-
-.hotline-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.hotline-item {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  text-decoration: none;
-  color: #ffffff;
-  transition: opacity 0.2s ease;
-}
-
-.hotline-item:hover {
-  opacity: 0.85;
-}
-
-.hotline-circle {
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 9999px;
-  border: 2px solid #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.15rem;
-}
-
-.hotline-tag {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #cbd5e1;
-}
-
-.hotline-num {
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: -0.025em;
-}
-
 /* Footer Section */
 .footer-section {
   width: 100%;
@@ -584,23 +579,81 @@ body {
   margin: 0;
 }
 
+/* Scroll Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .nav-links {
+    gap: 20px;
+  }
+}
+
 @media (max-width: 768px) {
-  .camp-card {
-    flex: 0 0 100%;
+  .nav-links {
+    display: none;
   }
-  .page-title-row {
+
+  .mobile-toggle {
+    display: block;
+  }
+
+  .main-content {
+    padding: 2.5rem 1rem 4rem;
+  }
+
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .form-container {
+    padding: 1.5rem;
+  }
+
+  .emergency-container {
+    text-align: center;
+  }
+
+  .emergency-text-group {
     flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
-  
-  /*Responsive Footer*/
+
   .footer-section {
     padding: 18px 0;
   }
+
   .footer-content p {
     font-size: 12px;
     line-height: 1.4;
   }
+}
 
-  .arrow-btn.prev { left: 4px; }
-  .arrow-btn.next { right: 4px; }
+@media (max-width: 480px) {
+  .brand-logo-text {
+    font-size: 18px;
+  }
+
+  .brand-logo-img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .emergency-call-btn {
+    width: 100%;
+  }
 }

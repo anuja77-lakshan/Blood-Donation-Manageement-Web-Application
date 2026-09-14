@@ -311,6 +311,8 @@ html, body {
 .badge-open { background: #10b981; }
 .badge-tomorrow { background: #f59e0b; }
 .badge-yesterday { background: #ef3446; }
+.badge-upcoming { background: #2563eb; }
+.badge-ended { background: #64748b;}
 
 .location-overlay {
   position: absolute;
