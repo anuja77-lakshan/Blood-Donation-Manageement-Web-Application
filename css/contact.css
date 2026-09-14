@@ -30,26 +30,11 @@ html, body {
   color: var(--text-dark);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 /* Full Screen Container (Matching Camps & Home standard) */
 .full-screen-container {
   width: 100%;
-<<<<<<< HEAD
-  border-bottom: 1px solid var(--color-bordergray);
-  background: #ffffff;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.full-screen-container {
-  width: 100%;
-  max-width: 100% !important;
-  padding-left: clamp(24px, 4.5vw, 70px);
-  padding-right: clamp(24px, 4.5vw, 70px);
-=======
   max-width: 100% !important;
   padding-left: clamp(24px, 4.5vw, 70px);
   padding-right: clamp(24px, 4.5vw, 70px);
@@ -60,15 +45,20 @@ html, body {
   width: 100%;
   border-bottom: 1px solid var(--border-light);
   background: #ffffff;
->>>>>>> d71c95b (contact and home page navigation bar, footer, and padding updated)
 }
 
-.navbar {
+.header-section .full-screen-container.navbar,
+.header-section .navbar {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: clamp(24px, 4.5vw, 70px) !important;
+  padding-right: clamp(24px, 4.5vw, 70px) !important;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  margin: 0 !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 18px;
-  padding-bottom: 18px;
 }
 
 .brand-logo {
@@ -121,15 +111,6 @@ html, body {
   font-weight: 600;
 }
 
-<<<<<<< HEAD
-.user-profile {
-  font-size: 22px;
-  color: #334155;
-  cursor: pointer;
-}
-
-=======
->>>>>>> d71c95b (contact and home page navigation bar, footer, and padding updated)
 /* Profile greeting */
 .user-greeting {
   display: inline-flex;
@@ -150,11 +131,7 @@ html, body {
 
 .user-greeting i {
   font-size: 19px;
-<<<<<<< HEAD
-  color: #ef3446 !important;
-=======
   color: var(--primary);
->>>>>>> d71c95b (contact and home page navigation bar, footer, and padding updated)
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -626,39 +603,6 @@ html, body {
 }
 
 @media (max-width: 768px) {
-<<<<<<< HEAD
-  .nav-links {
-    display: none;
-  }
-
-  .mobile-toggle {
-    display: block;
-  }
-
-  .main-content {
-    padding: 2.5rem 1rem 4rem;
-  }
-
-  .hero-title {
-    font-size: 1.75rem;
-  }
-
-  .form-container {
-    padding: 1.5rem;
-  }
-
-  .emergency-container {
-    text-align: center;
-  }
-
-  .emergency-text-group {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-=======
->>>>>>> d71c95b (contact and home page navigation bar, footer, and padding updated)
   .footer-section {
     padding: 18px 0;
   }
@@ -667,26 +611,4 @@ html, body {
     font-size: 12px;
     line-height: 1.4;
   }
-<<<<<<< HEAD
-}
-
-@media (max-width: 480px) {
-  .brand-logo-text {
-    font-size: 18px;
-  }
-
-  .brand-logo-img {
-    width: 38px;
-    height: 38px;
-  }
-
-  .hero-title {
-    font-size: 1.5rem;
-  }
-
-  .emergency-call-btn {
-    width: 100%;
-  }
-=======
->>>>>>> d71c95b (contact and home page navigation bar, footer, and padding updated)
 }
