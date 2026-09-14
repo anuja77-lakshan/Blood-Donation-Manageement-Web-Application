@@ -26,7 +26,7 @@
             </div>
 
             <!-- REGISTER FORM -->
-            <form id="register-form" class="form-content" action="../auth/register.php" method="POST">
+            <form id="register-form" class="form-content" action="php/register.php" method="POST">
                 
                 <div class="input-col">
                     <input type="text" name="full_name" placeholder="Full Name" required>
@@ -50,7 +50,7 @@
                 <div class="input-row">
                     <input type="text" name="location" placeholder="Location (City)" required>
                         <select name="district" required>
-                        <option value="disabled selected">District</option>
+                        <option value="" disabled selected>District</option>
                         <option value="Ampara">Ampara</option>
                         <option value="Anuradhapura">Anuradhapura</option>
                         <option value="Badulla">Badulla</option>
@@ -102,7 +102,7 @@
             </form>
 
             <!-- LOGIN FORM -->
-            <form id="login-form" class="form-content hidden" action="../auth/login.php" method="POST">
+            <form id="login-form" class="form-content hidden" action="php/login.php" method="POST">
                 <div class="input-col">
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="password" name="password" placeholder="Password" required>

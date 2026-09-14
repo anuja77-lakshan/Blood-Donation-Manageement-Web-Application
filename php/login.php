@@ -1,33 +1,33 @@
 <?php
-session_start(); // Session start
-require 'db.php';
+session_start();
+require_once 'db.php'; // Same directory
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email    = mysqli_real_escape_string($conn, trim($_POST['email']));
     $password = $_POST['password'];
 
-    // Email 
-    $sql = "SELECT * FROM users WHERE email = '$email'";
+    // Check user by email
+    $sql    = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
     $result = mysqli_query($conn, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
+    if ($result && mysqli_num_rows($result) === 1) {
         $user = mysqli_fetch_assoc($result);
-        
-        // Password compair
-        if (password_verify($password, $user['password'])) {
-            
-            //  if Password is correct, Email and Name save the Session 
+
+        // Verify password
+        if (password_verify($password, $user['password']) || $password === $user['password']) {
             $_SESSION['user_email'] = $user['email'];
-            $_SESSION['user_name'] = $user['full_name'];
-            
-         
-            header("Location: personal-account.php"); 
+            header("Location: ../personal-account.php");
             exit();
         } else {
-            echo "<script>alert('Incorrect Password!'); window.history.back();</script>";
+            echo "<script>alert('Invalid password'); window.history.back();</script>";
+            exit();
         }
     } else {
-        echo "<script>alert('Account not found! Please register first.'); window.history.back();</script>";
+        echo "<script>alert('No account found with this email'); window.history.back();</script>";
+        exit();
     }
+} else {
+    header("Location: ../login-register.php");
+    exit();
 }
 ?>
