@@ -17,7 +17,7 @@
 
   <header class="header-section">
     <div class="full-screen-container navbar">
-      <a href="home.html" class="brand-logo">
+      <a href="home.php" class="brand-logo">
         <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
@@ -43,11 +43,11 @@
     <!-- Mobile Dropdown menu -->
     <div id="mobile-menu" class="mobile-menu menu-closed">
       <nav class="mobile-nav">
-        <a href="home.html">Home</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="camps.html">Camps</a>
+        <a href="home.php">Home</a>
+        <a href="dashboard.php">Dashboard</a>
+        <a href="camps.php">Camps</a>
         <a href="contact.php" class="active">Contact</a>
-        <a href="personal-account.html" class="mobile-user-link">
+        <a href="personal-account.php" class="mobile-user-link">
           <i class="fa-regular fa-circle-user"></i>
           <span>Hi, senith</span>
         </a>

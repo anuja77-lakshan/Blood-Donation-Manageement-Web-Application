@@ -19,36 +19,47 @@
 </head>
 <body>
 
-    <!-- Header & Navigation -->
-    <header class="header-section">
-        <div class="full-screen-container navbar">
-            <a href="home.php" class="brand-logo">
-                <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
-                <span class="brand-logo-text">BLOODLINK</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="home.php" class="active">Home</a></li>
-                <li><a href="dashboard.php">Dashboard</a></li>
-                <li><a href="camps.php">Camps</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                
-            </ul>
-        </div>
+   <header class="header-section">
+    <div class="full-screen-container navbar">
+      <a href="home.php" class="brand-logo">
+        <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
+        <span class="brand-logo-text">BLOODLINK</span>
+      </a>
 
-        <!-- Mobile Navigation Drawer -->
-        <div id="mobile-menu" class="mobile-menu menu-closed">
-            <nav class="mobile-nav">
-                <a href="../html/home.html">Home</a>
-                <a href="../html/dashboard.html">Dashboard</a>
-                <a href="../html/camps.html">Camps</a>
-                <a href="../html/contact.html">Contact</a>
-                <div class="mobile-auth">
-                    <a href="login-registrer.php#login" class="btn btn-outline">Login</a>
-                    <a href="login-registrer.php#register" class="btn btn-primary">Register</a>
-                </div>
-            </nav>
-        </div>
-    </header>
+      <!-- Desktop Navigation -->
+      <ul class="nav-links">
+        <li><a href="home.php" class="active">Home</a></li>
+        <li><a href="dashboard.php">Dashboard</a></li>
+        <li><a href="camps.php">Camps</a></li>
+        <li><a href="contact.php">Contact</a></li>
+        <li>
+          <a href="personal-account.php" class="user-greeting">
+            <i class="fa-regular fa-circle-user"></i>
+            <span>Hi, senith</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Drawer -->
+    <div id="mobile-menu" class="mobile-menu menu-closed">
+      <nav class="mobile-nav">
+        <a href="home.php" class="active">Home</a>
+        <a href="dashboard.php">Dashboard</a>
+        <a href="camps.php">Camps</a>
+        <a href="contact.php">Contact</a>
+        <a href="personal-account.php" class="mobile-user-link">
+          <i class="fa-regular fa-circle-user"></i>
+          <span>Hi, senith</span>
+        </a>
+      </nav>
+    </div>
+  </header>
 
     <main>
         
@@ -228,6 +239,13 @@
                     const isOpen = mobileMenu.classList.toggle('menu-open');
                     mobileMenu.classList.toggle('menu-closed', !isOpen);
                     menuToggle.setAttribute('aria-expanded', isOpen);
+
+                    const icon = menuToggle.querySelector('i');
+                    if (isOpen) {
+                        icon.classList.replace('fa-bars', 'fa-xmark');
+                    } else {
+                        icon.classList.replace('fa-xmark', 'fa-bars');
+                    }
                 });
 
                 mobileMenu.querySelectorAll('a').forEach(link => {
@@ -235,6 +253,11 @@
                         mobileMenu.classList.remove('menu-open');
                         mobileMenu.classList.add('menu-closed');
                         menuToggle.setAttribute('aria-expanded', 'false');
+
+                        const icon = menuToggle.querySelector('i');
+                        if (icon) {
+                            icon.classList.replace('fa-xmark', 'fa-bars');
+                        }
                     });
                 });
             }
