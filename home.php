@@ -32,12 +32,7 @@
         <li><a href="dashboard.php">Dashboard</a></li>
         <li><a href="camps.php">Camps</a></li>
         <li><a href="contact.php">Contact</a></li>
-        <li>
-          <a href="personal-account.php" class="user-greeting">
-            <i class="fa-regular fa-circle-user"></i>
-            <span>Hi, senith</span>
-          </a>
-        </li>
+        
       </ul>
 
       <!-- Mobile Hamburger Button -->
@@ -53,10 +48,7 @@
         <a href="dashboard.php">Dashboard</a>
         <a href="camps.php">Camps</a>
         <a href="contact.php">Contact</a>
-        <a href="personal-account.php" class="mobile-user-link">
-          <i class="fa-regular fa-circle-user"></i>
-          <span>Hi, senith</span>
-        </a>
+        
       </nav>
     </div>
   </header>
@@ -89,8 +81,8 @@
                     </div>
 
                     <div class="hero-actions hero-actions-animate">
-                        <a href="login_registrer.php#login" class="btn btn-pill btn-outline-black btn-tactile">Login</a>
-                        <a href="login_registrer.php#register" class="btn btn-pill btn-primary btn-tactile">Register &rarr;</a>
+                        <a href="login-register.php#login" class="btn btn-pill btn-outline-black btn-tactile">Login</a>
+                        <a href="login-register.php#register" class="btn btn-pill btn-primary btn-tactile">Register &rarr;</a>
                     </div>
                 </div>
                 
@@ -218,7 +210,7 @@
 
             </div>
             
-            <a href="login-registrer.php#register" class="btn btn-dark btn-tactile btn-pill">
+            <a href="login-register.php#register" class="btn btn-dark btn-tactile btn-pill">
                 Start Your Registration &rarr;
             </a>
         </section>

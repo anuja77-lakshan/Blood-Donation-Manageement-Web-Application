@@ -28,3 +28,12 @@ function switchTab(tab) {
         btnLogin.classList.remove('active');
     }
 }
+
+// Check the URL hash when the page finishes loading
+document.addEventListener("DOMContentLoaded", () => {
+    if (window.location.hash === "#login") {
+        switchTab('login');
+    } else if (window.location.hash === "#register") {
+        switchTab('register');
+    }
+});
