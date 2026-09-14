@@ -8,35 +8,30 @@
     
     <!-- Font Awesome Icons (Added to match Camps page) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">   
     
     <!-- Main CSS -->
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
 
     <!-- Header & Navigation -->
     <header class="header-section">
         <div class="full-screen-container navbar">
-            <a href="home.html" class="brand-logo">
-                <img src="../images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
+            <a href="home.php" class="brand-logo">
+                <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
                 <span class="brand-logo-text">BLOODLINK</span>
             </a>
             <ul class="nav-links">
-                <li><a href="home.html" class="active">Home</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="camps.html">Camps</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li>
-                    <a href="personal-account.html" class="user-greeting">
-                        <i class="fa-regular fa-circle-user"></i>
-                        <span>#</span>
-                    </a>
-                </li>
+                <li><a href="home.php" class="active">Home</a></li>
+                <li><a href="dashboard.php">Dashboard</a></li>
+                <li><a href="camps.php">Camps</a></li>
+                <li><a href="contact.php">Contact</a></li>
+                
             </ul>
         </div>
 
@@ -48,8 +43,8 @@
                 <a href="../html/camps.html">Camps</a>
                 <a href="../html/contact.html">Contact</a>
                 <div class="mobile-auth">
-                    <a href="../html/login_registrer.html#login" class="btn btn-outline">Login</a>
-                    <a href="../html/login_registrer.html#register" class="btn btn-primary">Register</a>
+                    <a href="../html/login-registrer.html#login" class="btn btn-outline">Login</a>
+                    <a href="../html/login-registrer.html#register" class="btn btn-primary">Register</a>
                 </div>
             </nav>
         </div>
@@ -63,7 +58,7 @@
                 
                 <!-- Left Column: Image Wrapper -->
                 <div class="hero-image-wrapper reveal-on-scroll">
-                    <img src="../images/homemain.png" alt="Blood">
+                    <img src="images/homemain.png" alt="Blood">
                 </div>
 
                 <!-- Right Column: Content -->
@@ -83,8 +78,8 @@
                     </div>
 
                     <div class="hero-actions hero-actions-animate">
-                        <a href="../html/login_registrer.html#login" class="btn btn-pill btn-outline-black btn-tactile">Login</a>
-                        <a href="../html/login_registrer.html#register" class="btn btn-pill btn-primary btn-tactile">Register &rarr;</a>
+                        <a href="login_registrer.php#login" class="btn btn-pill btn-outline-black btn-tactile">Login</a>
+                        <a href="login_registrer.php#register" class="btn btn-pill btn-primary btn-tactile">Register &rarr;</a>
                     </div>
                 </div>
                 
@@ -212,26 +207,14 @@
 
             </div>
             
-            <a href="#register" class="btn btn-dark btn-tactile btn-pill">
+            <a href="login-registrer.php#register" class="btn btn-dark btn-tactile btn-pill">
                 Start Your Registration &rarr;
             </a>
         </section>
         
     </main>
 
-    <!-- Emergency Banner -->
-    <section id="emergency" class="emergency-section reveal-on-scroll">
-        <div class="container emergency-container">
-            <div class="emergency-info">
-                <h3>Emergency Blood Request</h3>
-                <p>For urgent blood requests, please contact our emergency dispatch directly or submit your details online.</p>
-            </div>
-            <div class="emergency-actions">
-                <a href="tel:+18005550199" class="btn btn-white btn-tactile btn-pill">Call Now</a>
-                <a href="#emergency-request" class="btn btn-outline-white btn-tactile btn-pill">Add Request</a>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Embedded Scripts -->
     <script>

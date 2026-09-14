@@ -35,20 +35,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- link our custom styles -->
-    <link rel="stylesheet" href="../css/emergency-requests.css">
+    <link rel="stylesheet" href="css/emergency-requests.css">
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
 
     <!-- top navbar -->
     <header class="header-section shadow-sm sticky top-0 z-50">
         <div class="full-screen-container navbar">
-            <a href="home.html" class="brand-logo">
-                <img src="../images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
+            <a href="home.php" class="brand-logo">
+                <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
                 <span class="brand-logo-text">BLOODLINK</span>
             </a>
             <ul class="nav-links hidden md:flex">
                 <li><a href="home.php">Home</a></li>
-                <li><a href="dashboard.[php]">Dashboard</a></li>
+                <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="camps.php">Camps</a></li>
                 <li><a href="../contact.php">Contact</a></li>
                 <li>
