@@ -11,21 +11,21 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  <link rel="stylesheet" href="../css/contact.css" />
+  <link rel="stylesheet" href="css/contact.css" />
 </head>
 <body>
 
   <header class="header-section">
     <div class="full-screen-container navbar">
-      <a href="../html/home.html" class="brand-logo">
-        <img src="../images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
+      <a href="home.html" class="brand-logo">
+        <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
       <ul class="nav-links">
         <li><a href="home.html">Home</a></li>
         <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="camps.html">Camps</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="contact.php" class="active">Contact</a></li>
         <li>
           <a href="personal-account.html" class="user-greeting">
             <i class="fa-regular fa-circle-user"></i>
@@ -38,7 +38,7 @@
 
   <main class="main-content">
     
-    <section class="hero-section">
+    <section class="hero-section reveal-on-scroll">
       <h1 class="hero-title">GET IN TOUCH WITH <span class="text-red">BLOODLINK.</span></h1>
       <p class="hero-subtitle">
         Connecting voluntary donors, patients, blood banks and camp organizers across <strong>Sri Lanka.</strong>
@@ -47,7 +47,7 @@
 
     <div class="contact-grid">
       
-      <div class="channels-column">
+      <div class="channels-column reveal-on-scroll">
         <div class="section-badge">CONTACT CHANNELS</div>
         <h2 class="section-title">REACH US DIRECTLY</h2>
         <div class="accent-line"></div>
@@ -112,12 +112,12 @@
         </div>
       </div>
 
-      <div class="form-container">
+      <div class="form-container reveal-on-scroll">
         <div class="section-badge">ONLINE INQUIRY</div>
         <h2 class="section-title">SEND US A MESSAGE</h2>
         <div class="dark-accent-line"></div>
 
-        <form id="contactForm" class="contact-form">
+        <form id="contactForm" class="contact-form" action="php/contact_process.php" method="POST">
           
           <div class="form-row">
             <div class="form-group">
@@ -147,7 +147,7 @@
     </div>
   </main>
 
-  <section class="emergency-banner">
+  <section class="emergency-banner reveal-on-scroll">
     <div class="emergency-container">
       <div class="emergency-text-group">
         <div class="emergency-icon-circle">
@@ -170,12 +170,54 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer-section">
+  <footer class="footer-section reveal-on-scroll">
     <div class="full-screen-container footer-content">
       <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal-on-scroll').forEach(element => {
+        revealObserver.observe(element);
+      });
+
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+
+          fetch('php/contact_process.php', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.text())
+          .then(data => {
+            if (data.trim() === 'success') {
+              alert('Thank you! Your message has been sent successfully.');
+              contactForm.reset();
+            } else {
+              alert('Error: Could not save your message. Please try again.');
+            }
+          })
+          .catch(error => {
+            alert('Something went wrong. Please check your connection.');
+          });
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
