@@ -33,6 +33,25 @@
           </a>
         </li>
       </ul>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown menu -->
+    <div id="mobile-menu" class="mobile-menu menu-closed">
+      <nav class="mobile-nav">
+        <a href="home.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="camps.html">Camps</a>
+        <a href="contact.php" class="active">Contact</a>
+        <a href="personal-account.html" class="mobile-user-link">
+          <i class="fa-regular fa-circle-user"></i>
+          <span>Hi, senith</span>
+        </a>
+      </nav>
     </div>
   </header>
 
@@ -178,6 +197,25 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Mobile Menu
+      const menuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = mobileMenu.classList.toggle('menu-open');
+          mobileMenu.classList.toggle('menu-closed', !isOpen);
+          
+          const icon = menuToggle.querySelector('i');
+          if (isOpen) {
+            icon.classList.replace('fa-bars', 'fa-xmark');
+          } else {
+            icon.classList.replace('fa-xmark', 'fa-bars');
+          }
+        });
+      }
+
+      // Scroll Animations
       const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
