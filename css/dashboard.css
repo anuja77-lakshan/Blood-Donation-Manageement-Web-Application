@@ -179,6 +179,16 @@ body {
     color: #ffffff;
 }
 
+/* New Link Rules to prevent browser default blue/black link text */
+a.metric-card {
+    display: block;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+a.metric-card.highlight-card {
+    color: #ffffff;
+}
+
 .card-top {
     display: flex;
     justify-content: space-between;

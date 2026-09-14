@@ -12,22 +12,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="../css/add_camps.css">
+  <link rel="stylesheet" href="css/add_camps.css">
 </head>
 <body>
 
   <!-- Top Full Width Navbar -->
   <header class="header-section">
     <div class="full-screen-container navbar">
-      <a href="../html/home.html" class="brand-logo">
-        <img src="../images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
+      <a href="home.php" class="brand-logo">
+        <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
       <ul class="nav-links">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="camps.html" class="active">Camps</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="home.php">Home</a></li>
+        <li><a href="dashboard.php">Dashboard</a></li>
+        <li><a href="camps.php" class="active">Camps</a></li>
+        <li><a href="contact.php">Contact</a></li>
         <li>
           <a href="personal_account.html" class="user-greeting">
             <i class="fa-regular fa-circle-user"></i>
@@ -42,7 +42,7 @@
   <main class="full-screen-container form-main">
     
     <!-- Navigation Back Link -->
-    <a href="../html/camps.html" class="back-link">
+    <a href="camps.php" class="back-link">
       <i class="fa-solid fa-arrow-left"></i> Back to Camps
     </a>
 
@@ -55,7 +55,7 @@
       </div>
 
       <!-- Add Camp Form (Pure HTML Submission/Redirection) -->
-      <form action="index.html" method="GET">
+      <form action="php/save_camp.php" method="POST" enctype="multipart/form-data">
         
         <!-- Camp Title & Organizing Body -->
         <div class="form-row">
@@ -106,7 +106,7 @@
 
         <!-- Action Buttons -->
         <div class="form-actions hero-actions-animate">
-          <a href="../html/camps.html" class="btn-cancel">Cancel</a>
+          <a href="camps.php" class="btn-cancel">Cancel</a>
           <button type="submit" class="btn-submit">
             <i class="fa-solid fa-check"></i> Publish Blood Camp
           </button>
@@ -116,6 +116,6 @@
     </div>
 
   </main>
-
+  <script src="js/add_camps.js"></script>
 </body>
 </html>

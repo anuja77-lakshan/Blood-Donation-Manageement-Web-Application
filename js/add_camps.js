@@ -1,34 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('addCampForm');
+  const fileInput = document.getElementById('coverImage');
+  const dropzoneTitle = document.querySelector('.dropzone-title');
+  const dropzoneHint = document.querySelector('.dropzone-hint');
+  const dropzoneIcon = document.querySelector('.dropzone-icon');
+  const dropzoneBox = document.querySelector('.file-dropzone');
 
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
+  if (fileInput) {
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files && fileInput.files[0]) {
+        const file = fileInput.files[0];
+        const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
 
-      // Collect form input values
-      const campData = {
-        name: document.getElementById('campName').value.trim(),
-        organization: document.getElementById('orgName').value.trim(),
-        date: document.getElementById('campDate').value,
-        startTime: document.getElementById('startTime').value,
-        endTime: document.getElementById('endTime').value,
-        location: document.getElementById('campLocation').value.trim(),
-        status: document.getElementById('campStatus').value,
-        imageUrl: document.getElementById('imageUrl').value.trim() || 'https://placehold.co/800x400/991b1b/ffffff?text=Blood+Donation+Drive'
-      };
+        // Update icon to checkmark
+        if (dropzoneIcon) {
+          dropzoneIcon.className = 'fa-solid fa-circle-check dropzone-icon';
+          dropzoneIcon.style.color = '#16a34a';
+        }
 
-      // Retrieve existing camps from localStorage or set empty array
-      const existingCamps = JSON.parse(localStorage.getItem('bloodCamps')) || [];
+        // Display selected file name
+        if (dropzoneTitle) {
+          dropzoneTitle.textContent = `Uploaded: ${file.name}`;
+          dropzoneTitle.style.color = '#16a34a';
+          dropzoneTitle.style.fontWeight = '700';
+        }
 
-      // Append new camp details
-      existingCamps.push(campData);
+        // Display file size
+        if (dropzoneHint) {
+          dropzoneHint.textContent = `File ready for upload (${fileSizeMB} MB) • Click to change`;
+          dropzoneHint.style.color = '#374151';
+        }
 
-      // Save updated data to localStorage
-      localStorage.setItem('bloodCamps', JSON.stringify(existingCamps));
-
-      // Display confirmation alert and redirect to main page
-      alert('Blood Camp added successfully!');
-      window.location.href = 'index.html';
+        // Highlight dropzone border
+        if (dropzoneBox) {
+          dropzoneBox.style.borderColor = '#16a34a';
+          dropzoneBox.style.backgroundColor = '#f0fdf4';
+        }
+      }
     });
   }
 });
