@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloodLink - Register & Log in</title>
+    <link rel="stylesheet" href="../css/login_registrer.css">
+</head>
+<body>
+    
+    <div class="page-wrapper">
+        <!-- Logo Area -->
+        <header class="logo-area">
+           
+            <img src="../images/bloodlink_logo.png" alt="BloodLink Logo">
+            <h1>BLOODLINK</h1>
+        </header>
+
+        <!-- Main Form Card -->
+        <main class="form-card">
+            
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" id="btn-register" onclick="switchTab('register')">Register</button>
+                <button class="tab-btn inactive" id="btn-login" onclick="switchTab('login')">Log in</button>
+            </div>
+
+            <!-- REGISTER FORM -->
+            <form id="register-form" class="form-content" action="../auth/register.php" method="POST">
+                
+                <div class="input-col">
+                    <input type="text" name="full_name" placeholder="Full Name" required>
+                    <input type="text" name="nic" placeholder="NIC / Passport Number" required>
+                </div>
+                
+                <div class="input-row">
+                    <input type="date" name="dob" required title="Date of Birth">
+                    <select name="gender" required>
+                        <option value="" disabled selected>Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                
+                <div class="input-col">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                </div>
+                
+                <div class="input-row">
+                    <input type="text" name="location" placeholder="Location (City)" required>
+                        <select name="district" required>
+                        <option value="disabled selected">District</option>
+                        <option value="Ampara">Ampara</option>
+                        <option value="Anuradhapura">Anuradhapura</option>
+                        <option value="Badulla">Badulla</option>
+                        <option value="Batticaloa">Batticaloa</option>
+                        <option value="Colombo">Colombo</option>
+                        <option value="Galle">Galle</option>
+                        <option value="Gampaha">Gampaha</option>
+                        <option value="Hambantota">Hambantota</option>
+                        <option value="Jaffna">Jaffna</option>
+                        <option value="Kalutara">Kalutara</option>
+                        <option value="Kandy">Kandy</option>
+                        <option value="Kegalle">Kegalle</option>
+                        <option value="Kilinochchi">Kilinochchi</option>
+                        <option value="Kurunegala">Kurunegala</option>
+                        <option value="Mannar">Mannar</option>
+                        <option value="Matale">Matale</option>
+                        <option value="Matara">Matara</option>
+                        <option value="Monaragala">Monaragala</option>
+                        <option value="Mullaitivu">Mullaitivu</option>
+                        <option value="Nuwara Eliya">Nuwara Eliya</option>
+                        <option value="Polonnaruwa">Polonnaruwa</option>
+                        <option value="Puttalam">Puttalam</option>
+                        <option value="Ratnapura">Ratnapura</option>
+                        <option value="Trincomalee">Trincomalee</option>
+                        <option value="Vavuniya">Vavuniya</option>
+                    </select>
+                        
+                    </select>
+                </div>
+
+                <div class="input-row">
+                    <select name="blood_group" required>
+                        <option value="" disabled selected>Blood Group</option>
+                        <option value="O+">O+</option>
+                        <option value="A+">A+</option>
+                        <option value="B+">B+</option>
+                        <option value="AB+">AB+</option>
+                        <option value="O-">O-</option>
+                        <option value="A-">A-</option>
+                        <option value="B-">B-</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                    <input type="number" name="weight" placeholder="Weight (kg)" min="30" required>
+                </div>
+
+                <div class="input-row">
+                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+
+            <!-- LOGIN FORM -->
+            <form id="login-form" class="form-content hidden" action="../auth/login.php" method="POST">
+                <div class="input-col">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Log in</button>
+            </form>
+
+        </main>
+    </div>
+
+    <!-- Custom JS Link -->
+    <script src="../js/login_registrer.js"></script>
+</body>
+</html>

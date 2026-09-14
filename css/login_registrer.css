@@ -1,0 +1,193 @@
+:root {
+            /*Colors from the image*/
+            --primary-color: #ea1822; 
+            --hover-color:  #ea1822;
+            --card-bg: #f8fafc; 
+            --bg-color: #FFFFFF;
+            --text-dark: #2D3748;
+            --text-light: #A0AEC0;
+            --border-light: #e2e8f0;
+        }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Background Gradient from the image */
+body {
+    background: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.page-wrapper {
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Logo Styles */
+.logo-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.logo-area img {
+    width: 35px;
+    height: 35px;
+    margin-right: 12px;
+}
+
+.logo-area h1 {
+    font-size: 22px;
+    color:var(--text-dark);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+/* Main Form Card */
+.form-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    width: 100%;
+    box-shadow: 10px 20px 50px rgba(20, 16, 16, 0.03);
+    position: relative;
+}
+
+/* Tab Navigation */
+.tabs {
+    display: flex;
+    height: 60px;
+}
+
+.tab-btn {
+    flex: 1;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Active Tab completely blends with the card */
+.tab-btn.active {
+    background-color:var(--card-bg);
+    color:black;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+/* Inactive Tab is white with curved edges like the image */
+.tab-btn.inactive {
+    background-color:var(--bg-color);
+    color: #000;
+}
+
+#btn-register.inactive {
+    border-bottom-right-radius: 16px;
+    border-top-left-radius: 16px;
+}
+
+#btn-login.inactive {
+    border-bottom-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+/* Form Layout */
+.form-content {
+    padding: 30px 40px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.hidden {
+    display: none;
+}
+
+.input-row {
+    display: flex;
+    gap: 15px;
+    
+}
+
+.input-col {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Input Fields */
+.input-row input, 
+.input-row select, 
+.input-col input {
+    flex: 1;
+    width: 100%;
+    padding: 14px 18px;
+    border:1px solid rgb(228, 224, 224);
+    border-radius: 8px;
+    background-color:var(--card-bg); /* Lighter cyan for inputs */
+    font-size: 14px;
+    color:var(--text-dark);
+    outline: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.input-row input:focus, 
+.input-row select:focus, 
+.input-col input:focus {
+    box-shadow: inset 0 0 0 2px var(--primary-color);
+}
+
+.input-row input::placeholder, 
+.input-col input::placeholder {
+    color:var(--text-dark);
+}
+
+/* Select Box Placeholder color fix */
+select:required:invalid {
+    color:var(--text-dark);
+}
+
+/* Submit Button */
+.submit-btn {
+    margin-top: 20px;
+    background-color: var(--primary-color); 
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 25px; 
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(14, 13, 13, 0.35);
+    transition: all 0.3s ease;
+}
+
+
+.submit-btn:hover {
+    background-color:rgb(212, 16, 16);
+    box-shadow: 0 8px 20px rgba(23, 22, 22, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 500px) {
+    .input-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .form-content {
+        padding: 25px 20px 30px 20px;
+    }
+}
