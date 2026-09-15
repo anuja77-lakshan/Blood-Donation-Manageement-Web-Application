@@ -72,44 +72,69 @@ if ($result && mysqli_num_rows($result) > 0) {
         </div>
       </div>
 
-      <!-- Info Cards Grid -->
-      <div class="info-cards-wrapper hero-actions-animate">
-        
-        <!-- Donor Personal Details -->
-        <div class="user-card">
-          <div class="personal-details">
-            <h3>Donor Information</h3>
-            <p><span>Full Name:</span> <?php echo htmlspecialchars($user['full_name']); ?></p>
-            <p><span>Date of Birth:</span> <?php echo htmlspecialchars($user['dob']); ?></p>
-            <p><span>Gender:</span> <?php echo htmlspecialchars($user['gender']); ?></p>
-            <p><span>NIC/Passport Number:</span> <?php echo htmlspecialchars($user['nic']); ?></p>
-            <p><span>Phone:</span> <?php echo htmlspecialchars($user['phone']); ?></p>
-            <p><span>Email address:</span> <?php echo htmlspecialchars($user['email']); ?></p>
-            <p><span>Location:</span> <?php echo htmlspecialchars($user['location']); ?></p>
-            <p><span>District:</span> <?php echo htmlspecialchars($user['district']); ?></p>
-          </div>
-        </div>
+      <!-- Info Cards Grid (Profile Update Form) -->
+      <form action="php/update_profile.php" method="POST">
+        <div class="info-cards-wrapper hero-actions-animate">
+          
+          <!-- Donor Personal Details -->
+          <div class="user-card">
+            <div class="personal-details" style="width: 100%;">
+              <h3>Donor Information</h3>
+              <p><span>Full Name:</span></p>
+              <input type="text" name="full_name" value="<?php echo htmlspecialchars($user['full_name']); ?>" required style="width: 100%; padding: 7px; margin-bottom: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
 
-        <!-- Blood Donation Information -->
-        <div class="user-card">
-          <div class="personal-details">
-            <h3>Blood Donation Information</h3>
-            <p><span>Blood Group:</span> <strong style="color: var(--primary-color); font-size: 16px;"><?php echo htmlspecialchars($user['blood_group']); ?></strong></p>
-            <p><span>Weight:</span> <?php echo htmlspecialchars($user['weight']); ?> kg</p>
-            <p><span>Last Donation Date:</span> <?php echo !empty($user['last_donation_date']) ? htmlspecialchars($user['last_donation_date']) : 'None Recorded'; ?></p>
-            <p><span>Total Donations:</span> <?php echo isset($user['total_donations']) ? htmlspecialchars($user['total_donations']) : '0'; ?></p>
-          </div>
-        </div>
+              <p><span>Date of Birth:</span> <?php echo htmlspecialchars($user['dob']); ?></p>
+              <p><span>Gender:</span> <?php echo htmlspecialchars($user['gender']); ?></p>
+              <p><span>NIC/Passport Number:</span> <?php echo htmlspecialchars($user['nic']); ?></p>
 
-      </div>
+              <p><span>Phone:</span></p>
+              <input type="tel" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>" pattern="0[0-9]{9}" maxlength="10" required style="width: 100%; padding: 7px; margin-bottom: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+
+              <p><span>Email address:</span></p>
+              <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required style="width: 100%; padding: 7px; margin-bottom: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+
+              <p><span>Location:</span></p>
+              <input type="text" name="location" value="<?php echo htmlspecialchars($user['location']); ?>" required style="width: 100%; padding: 7px; margin-bottom: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+
+              <p><span>District:</span></p>
+              <select name="district" required style="width: 100%; padding: 7px; margin-bottom: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                <?php
+                $districts = ["Ampara", "Anuradhapura", "Badulla", "Batticaloa", "Colombo", "Galle", "Gampaha", "Hambantota", "Jaffna", "Kalutara", "Kandy", "Kegalle", "Kilinochchi", "Kurunegala", "Mannar", "Matale", "Matara", "Monaragala", "Mullaitivu", "Nuwara Eliya", "Polonnaruwa", "Puttalam", "Ratnapura", "Trincomalee", "Vavuniya"];
+                foreach ($districts as $d) {
+                    $selected = ($user['district'] === $d) ? 'selected' : '';
+                    echo "<option value='$d' $selected>$d</option>";
+                }
+                ?>
+              </select>
+            </div>
+          </div>
+
+          <!-- Blood Donation Information -->
+          <div class="user-card">
+            <div class="personal-details" style="width: 100%;">
+              <h3>Blood Donation Information</h3>
+              <p><span>Blood Group:</span> <strong style="color: var(--primary-color); font-size: 16px;"><?php echo htmlspecialchars($user['blood_group']); ?></strong></p>
+              
+              <p style="margin-top: 10px;"><span>Weight (kg):</span></p>
+              <input type="number" name="weight" value="<?php echo htmlspecialchars($user['weight']); ?>" min="45" max="180" required style="width: 100%; padding: 7px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 6px;">
+
+              <p><span>Last Donation Date:</span> <?php echo !empty($user['last_donation_date']) ? htmlspecialchars($user['last_donation_date']) : 'None Recorded'; ?></p>
+              <p><span>Total Donations:</span> <?php echo isset($user['total_donations']) ? htmlspecialchars($user['total_donations']) : '0'; ?></p>
+
+              <button type="submit" style="margin-top: 20px; width: 100%; padding: 10px; background-color: var(--primary-color); color: #ffffff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">Save Changes</button>
+            </div>
+          </div>
+
+        </div>
+      </form>
 
       <!-- Action Shortcut Buttons -->
       <div class="action-grid hero-actions-animate">
-        <a href="#" class="action-btn">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJcvjOg2aq0pVsisfQhgpALqR2Fxin4YlaSRybQHkAjEcYHw/viewform?pli=1" class="action-btn">
           <div class="btn-icon"><i class="fa-solid fa-droplet"></i></div>
           Donor Form
         </a>
-        <a href="#" class="action-btn">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe_g5i1wLXAdW_G80ihm7qwp991fcOOmZBkND7tjR_cefTl-g/viewform" class="action-btn">
           <div class="btn-icon"><i class="fa-solid fa-hospital"></i></div>
           Patient Form
         </a>
@@ -124,9 +149,9 @@ if ($result && mysqli_num_rows($result) > 0) {
       </div>
 
       <!-- Logout button link -->
-        <div class="button-container hero-actions-animate" style="margin-top: 30px;">
+      <div class="button-container hero-actions-animate" style="margin-top: 30px;">
         <a href="php/logout.php" class="button logout-btn">Log Out</a>
-        </div>
+      </div>
 
     </div>
   </main>
