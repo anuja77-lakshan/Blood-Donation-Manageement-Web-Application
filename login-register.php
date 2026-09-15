@@ -44,7 +44,7 @@
                 
                 <div class="input-col">
                     <input type="email" name="email" placeholder="Email" required>
-                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                    <input type="tel" name="phone" placeholder="Phone Number (e.g. 0712345678)" pattern="0[0-9]{9}" maxlength="10" required>
                 </div>
                 
                 <div class="input-row">
@@ -90,7 +90,7 @@
                         <option value="B-">B-</option>
                         <option value="AB-">AB-</option>
                     </select>
-                    <input type="number" name="weight" placeholder="Weight (kg)" min="30" required>
+                    <input type="number" name="weight" placeholder="Weight (kg)" min="45" max="180" required>
                 </div>
 
                 <div class="input-row">
