@@ -35,7 +35,7 @@ if ($donorId === false) {
 
 try {
     // 2. Fetch donor details from users table
-    $stmtUser = $pdo->prepare("SELECT id, name, blood_group FROM users WHERE id = :id LIMIT 1");
+    $stmtUser = $pdo->prepare("SELECT id, full_name, blood_group FROM users WHERE id = :id LIMIT 1");
     $stmtUser->execute(['id' => $donorId]);
     $donor = $stmtUser->fetch();
 
@@ -43,7 +43,7 @@ try {
         // Fallback for safety if users table has not been populated
         $donor = [
             'id'          => $donorId,
-            'name'        => 'Senith Chethiya',
+            'full_name'   => 'Senith Chethiya',
             'blood_group' => 'O+'
         ];
     }
@@ -53,8 +53,9 @@ try {
     $location = !empty($data['location'])  ? trim($data['location'])  : 'Test Hospital';
     $status   = 'Completed';
     
-    // Note: your donations table has donation_date as DATE (YYYY-MM-DD)
-    $donationDate = date('Y-m-d');
+    // FIX: Set timezone to Sri Lanka and capture exact date AND time
+    date_default_timezone_set('Asia/Colombo');
+    $donationDate = date('Y-m-d H:i:s');
 
     // 4. Insert into donations table
     $sql = "INSERT INTO `donations` (`user_id`, `donation_date`, `location`, `camp_name`, `status`) 
@@ -73,10 +74,10 @@ try {
     // 5. Output response
     echo json_encode([
         'status'   => 'success',
-        'message'  => 'Donation successfully recorded for ' . $donor['name'] . ' (' . $donor['blood_group'] . ')',
+        'message'  => 'Donation successfully recorded for ' . $donor['full_name'] . ' (' . $donor['blood_group'] . ')',
         'donor'    => [
             'id'          => (int)$donor['id'],
-            'name'        => $donor['name'],
+            'full_name'   => $donor['full_name'],
             'blood_group' => $donor['blood_group']
         ],
         'donation' => [
@@ -97,3 +98,4 @@ try {
     ]);
     exit;
 }
+?>

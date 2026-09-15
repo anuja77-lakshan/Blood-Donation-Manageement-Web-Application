@@ -3,26 +3,36 @@
 session_start();
 require_once __DIR__ . '/config/db.php';
 
-// Fallback to donor 1
+// 1. Check if user is logged in via email (Matches logic in donor_qr.php)
+if (isset($_SESSION['user_email'])) {
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email LIMIT 1");
+    $stmt->execute(['email' => $_SESSION['user_email']]);
+    $loggedUser = $stmt->fetch();
+    if ($loggedUser) {
+        $_SESSION['user_id'] = $loggedUser['id'];
+    }
+}
+
+// 2. Fallback to donor 1 if no one is logged in
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['user_id'] = 1;
 }
 
 $userId = (int)$_SESSION['user_id'];
 
-// 1. Fetch user info
-$stmtUser = $pdo->prepare("SELECT id, name, blood_group FROM users WHERE id = :id");
+// 3. Fetch user info 
+$stmtUser = $pdo->prepare("SELECT id, full_name, blood_group FROM users WHERE id = :id");
 $stmtUser->execute(['id' => $userId]);
 $donor = $stmtUser->fetch();
 
 if (!$donor) {
-    $donor = ['id' => 1, 'name' => 'Senith Chethiya', 'blood_group' => 'O+'];
+    $donor = ['id' => 1, 'full_name' => 'Senith Chethiya', 'blood_group' => 'O+'];
 }
 
-// Extract first name for the navbar greeting
-$firstName = explode(' ', trim($donor['name']))[0];
+// Extract first name for the navbar greeting 
+$firstName = explode(' ', trim($donor['full_name']))[0];
 
-// 2. Fetch past donations from your existing donations table
+// 4. Fetch past donations from your existing donations table
 $sql = "SELECT id, user_id, donation_date, location, camp_name, status 
         FROM donations 
         WHERE user_id = :user_id 
@@ -31,7 +41,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute(['user_id' => $userId]);
 $donations = $stmt->fetchAll();
 
-// 3. Analytics
+// 5. Analytics
 $totalDonations = count($donations);
 $lastDonationDate = $totalDonations > 0 ? $donations[0]['donation_date'] : null;
 
@@ -146,7 +156,7 @@ if ($lastDonationDate) {
         <div class="page-title-row" style="margin-bottom: 20px;">
             <div class="title-group">
                 <div class="section-tag hero-badge-animate">Donor Profile</div>
-                <h2 class="main-heading hero-title-animate">Hello, <?= htmlspecialchars($donor['name']); ?> 👋</h2>
+                <h2 class="main-heading hero-title-animate">Hello, <?= htmlspecialchars($donor['full_name']); ?> 👋</h2>
                 <p class="sub-text hero-desc-animate">Here is your verified blood donation record.</p>
             </div>
             <span class="blood-badge hero-actions-animate" style="background: var(--primary); color: white; padding: 10px 20px; border-radius: 30px; font-weight: 700;">

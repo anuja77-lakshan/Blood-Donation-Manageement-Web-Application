@@ -1,15 +1,6 @@
 <?php
 // scanner.php - Unauthenticated Prototype for Hospital / Camp intake desk
 require_once __DIR__ . '/config/db.php';
-
-// Fetch active blood camps from your existing blood_camps table
-$camps = [];
-try {
-    $stmtCamps = $pdo->query("SELECT id, camp_name, location FROM blood_camps ORDER BY id DESC");
-    $camps = $stmtCamps->fetchAll();
-} catch (\PDOException $e) {
-    // Fallback if query fails
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,36 +71,49 @@ try {
             display: none;
             text-align: left;
         }
+
+        .security-warning {
+            background-color: #fffbeb; 
+            border-left: 4px solid #f59e0b; 
+            padding: 12px; 
+            margin-bottom: 20px; 
+            font-size: 13px; 
+            text-align: left; 
+            border-radius: 4px; 
+            color: #92400e;
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="scanner.php" class="brand">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-            BloodLink Hospital Intake Scanner
+        <a href="scanner.php" class="brand" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+            <img src="images/bloodlink_logo.png" alt="BloodLink Logo" style="width: 35px; height: 35px; object-fit: contain;">
+            <span style="color: black; font-weight: 900;">BLOODLINK</span> <span style="font-weight: 500;">Hospital Intake Scanner(ADMIN)</span>
         </a>
         <div class="nav-links">
             <a href="donor_qr.php" target="_blank">Donor QR View ↗</a>
-            <a href="history.php" target="_blank">Donation History ↗</a>
         </div>
     </nav>
 
     <div class="container scanner-container">
         <div class="card" style="text-align: center;">
+            
+            <!-- Security Caution Banner -->
+            <div class="security-warning">
+                <strong>⚠️ Security Notice:</strong> This terminal connects directly to the live database. Do strictly ensure that you do not share the admin page link, scanner terminal URLs, or login credentials with unauthorized personnel.
+            </div>
+
             <h1 class="card-title">Hospital Scanner Terminal</h1>
             <p class="card-subtitle">Scan a donor's QR code to record their blood donation directly into the database.</p>
 
-            <!-- Camp selector using your existing blood_camps table -->
+            <!-- Simplified Static Selector -->
             <div class="camp-selector">
-                <label for="campSelect">Active Blood Camp / Location:</label>
+                <label for="campSelect">Active Intake Location:</label>
                 <select id="campSelect">
-                    <option value='{"camp":"Test Camp","location":"Test Hospital"}'>-- Default: Test Camp (Test Hospital) --</option>
-                    <?php foreach ($camps as $c): ?>
-                        <option value='<?= json_encode(["camp" => $c['camp_name'], "location" => $c['location']], JSON_HEX_APOS | JSON_HEX_QUOT); ?>'>
-                            <?= htmlspecialchars($c['camp_name']) . " (" . htmlspecialchars($c['location']) . ")"; ?>
-                        </option>
-                    <?php endforeach; ?>
+                    <option value="" disabled selected>-- Select an Intake Location --</option>
+                    <option value='{"camp":"Hospital","location":"Main Hospital Intake"}'>Hospital</option>
+                    <option value='{"camp":"Blood Donation Camp","location":"Mobile Donation Camp"}'>Blood Donation Camp</option>
                 </select>
             </div>
 
@@ -130,7 +134,7 @@ try {
                 <p><strong>Donor Name:</strong> <span id="resDonorName">-</span></p>
                 <p><strong>Blood Group:</strong> <span id="resBloodGroup" class="blood-badge" style="font-size:12px;">-</span></p>
                 <p><strong>Location:</strong> <span id="resLocation">-</span></p>
-                <p><strong>Camp Name:</strong> <span id="resCamp">-</span></p>
+                <p><strong>Intake Type:</strong> <span id="resCamp">-</span></p>
                 <p><strong>Date:</strong> <span id="resDate">-</span></p>
             </div>
         </div>
@@ -168,17 +172,27 @@ try {
         // Camera QR scan callback
         function onScanSuccess(decodedText, decodedResult) {
             if (isCooldown) return; // Prevent spamming duplicate scans
+            
+            // Check if a location is actually selected
+            if (!campSelect.value) {
+                showStatus("alert-danger", "Please select an Intake Location (Hospital or Camp) before scanning.");
+                return;
+            }
 
             isCooldown = true;
             playBeep();
 
             showStatus("alert-success", "QR Code detected! Sending to server...");
 
-            // Read selected camp & location
-            let selectedCampInfo = { camp: "Test Camp", location: "Test Hospital" };
+            // Parse selected camp & location
+            let selectedCampInfo = null;
             try {
                 selectedCampInfo = JSON.parse(campSelect.value);
-            } catch (e) {}
+            } catch (e) {
+                showStatus("alert-danger", "Error reading location selection.");
+                isCooldown = false;
+                return;
+            }
 
             // Send AJAX POST to process_scan.php
             fetch("process_scan.php", {
@@ -198,7 +212,7 @@ try {
                 if (data.status === "success") {
                     showStatus("alert-success", data.message);
 
-                    document.getElementById("resDonorName").textContent = data.donor.name;
+                    document.getElementById("resDonorName").textContent = data.donor.full_name;
                     document.getElementById("resBloodGroup").textContent = data.donor.blood_group;
                     document.getElementById("resLocation").textContent = data.donation.location;
                     document.getElementById("resCamp").textContent = data.donation.camp_name;

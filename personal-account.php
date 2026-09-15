@@ -13,11 +13,34 @@ $email  = mysqli_real_escape_string($conn, $_SESSION['user_email']);
 $sql    = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
 $result = mysqli_query($conn, $sql);
 
+// Initialize default values for the dashboard
+$total_donations = 0;
+$last_donation_date = 'None Recorded';
+
 if ($result && mysqli_num_rows($result) > 0) {
     $user = mysqli_fetch_assoc($result);
+    
     // Store user_id in session so donor_qr.php and history.php can use it
     if (isset($user['id'])) {
-        $_SESSION['user_id'] = $user['id'];
+        $user_id = $user['id'];
+        $_SESSION['user_id'] = $user_id;
+
+        // Fetch Total Donations from donations table
+        $count_sql = "SELECT COUNT(*) as total FROM donations WHERE user_id = '$user_id'";
+        $count_result = mysqli_query($conn, $count_sql);
+        if ($count_result) {
+            $count_data = mysqli_fetch_assoc($count_result);
+            $total_donations = $count_data['total'];
+        }
+
+        // Fetch Last Donation Date from donations table
+        $date_sql = "SELECT donation_date FROM donations WHERE user_id = '$user_id' ORDER BY donation_date DESC LIMIT 1";
+        $date_result = mysqli_query($conn, $date_sql);
+        if ($date_result && mysqli_num_rows($date_result) > 0) {
+            $date_data = mysqli_fetch_assoc($date_result);
+            // Format the date nicely (e.g., 2026-08-12)
+            $last_donation_date = date('Y-m-d', strtotime($date_data['donation_date'])); 
+        }
     }
 } else {
     session_destroy();
@@ -100,8 +123,8 @@ if ($result && mysqli_num_rows($result) > 0) {
             <h3>Blood Donation Information</h3>
             <p><span>Blood Group:</span> <strong style="color: var(--primary-color); font-size: 16px;"><?php echo htmlspecialchars($user['blood_group']); ?></strong></p>
             <p><span>Weight:</span> <?php echo htmlspecialchars($user['weight']); ?> kg</p>
-            <p><span>Last Donation Date:</span> <?php echo !empty($user['last_donation_date']) ? htmlspecialchars($user['last_donation_date']) : 'None Recorded'; ?></p>
-            <p><span>Total Donations:</span> <?php echo isset($user['total_donations']) ? htmlspecialchars($user['total_donations']) : '0'; ?></p>
+            <p><span>Last Donation Date:</span> <?php echo htmlspecialchars($last_donation_date); ?></p>
+            <p><span>Total Donations:</span> <span style="background: #2563eb; color: white; padding: 2px 8px; border-radius: 4px;"><?php echo htmlspecialchars($total_donations); ?></span></p>
           </div>
         </div>
 
