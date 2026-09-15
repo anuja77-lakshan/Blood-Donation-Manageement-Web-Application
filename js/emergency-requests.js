@@ -1,4 +1,3 @@
-// some fake starting data so the page isn't empty
 let requests = [
     {
         id: 1,
@@ -9,7 +8,7 @@ let requests = [
         location: "Mercy General Hospital, ICU",
         contact: "555-0192",
         notes: "Surgery scheduled for tonight.",
-        timestamp: new Date(Date.now() - 1000 * 60 * 15) // 15 mins ago
+        timestamp: new Date(Date.now() - 1000 * 60 * 15)
     },
     {
         id: 2,
@@ -20,7 +19,7 @@ let requests = [
         location: "St. Jude Medical Center",
         contact: "555-8834",
         notes: "Needed for accident victim.",
-        timestamp: new Date(Date.now() - 1000 * 60 * 45) // 45 mins ago
+        timestamp: new Date(Date.now() - 1000 * 60 * 45)
     },
     {
         id: 3,
@@ -31,63 +30,84 @@ let requests = [
         location: "City Health Clinic",
         contact: "555-2211",
         notes: "Rare blood type needed urgently.",
-        timestamp: new Date(Date.now() - 1000 * 60 * 120) // 2 hours ago
+        timestamp: new Date(Date.now() - 1000 * 60 * 120)
     }
 ];
 
 let currentFilter = 'all';
 
-// setup everything once the page loads
 document.addEventListener('DOMContentLoaded', () => {
     renderRequests();
 
-    // what happens when you click submit on the form
-    document.getElementById('newRequestForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // stop the page from refreshing
+    const form = document.getElementById('newRequestForm');
+    if (!form) return;
+
+    // save data into database
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
         
-        // grab all the details from the form
         const newRequest = {
-            id: Date.now(),
-            patientName: document.getElementById('patientName').value,
+            patientName: document.getElementById('patientName').value.trim(),
             bloodType: document.getElementById('bloodType').value,
             units: document.getElementById('units').value,
             urgency: document.getElementById('urgency').value,
-            location: document.getElementById('location').value,
-            contact: document.getElementById('contact').value,
-            notes: document.getElementById('notes').value,
+            location: document.getElementById('location').value.trim(),
+            contact: document.getElementById('contact').value.trim(),
+            notes: document.getElementById('notes').value.trim(),
             timestamp: new Date()
         };
 
-        // put the new request at the top of our list
-        requests.unshift(newRequest);
-        
-        // clear the form out for the next time
-        this.reset();
-        
-        // show a quick success message where the feed title is
-        const feedHeader = document.querySelector('h2');
-        const originalText = feedHeader.innerText;
-        feedHeader.innerText = "REQUEST POSTED SUCCESSFULLY!";
-        feedHeader.classList.add('text-green-600');
-        
-        // change it back to normal after 3 seconds
-        setTimeout(() => {
-            feedHeader.innerText = originalText;
-            feedHeader.classList.remove('text-green-600');
-        }, 3000);
+        try {
+            // Database Absolute path
+            const response = await fetch('/bloodlink/php/add_emergency_request.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newRequest)
+            });
 
-        // draw the updated list on the screen
-        renderRequests();
+            const result = await response.json();
+
+            if (result.success) {
+                newRequest.id = result.id || Date.now();
+                // Priority to new request
+                requests.unshift(newRequest);
+                
+                form.reset();
+                
+                // Requests shows in UI
+                const feedHeader = document.querySelector('h2');
+                if (feedHeader) {
+                    const originalText = feedHeader.innerText;
+                    feedHeader.innerText = "REQUEST POSTED SUCCESSFULLY!";
+                    feedHeader.classList.add('text-green-600');
+                    
+                    setTimeout(() => {
+                        feedHeader.innerText = originalText;
+                        feedHeader.classList.remove('text-green-600');
+                    }, 3000);
+                }
+
+                renderRequests();
+            } else {
+                alert('Database Error: ' + (result.message || 'Could not save request.'));
+            }
+        } catch (err) {
+            console.error('Request submission failed:', err);
+            // Prevent Network errors
+            requests.unshift(newRequest);
+            form.reset();
+            renderRequests();
+        }
     });
 });
 
-// triggers when they use the dropdown to filter blood types
 function filterRequests() {
     currentFilter = document.getElementById('bloodTypeFilter').value;
     renderRequests();
 }
 
-// calculates how long ago a request was posted
 function formatTimeAgo(date) {
     const seconds = Math.floor((new Date() - date) / 1000);
     let interval = seconds / 31536000;
@@ -103,54 +123,47 @@ function formatTimeAgo(date) {
     return "Just now";
 }
 
-// gives negative blood types a purple tint, and positive ones a red tint
 function getBloodTypeColor(type) {
-    if(type.includes('-')) return 'bg-purple-50 text-purple-800 border-purple-200';
+    if (type.includes('-')) return 'bg-purple-50 text-purple-800 border-purple-200';
     return 'bg-red-50 text-blood-700 border-red-200';
 }
 
-// handles copying the phone number to the clipboard when they click 'contact'
 function handleContactClick(contact, id) {
-     const btn = document.getElementById(`contact-btn-${id}`);
-     const originalHTML = btn.innerHTML;
-     
-     // make the button turn green to show it worked
-     btn.innerHTML = `<i class="fa-solid fa-check"></i> ${contact}`;
-     btn.classList.replace('bg-blood-100', 'bg-green-100');
-     btn.classList.replace('text-blood-700', 'text-green-700');
-     
-     // actually copy the text
-     try {
-         navigator.clipboard.writeText(contact);
-     } catch(e) {
-        // backup way to copy just in case the browser is older
+    const btn = document.getElementById(`contact-btn-${id}`);
+    if (!btn) return;
+    const originalHTML = btn.innerHTML;
+    
+    btn.innerHTML = `<i class="fa-solid fa-check"></i> ${contact}`;
+    btn.classList.replace('bg-blood-100', 'bg-green-100');
+    btn.classList.replace('text-blood-700', 'text-green-700');
+    
+    try {
+        navigator.clipboard.writeText(contact);
+    } catch(e) {
         const tempInput = document.createElement("input");
         tempInput.value = contact;
         document.body.appendChild(tempInput);
         tempInput.select();
         document.execCommand("copy");
         document.body.removeChild(tempInput);
-     }
+    }
 
-     // change the button back after 3 seconds
-     setTimeout(() => {
-         btn.innerHTML = originalHTML;
-         btn.classList.replace('bg-green-100', 'bg-blood-100');
-         btn.classList.replace('text-green-700', 'text-blood-700');
-     }, 3000);
+    setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.classList.replace('bg-green-100', 'bg-blood-100');
+        btn.classList.replace('text-green-700', 'text-blood-700');
+    }, 3000);
 }
 
-// builds the actual HTML cards for the feed
 function renderRequests() {
     const feedContainer = document.getElementById('requestsFeed');
-    feedContainer.innerHTML = ''; // clear the old stuff out
+    if (!feedContainer) return;
+    feedContainer.innerHTML = '';
     
-    // check if we are filtering
     const filteredRequests = currentFilter === 'all' 
         ? requests 
         : requests.filter(r => r.bloodType === currentFilter);
 
-    // if no requests match the filter, show a friendly message
     if (filteredRequests.length === 0) {
         feedContainer.innerHTML = `
             <div class="text-center py-12 bg-white rounded-xl border border-dashed border-gray-300 animate-fade-in-up">
@@ -162,21 +175,16 @@ function renderRequests() {
         return;
     }
 
-    // draw a card for each request
     filteredRequests.forEach((req, index) => {
         const isCritical = req.urgency === 'Critical';
         const urgencyColor = isCritical ? 'text-red-600 bg-red-50 border-red-200' : 'text-orange-600 bg-orange-50 border-orange-200';
         const urgencyIcon = isCritical ? 'fa-triangle-exclamation pulse-animation' : 'fa-clock';
         const typeStyle = getBloodTypeColor(req.bloodType);
-        
-        // Stagger the animation delay so they load one after another beautifully
         const animationDelay = (index * 0.1) + 0.3; 
 
-        // the html structure of a single request card
         const cardHTML = `
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow relative overflow-hidden group animate-fade-in-up" style="animation-delay: ${animationDelay}s;">
                 <div class="flex flex-col sm:flex-row justify-between gap-4">
-                    
                     <div class="flex sm:flex-col items-center sm:items-start gap-4 sm:gap-2 sm:w-24 shrink-0">
                         <div class="w-16 h-16 rounded-xl flex items-center justify-center font-bold text-2xl border ${typeStyle} shadow-inner">
                             ${req.bloodType}
@@ -188,7 +196,7 @@ function renderRequests() {
                     
                     <div class="flex-grow">
                         <div class="flex justify-between items-start mb-1">
-                            <h3 class="font-bold text-lg text-gray-900">${req.patientName} <span class="text-sm font-semibold text-gray-500 ml-2">Needs ${req.units} Unit${req.units > 1 ? 's' : ''}</span></h3>
+                            <h3 class="font-bold text-lg text-gray-900">${req.patientName} <span class="text-sm font-semibold text-gray-500 ml-2">Needs ${req.units || 1} Unit${(req.units && req.units > 1) ? 's' : ''}</span></h3>
                             <span class="text-xs text-gray-400 font-medium flex items-center gap-1 whitespace-nowrap">
                                 <i class="fa-regular fa-clock"></i> ${formatTimeAgo(req.timestamp)}
                             </span>
@@ -215,10 +223,8 @@ function renderRequests() {
                 </div>
             </div>
         `;
-        // drop the card into the feed container
         feedContainer.insertAdjacentHTML('beforeend', cardHTML);
     });
 }
 
-// keep checking every 60 seconds so the "time ago" numbers stay accurate
 setInterval(renderRequests, 60000);
