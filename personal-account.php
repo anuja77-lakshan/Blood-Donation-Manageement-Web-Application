@@ -15,6 +15,10 @@ $result = mysqli_query($conn, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {
     $user = mysqli_fetch_assoc($result);
+    // Store user_id in session so donor_qr.php and history.php can use it
+    if (isset($user['id'])) {
+        $_SESSION['user_id'] = $user['id'];
+    }
 } else {
     session_destroy();
     header("Location: login-register.php");
@@ -142,7 +146,8 @@ if ($result && mysqli_num_rows($result) > 0) {
           <div class="btn-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
           History
         </a>
-        <a href="#" class="action-btn">
+        <!-- LINKED TO DONOR QR CODE PAGE -->
+        <a href="donor_qr.php" class="action-btn">
           <div class="btn-icon"><i class="fa-solid fa-qrcode"></i></div>
           QR Code
         </a>
