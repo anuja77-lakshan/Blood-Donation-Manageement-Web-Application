@@ -153,7 +153,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
       <!-- Logout button link -->
       <div class="button-container hero-actions-animate" style="margin-top: 30px;">
-        <a href="php/logout.php" class="button logout-btn">Log Out</a>
+        <a href="php/login.php" class="button logout-btn">Log Out</a>
       </div>
 
     </div>
