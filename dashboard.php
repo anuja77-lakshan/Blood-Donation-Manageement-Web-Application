@@ -55,7 +55,7 @@ if ($resRequests && $row = $resRequests->fetch_assoc()) {
     $requestCount = $row['total'];
 }
 
-// Fetch Featured Camps from Database (Recent/Upcoming 3 Camps)
+// Fetch Featured Camps from Database 
 $featuredCamps = [];
 $resFeatured = $conn->query("SELECT * FROM blood_camps ORDER BY camp_date ASC LIMIT 3");
 if ($resFeatured && $resFeatured->num_rows > 0) {
@@ -76,105 +76,12 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- CSS File Set-->
-    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- CSS File Set -->
+    <link rel="stylesheet" href="css/dashboard.css?v=<?php echo time(); ?>">
     <!-- Font-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Leaflet.js and Map CSS Code -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
-    <style>
-      /* Modern Featured Camps Grid Styling */
-      .camps-grid-custom {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 20px;
-          margin-top: 20px;
-      }
-      .featured-camp-card {
-          background: #ffffff;
-          border: 1px solid #f1f5f9;
-          border-radius: 16px;
-          overflow: hidden;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-          display: flex;
-          flex-direction: column;
-      }
-      .featured-camp-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-      }
-      .camp-card-header {
-          background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
-          padding: 16px 20px;
-          color: #ffffff;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-      }
-      .camp-card-header h3 {
-          margin: 0;
-          font-size: 16px;
-          font-weight: 700;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          max-width: 200px;
-      }
-      .camp-date-badge {
-          background: rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(4px);
-          padding: 4px 10px;
-          border-radius: 20px;
-          font-size: 12px;
-          font-weight: 600;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-      }
-      .camp-card-body {
-          padding: 20px;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-      }
-      .camp-info-row {
-          display: flex;
-          align-items: flex-start;
-          gap: 10px;
-          font-size: 14px;
-          color: #475569;
-      }
-      .camp-info-row i {
-          color: #ef4444;
-          margin-top: 3px;
-          width: 16px;
-      }
-      .camp-card-footer {
-          padding: 14px 20px;
-          border-top: 1px solid #f1f5f9;
-          background: #fafafa;
-      }
-      .btn-camp-view {
-          display: block;
-          text-align: center;
-          background: #ffffff;
-          color: #dc2626;
-          border: 1px solid #fca5a5;
-          padding: 8px 14px;
-          border-radius: 8px;
-          font-weight: 600;
-          font-size: 13px;
-          text-decoration: none;
-          transition: all 0.2s;
-      }
-      .btn-camp-view:hover {
-          background: #dc2626;
-          color: #ffffff;
-      }
-    </style>
 </head>
 <body>
 
@@ -206,28 +113,14 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
             <p class="tagline">LIVE SYSTEM DASHBOARD</p>
             <h2 class="title">Donation Network Overview</h2>
             <div class="metrics-grid">
-                <!-- 1. Live Visitors Card -->
-                <div class="metric-card">
-                    <div class="card-top"><span>New Visitors (Today)</span> <i class="fa-regular fa-eye"></i></div>
-                    <div class="card-num"><?php echo number_format($todayVisitors); ?></div>
-                    <span class="trend success">Live system traffic</span>
-                </div>
-
-                <!-- 2. Registered Donors Card -->
-                <div class="metric-card">
-                    <div class="card-top"><span>Registered Donors</span> <i class="fa-regular fa-heart"></i></div>
-                    <div class="card-num"><?php echo number_format($donorCount); ?></div>
-                    <span class="trend">+<?php echo $todayDonors; ?> new registrations today</span>
-                </div>
-
-                <!-- 3. Active Camps Card -->
-                <a href="camps.php" class="metric-card highlight-card">
+                <!--Active Camps Card-->
+                <a href="camps.php" class="metric-card highlight-green">
                     <div class="card-top"><span>Active Camps</span> <i class="fa-regular fa-flag"></i></div>
                     <div class="card-num"><?php echo number_format($campCount); ?></div>
                     <span class="trend">Click here for more...</span>
                 </a>
 
-                <!-- 4. Emergency Requests Card -->
+                <!--Emergency Requests Card-->
                 <a href="emergency-requests.php" class="metric-card highlight-card">
                     <div class="card-top"><span>Emergency Requests</span> <i class="fa-regular fa-message"></i></div>
                     <div class="card-num"><?php echo number_format($requestCount); ?></div>
@@ -246,7 +139,6 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
                 <h2>Become a Donor Today & Save Local Lives</h2>
                 <p>Every individual donation can save up to three lives. Our centralized network coordinates directly with regional blood banks, ensuring your contribution lands exactly where the emergency demand is highest.</p>
                 <div class="btn-cluster">
-                    <a href="login-register.php" class="btn btn-red">REGISTER AS DONOR</a>
                     <a href="https://www.who.int/campaigns/world-blood-donor-day/2018/who-can-give-blood" class="btn btn-border" target="_blank">CHECK ELIGIBILITY</a>
                 </div>
             </div>
@@ -274,7 +166,7 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
                     <p class="tagline">ACTIVE COMMUNITY DRIVES</p>
                     <h2>Featured Camps</h2>
                 </div>
-                <a href="camps.php" class="btn btn-red btn-sm">ALL CAMPS &rarr;</a>
+                <a href="camps.php" class="btn btn-green btn-sm">ALL CAMPS &rarr;</a>
             </div>
             
             <div class="camps-grid-custom">
@@ -318,7 +210,7 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
                         <i class="fa-solid fa-campground" style="font-size: 36px; color: #cbd5e1; margin-bottom: 10px;"></i>
                         <h4 style="margin: 0 0 8px 0; color: #475569;">No Active Camps Found</h4>
                         <p style="margin: 0 0 15px 0; color: #64748b; font-size: 14px;">Organize or add a blood donation drive to see it listed here.</p>
-                        <a href="camps.php" class="btn btn-red btn-sm" style="display: inline-block;">Add Blood Camp</a>
+                        <a href="camps.php" class="btn btn-green btn-sm" style="display: inline-block;">Add Blood Camp</a>
                     </div>
                 <?php endif; ?>
             </div>
@@ -389,8 +281,6 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
         </section>
     </main>
 
-
-    <!-- Footer -->
   <footer class="footer-section">
     <div class="full-screen-container footer-content">
       <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
