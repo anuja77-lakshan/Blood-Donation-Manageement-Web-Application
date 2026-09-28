@@ -142,7 +142,7 @@ if ($result && mysqli_num_rows($result) > 0) {
           <div class="btn-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
           History
         </a>
-        <a href="#" class="action-btn">
+        <a href="donor_qr.php" class="action-btn">
           <div class="btn-icon"><i class="fa-solid fa-qrcode"></i></div>
           QR Code
         </a>

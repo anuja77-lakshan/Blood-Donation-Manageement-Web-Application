@@ -174,7 +174,7 @@
               </ul>
             </div>
           </div>
-          <a href="qr_scanner.php" class="btn-portal btn-portal-purple">
+          <a href="scanner.php" class="btn-portal btn-portal-purple">
             <span>Launch QR Scanner</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
