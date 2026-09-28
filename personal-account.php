@@ -13,35 +13,8 @@ $email  = mysqli_real_escape_string($conn, $_SESSION['user_email']);
 $sql    = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
 $result = mysqli_query($conn, $sql);
 
-// Initialize default values for the dashboard
-$total_donations = 0;
-$last_donation_date = 'None Recorded';
-
 if ($result && mysqli_num_rows($result) > 0) {
     $user = mysqli_fetch_assoc($result);
-    
-    // Store user_id in session so donor_qr.php and history.php can use it
-    if (isset($user['id'])) {
-        $user_id = $user['id'];
-        $_SESSION['user_id'] = $user_id;
-
-        // Fetch Total Donations from donations table
-        $count_sql = "SELECT COUNT(*) as total FROM donations WHERE user_id = '$user_id'";
-        $count_result = mysqli_query($conn, $count_sql);
-        if ($count_result) {
-            $count_data = mysqli_fetch_assoc($count_result);
-            $total_donations = $count_data['total'];
-        }
-
-        // Fetch Last Donation Date from donations table
-        $date_sql = "SELECT donation_date FROM donations WHERE user_id = '$user_id' ORDER BY donation_date DESC LIMIT 1";
-        $date_result = mysqli_query($conn, $date_sql);
-        if ($date_result && mysqli_num_rows($date_result) > 0) {
-            $date_data = mysqli_fetch_assoc($date_result);
-            // Format the date nicely (e.g., 2026-08-12)
-            $last_donation_date = date('Y-m-d', strtotime($date_data['donation_date'])); 
-        }
-    }
 } else {
     session_destroy();
     header("Location: login-register.php");
@@ -55,7 +28,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Account - BloodLink</title>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/personal-account.css">
@@ -87,7 +60,7 @@ if ($result && mysqli_num_rows($result) > 0) {
   <!-- Main Content Layout -->
   <main class="full-screen-container">
     <div class="dashboard-container">
-      
+
       <!-- Welcome Header -->
       <div class="header">
         <div class="profile-pic hero-badge-animate">
@@ -99,44 +72,69 @@ if ($result && mysqli_num_rows($result) > 0) {
         </div>
       </div>
 
-      <!-- Info Cards Grid -->
-      <div class="info-cards-wrapper hero-actions-animate">
-        
-        <!-- Donor Personal Details -->
-        <div class="user-card">
-          <div class="personal-details">
-            <h3>Donor Information</h3>
-            <p><span>Full Name:</span> <?php echo htmlspecialchars($user['full_name']); ?></p>
-            <p><span>Date of Birth:</span> <?php echo htmlspecialchars($user['dob']); ?></p>
-            <p><span>Gender:</span> <?php echo htmlspecialchars($user['gender']); ?></p>
-            <p><span>NIC/Passport Number:</span> <?php echo htmlspecialchars($user['nic']); ?></p>
-            <p><span>Phone:</span> <?php echo htmlspecialchars($user['phone']); ?></p>
-            <p><span>Email address:</span> <?php echo htmlspecialchars($user['email']); ?></p>
-            <p><span>Location:</span> <?php echo htmlspecialchars($user['location']); ?></p>
-            <p><span>District:</span> <?php echo htmlspecialchars($user['district']); ?></p>
-          </div>
-        </div>
+      <!-- Info Cards Grid (Profile Update Form) -->
+      <form action="php/update_profile.php" method="POST" style="width: 100%;">
+        <div class="info-cards-wrapper hero-actions-animate">
+          
+          <!-- Donor Personal Details -->
+          <div class="user-card">
+            <div class="personal-details" style="width: 100%;">
+              <h3>Donor Information</h3>
+              <p><span>Full Name:</span></p>
+              <input type="text" name="full_name" value="<?php echo htmlspecialchars($user['full_name']); ?>" required style="width: 100%; padding: 7px; margin-bottom: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
 
-        <!-- Blood Donation Information -->
-        <div class="user-card">
-          <div class="personal-details">
-            <h3>Blood Donation Information</h3>
-            <p><span>Blood Group:</span> <strong style="color: var(--primary-color); font-size: 16px;"><?php echo htmlspecialchars($user['blood_group']); ?></strong></p>
-            <p><span>Weight:</span> <?php echo htmlspecialchars($user['weight']); ?> kg</p>
-            <p><span>Last Donation Date:</span> <?php echo htmlspecialchars($last_donation_date); ?></p>
-            <p><span>Total Donations:</span> <span style="background: #2563eb; color: white; padding: 2px 8px; border-radius: 4px;"><?php echo htmlspecialchars($total_donations); ?></span></p>
-          </div>
-        </div>
+              <p><span>Date of Birth:</span> <?php echo htmlspecialchars($user['dob']); ?></p>
+              <p><span>Gender:</span> <?php echo htmlspecialchars($user['gender']); ?></p>
+              <p><span>NIC/Passport Number:</span> <?php echo htmlspecialchars($user['nic']); ?></p>
 
-      </div>
+              <p><span>Phone:</span></p>
+              <input type="tel" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>" pattern="0[0-9]{9}" maxlength="10" required style="width: 100%; padding: 7px; margin-bottom: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+
+              <p><span>Email address:</span></p>
+              <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required style="width: 100%; padding: 7px; margin-bottom: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+
+              <p><span>Location:</span></p>
+              <input type="text" name="location" value="<?php echo htmlspecialchars($user['location']); ?>" required style="width: 100%; padding: 7px; margin-bottom: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+
+              <p><span>District:</span></p>
+              <select name="district" required style="width: 100%; padding: 7px; margin-bottom: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                <?php
+                $districts = ["Ampara", "Anuradhapura", "Badulla", "Batticaloa", "Colombo", "Galle", "Gampaha", "Hambantota", "Jaffna", "Kalutara", "Kandy", "Kegalle", "Kilinochchi", "Kurunegala", "Mannar", "Matale", "Matara", "Monaragala", "Mullaitivu", "Nuwara Eliya", "Polonnaruwa", "Puttalam", "Ratnapura", "Trincomalee", "Vavuniya"];
+                foreach ($districts as $d) {
+                    $selected = ($user['district'] === $d) ? 'selected' : '';
+                    echo "<option value='$d' $selected>$d</option>";
+                }
+                ?>
+              </select>
+            </div>
+          </div>
+
+          <!-- Blood Donation Information -->
+          <div class="user-card">
+            <div class="personal-details" style="width: 100%;">
+              <h3>Blood Donation Information</h3>
+              <p><span>Blood Group:</span> <strong style="color: var(--primary-color); font-size: 16px;"><?php echo htmlspecialchars($user['blood_group']); ?></strong></p>
+              
+              <p style="margin-top: 10px;"><span>Weight (kg):</span></p>
+              <input type="number" name="weight" value="<?php echo htmlspecialchars($user['weight']); ?>" min="45" max="180" required style="width: 100%; padding: 7px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 6px;">
+
+              <p><span>Last Donation Date:</span> <?php echo !empty($user['last_donation_date']) ? htmlspecialchars($user['last_donation_date']) : 'None Recorded'; ?></p>
+              <p><span>Total Donations:</span> <?php echo isset($user['total_donations']) ? htmlspecialchars($user['total_donations']) : '0'; ?></p>
+
+              <button type="submit" style="margin-top: 20px; width: 100%; padding: 10px; background-color: var(--primary-color); color: #ffffff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">Save Changes</button>
+            </div>
+          </div>
+
+        </div>
+      </form>
 
       <!-- Action Shortcut Buttons -->
       <div class="action-grid hero-actions-animate">
-        <a href="#" class="action-btn">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJcvjOg2aq0pVsisfQhgpALqR2Fxin4YlaSRybQHkAjEcYHw/viewform?pli=1" class="action-btn">
           <div class="btn-icon"><i class="fa-solid fa-droplet"></i></div>
           Donor Form
         </a>
-        <a href="#" class="action-btn">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe_g5i1wLXAdW_G80ihm7qwp991fcOOmZBkND7tjR_cefTl-g/viewform" class="action-btn">
           <div class="btn-icon"><i class="fa-solid fa-hospital"></i></div>
           Patient Form
         </a>
@@ -144,8 +142,7 @@ if ($result && mysqli_num_rows($result) > 0) {
           <div class="btn-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
           History
         </a>
-        <!-- LINKED TO DONOR QR CODE PAGE -->
-        <a href="donor_qr.php" class="action-btn">
+        <a href="#" class="action-btn">
           <div class="btn-icon"><i class="fa-solid fa-qrcode"></i></div>
           QR Code
         </a>
@@ -153,7 +150,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
       <!-- Logout button link -->
       <div class="button-container hero-actions-animate" style="margin-top: 30px;">
-        <a href="php/login.php" class="button logout-btn">Log Out</a>
+        <a href="php/logout.php" class="button logout-btn">Log Out</a>
       </div>
 
     </div>
