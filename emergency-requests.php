@@ -180,6 +180,7 @@
     </footer>
 
     <!-- link our script -->
-    <script src="../js/emergency-requests.js"></script>
+    <script src="js/emergency-requests.js"></script>
+    
 </body>
 </html>

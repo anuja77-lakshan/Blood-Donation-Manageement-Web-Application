@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloodLink - Register & Log in</title>
-    <link rel="stylesheet" href="../css/login_registrer.css">
+    <link rel="stylesheet" href="css/login-register.css">
 </head>
 <body>
     
@@ -12,7 +12,7 @@
         <!-- Logo Area -->
         <header class="logo-area">
            
-            <img src="../images/bloodlink_logo.png" alt="BloodLink Logo">
+            <img src="images/bloodlink_logo.png" alt="BloodLink Logo">
             <h1>BLOODLINK</h1>
         </header>
 
@@ -26,7 +26,7 @@
             </div>
 
             <!-- REGISTER FORM -->
-            <form id="register-form" class="form-content" action="../auth/register.php" method="POST">
+            <form id="register-form" class="form-content" action="php/register.php" method="POST">
                 
                 <div class="input-col">
                     <input type="text" name="full_name" placeholder="Full Name" required>
@@ -44,13 +44,13 @@
                 
                 <div class="input-col">
                     <input type="email" name="email" placeholder="Email" required>
-                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                    <input type="tel" name="phone" placeholder="Phone Number (e.g. 0712345678)" pattern="0[0-9]{9}" maxlength="10" required>
                 </div>
                 
                 <div class="input-row">
                     <input type="text" name="location" placeholder="Location (City)" required>
                         <select name="district" required>
-                        <option value="disabled selected">District</option>
+                        <option value="" disabled selected>District</option>
                         <option value="Ampara">Ampara</option>
                         <option value="Anuradhapura">Anuradhapura</option>
                         <option value="Badulla">Badulla</option>
@@ -90,7 +90,7 @@
                         <option value="B-">B-</option>
                         <option value="AB-">AB-</option>
                     </select>
-                    <input type="number" name="weight" placeholder="Weight (kg)" min="30" required>
+                    <input type="number" name="weight" placeholder="Weight (kg)" min="45" max="180" required>
                 </div>
 
                 <div class="input-row">
@@ -102,7 +102,7 @@
             </form>
 
             <!-- LOGIN FORM -->
-            <form id="login-form" class="form-content hidden" action="../auth/login.php" method="POST">
+            <form id="login-form" class="form-content hidden" action="php/login.php" method="POST">
                 <div class="input-col">
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="password" name="password" placeholder="Password" required>
@@ -115,6 +115,6 @@
     </div>
 
     <!-- Custom JS Link -->
-    <script src="../js/login_registrer.js"></script>
+    <script src="js/login-register.js"></script>
 </body>
 </html>
