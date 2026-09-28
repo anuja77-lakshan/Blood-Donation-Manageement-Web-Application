@@ -20,7 +20,9 @@
         <main class="form-card">
             
             <!-- Tabs -->
+                 
             <div class="tabs">
+              
                 <button class="tab-btn active" id="btn-register" onclick="switchTab('register')">Register</button>
                 <button class="tab-btn inactive" id="btn-login" onclick="switchTab('login')">Log in</button>
                 <button class="tab-btn inactive" id="btn-admin" onclick="switchTab('admin')">Admin</button>

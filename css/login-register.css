@@ -68,28 +68,32 @@ body {
     display: flex;
     height: 60px;
 }
-
 .tab-btn {
     flex: 1;
     border: none;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; 
 }
 
-/* Active Tab completely blends with the card */
+
 .tab-btn.active {
-    background-color:var(--card-bg);
-    color:black;
+    background-color: var(--card-bg);
+    color: var(--primary-color);
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
+    border-bottom: 3px solid var(--primary-color); 
 }
 
-/* Inactive Tab is white with curved edges like the image */
+
 .tab-btn.inactive {
-    background-color:var(--bg-color);
-    color: #000;
+    background-color: var(--bg-color);
+    color: #64748b; 
+}
+
+.tab-btn:hover {
+    color: var(--primary-color);
 }
 
 #btn-register.inactive {
@@ -98,6 +102,12 @@ body {
 }
 
 #btn-login.inactive {
+    border-bottom-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+
+#btn-admin.inactive {
     border-bottom-left-radius: 16px;
     border-top-right-radius: 16px;
 }
