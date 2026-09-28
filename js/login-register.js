@@ -1,31 +1,42 @@
 function switchTab(tab) {
+    // Forms
     const registerForm = document.getElementById('register-form');
     const loginForm = document.getElementById('login-form');
+    const adminForm = document.getElementById('admin-form');
+
+    // Tab Buttons
     const btnRegister = document.getElementById('btn-register');
     const btnLogin = document.getElementById('btn-login');
+    const btnAdmin = document.getElementById('btn-admin');
 
+    // 1. සියලු Forms සඟවන්න (Hide all forms)
+    registerForm.classList.add('hidden');
+    loginForm.classList.add('hidden');
+    if (adminForm) adminForm.classList.add('hidden');
+
+    // 2. සියලු Buttons Inactive කරන්න
+    [btnRegister, btnLogin, btnAdmin].forEach(btn => {
+        if (btn) {
+            btn.classList.remove('active');
+            btn.classList.add('inactive');
+        }
+    });
+
+    // 3. තෝරාගත් Tab එක සහ Form එක පමණක් පෙන්වන්න
     if (tab === 'login') {
-        // Show Login, Hide Register
-        registerForm.classList.add('hidden');
         loginForm.classList.remove('hidden');
-        
-        // Update Tab Classes
         btnLogin.classList.add('active');
         btnLogin.classList.remove('inactive');
-        
-        btnRegister.classList.add('inactive');
-        btnRegister.classList.remove('active');
-    } else {
-        // Show Register, Hide Login
-        loginForm.classList.add('hidden');
+    } else if (tab === 'admin') {
+        if (adminForm) adminForm.classList.remove('hidden');
+        if (btnAdmin) {
+            btnAdmin.classList.add('active');
+            btnAdmin.classList.remove('inactive');
+        }
+    } else { // register tab
         registerForm.classList.remove('hidden');
-        
-        // Update Tab Classes
         btnRegister.classList.add('active');
         btnRegister.classList.remove('inactive');
-        
-        btnLogin.classList.add('inactive');
-        btnLogin.classList.remove('active');
     }
 }
 
@@ -33,6 +44,8 @@ function switchTab(tab) {
 document.addEventListener("DOMContentLoaded", () => {
     if (window.location.hash === "#login") {
         switchTab('login');
+    } else if (window.location.hash === "#admin") {
+        switchTab('admin');
     } else if (window.location.hash === "#register") {
         switchTab('register');
     }

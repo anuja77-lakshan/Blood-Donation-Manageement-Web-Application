@@ -23,6 +23,7 @@
             <div class="tabs">
                 <button class="tab-btn active" id="btn-register" onclick="switchTab('register')">Register</button>
                 <button class="tab-btn inactive" id="btn-login" onclick="switchTab('login')">Log in</button>
+                <button class="tab-btn inactive" id="btn-admin" onclick="switchTab('admin')">Admin</button>
             </div>
 
             <!-- REGISTER FORM -->
@@ -110,6 +111,17 @@
                 
                 <button type="submit" class="submit-btn">Log in</button>
             </form>
+
+            <form id="admin-form" class="form-content hidden" action="php/admin_login.php" method="POST">
+                <div class="input-col">
+                    <input type="email" name="admin_email" placeholder="Admin Email" required>
+                    
+                    <input type="password" name="admin_password" placeholder="Admin Password (6 Characters)" minlength="6" maxlength="6" required title="Password must be exactly 6 characters">
+                </div>
+                
+                <button type="submit" class="submit-btn";>Admin Log in</button>
+            </form>
+
 
         </main>
     </div>
