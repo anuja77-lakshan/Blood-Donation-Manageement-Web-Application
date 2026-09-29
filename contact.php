@@ -15,8 +15,7 @@
 </head>
 <body>
 
-  <!-- Top Full Width Navbar -->
- <header class="header-section">
+    <header class="header-section">
     <div class="full-screen-container navbar">
       <a href="home.php" class="brand-logo">
         <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
@@ -29,12 +28,6 @@
         <li><a href="dashboard.php">Dashboard</a></li>
         <li><a href="camps.php">Camps</a></li>
         <li><a href="contact.php" class="active">Contact</a></li>
-        <li>
-          <a href="personal-account.php" class="user-greeting">
-            <i class="fa-regular fa-circle-user"></i>
-            <span><?php echo htmlspecialchars($user_display_name); ?></span>
-          </a>
-        </li>
       </ul>
 
       <!-- Mobile Hamburger Button -->
@@ -50,10 +43,6 @@
         <a href="dashboard.php">Dashboard</a>
         <a href="camps.php">Camps</a>
         <a href="contact.php" class="active">Contact</a>
-        <a href="personal-account.php" class="mobile-user-link">
-          <i class="fa-regular fa-circle-user"></i>
-          <span><?php echo htmlspecialchars($user_display_name); ?></span>
-        </a>
       </nav>
     </div>
   </header>
