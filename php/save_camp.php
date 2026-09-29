@@ -16,6 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $startTime    = isset($_POST['startTime']) ? $_POST['startTime'] : '';
     $endTime      = isset($_POST['endTime']) ? $_POST['endTime'] : '';
     $campLocation = isset($_POST['campLocation']) ? trim($_POST['campLocation']) : '';
+    
+    // Latitude and Longitude values in form
+    $latitude     = !empty($_POST['latitude']) ? floatval($_POST['latitude']) : NULL;
+    $longitude    = !empty($_POST['longitude']) ? floatval($_POST['longitude']) : NULL;
 
     // Default fallback image
     $imagePath = "../images/card1.png";
@@ -44,19 +48,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Insert record into database using prepared statement
-    $sql = "INSERT INTO blood_camps (camp_name, org_name, camp_date, start_time, end_time, location, cover_image) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO blood_camps (camp_name, org_name, camp_date, start_time, end_time, location, latitude, longitude, cover_image) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
 
     if (!$stmt) {
         die("Query prepare failed: " . $conn->error);
     }
-
-    $stmt->bind_param("sssssss", $campName, $orgName, $campDate, $startTime, $endTime, $campLocation, $imagePath);
-
-    // Execute query and redirect
+    $stmt->bind_param("ssssssdds", $campName, $orgName, $campDate, $startTime, $endTime, $campLocation, $latitude, $longitude, $imagePath);
     if ($stmt->execute()) {
         header("Location: ../camps.php");
         exit();

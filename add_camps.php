@@ -91,6 +91,19 @@
           <input type="text" id="campLocation" name="campLocation" placeholder="e.g., Community Hall, MG Road, Bengaluru" required>
         </div>
 
+        <!-- Latitude and Longitude Inputs -->
+<div style="display: flex; gap: 15px; margin-top: 15px;">
+   <div style="flex: 1;">
+      <label style="font-weight: bold; font-size: 14px;">Latitude </label>
+        <input type="text" name="latitude" placeholder="e.g., 6.028417" required 
+               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+    </div>
+    <div style="flex: 1;">
+        <label style="font-weight: bold; font-size: 14px;">Longitude </label>
+        <input type="text" name="longitude" placeholder="e.g., 80.217751" required 
+               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+    </div>
+</div> 
         <!-- Cover Image upload -->
         <div class="form-group full-width">
           <label>Cover Image (Upload)</label>

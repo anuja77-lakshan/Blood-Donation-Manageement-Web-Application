@@ -124,7 +124,7 @@
             <div class="info-grid">
                 <div class="info-text">
                     <span class="section-number">03</span>
-                    <h2>Trusted<br>Nationwide<br>Network</h2>
+                    <h2>Trusted<br>Nation wide<br>Network</h2>
                     <p>BloodLink partners with over 420 hospitals, 90 community blood banks, and 600+ volunteer drive organizers across the country. Real-time inventory data ensures every unit is routed where it is needed most.</p>
                     <blockquote class="highlight-quote">All collected blood is screened, typed, and processed within 24 hours.</blockquote>
                 </div>
@@ -167,7 +167,7 @@
                     </div>
                     <div class="step-body">
                         <h3>Book A Slot</h3>
-                        <p>Choose from nearby donation drives or walk-in centres that fit your schedule.</p>
+                        <p>Choose from nearby donation drives or walk in centres that fit your schedule.</p>
                     </div>
                 </div>
 
