@@ -1,230 +1,118 @@
-let requests = [
-    {
-        id: 1,
-        patientName: "Sarah Jenkins",
-        bloodType: "O-",
-        units: 3,
-        urgency: "Critical",
-        location: "Mercy General Hospital, ICU",
-        contact: "555-0192",
-        notes: "Surgery scheduled for tonight.",
-        timestamp: new Date(Date.now() - 1000 * 60 * 15)
-    },
-    {
-        id: 2,
-        patientName: "Michael Chen",
-        bloodType: "A+",
-        units: 2,
-        urgency: "High",
-        location: "St. Jude Medical Center",
-        contact: "555-8834",
-        notes: "Needed for accident victim.",
-        timestamp: new Date(Date.now() - 1000 * 60 * 45)
-    },
-    {
-        id: 3,
-        patientName: "Elena Rodriguez",
-        bloodType: "AB-",
-        units: 1,
-        urgency: "High",
-        location: "City Health Clinic",
-        contact: "555-2211",
-        notes: "Rare blood type needed urgently.",
-        timestamp: new Date(Date.now() - 1000 * 60 * 120)
+let allRequestsData = [];
+     //get data in the db
+function loadRequests() 
+{
+    fetch('php/get_emergency_requests.php')
+        .then(response => response.json())
+        .then(data => {
+            allRequestsData = Array.isArray(data) ? data : [];
+            filterRequests(); //filter run after get data
+        })
+        .catch(err => {
+            console.log('Error loading requests:', err);
+        });
+function filterRequests() {
+    let container = document.getElementById('requestsFeed');
+    if (!container) return;
+
+    let filterElem = document.getElementById('bloodTypeFilter');
+    let selectedGroup = filterElem ? filterElem.value.trim().toLowerCase() : 'all';
+
+    container.innerHTML = '';
+    let filteredList = allRequestsData.filter(item => { //filter option
+        if (selectedGroup === 'all' || selectedGroup === 'all types') {
+            return true;
+        }
+        return item.blood_group && item.blood_group.toLowerCase() === selectedGroup;
+    });
+
+    if (filteredList.length === 0) {
+        container.innerHTML = '<p class="text-center py-6 text-gray-500 font-medium">No emergency requests found for this blood group.</p>';
+        return;
     }
-];
+    filteredList.forEach(item => { //cards
+        let isCritical = item.status && item.status.toLowerCase().includes('critical');
+        let badgeClass = isCritical ? 'bg-red-100 text-red-700 border-red-200' : 'bg-orange-100 text-orange-700 border-orange-200';
+        let badgeText = isCritical ? 'Critical' : 'High';
+        let icon = isCritical ? 'fa-triangle-exclamation' : 'fa-clock';
 
-let currentFilter = 'all';
+        let card = `
+            <div class="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-red-100 text-blood-600 font-black rounded-xl flex items-center justify-center text-lg border border-red-200">
+                        ${item.blood_group}
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-bold text-gray-900">${item.patient_name}</h4>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full font-bold border ${badgeClass} flex items-center gap-1">
+                                <i class="fa-solid ${icon}"></i> ${badgeText}
+                            </span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                            <i class="fa-solid fa-hospital text-gray-400"></i> ${item.hospital}
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <a href="tel:${item.contact_no}" class="border border-blood-600 text-blood-600 hover:bg-blood-50 px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-phone"></i> Contact
+                    </a>
+                </div>
+            </div>
+        `;
+        container.innerHTML += card;
+    });
+}
+window.onload = function() { //page loading
+    loadRequests();
+    setInterval(loadRequests, 15000); //change every 15 sec
 
-document.addEventListener('DOMContentLoaded', () => {
-    renderRequests();
+    // Form Submit
+    let form = document.getElementById('newRequestForm');
+    if (form) {
+        form.onsubmit = function(e) {
+            e.preventDefault();
 
-    const form = document.getElementById('newRequestForm');
-    if (!form) return;
+            let patientName = document.getElementById('patientName') ? document.getElementById('patientName').value.trim() : '';
+            let bloodType   = document.getElementById('bloodType') ? document.getElementById('bloodType').value : '';
+            let location    = document.getElementById('location') ? document.getElementById('location').value.trim() : '';
+            let contact     = document.getElementById('contact') ? document.getElementById('contact').value.trim() : '';
+            let urgencyElem = document.getElementById('Emergency');
+            let urgency     = urgencyElem ? urgencyElem.value : 'Critical';
 
-    // save data into database
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const newRequest = {
-            patientName: document.getElementById('patientName').value.trim(),
-            bloodType: document.getElementById('bloodType').value,
-            units: document.getElementById('units').value,
-            urgency: document.getElementById('urgency').value,
-            location: document.getElementById('location').value.trim(),
-            contact: document.getElementById('contact').value.trim(),
-            notes: document.getElementById('notes').value.trim(),
-            timestamp: new Date()
-        };
+            if (!patientName || !bloodType || !location || !contact) {
+                alert('Please fill all required fields!');
+                return;
+            }
 
-        try {
-            // Database Absolute path
-            const response = await fetch('/bloodlink/php/add_emergency_request.php', {
+            let requestData = {
+                patientName: patientName,
+                bloodType: bloodType,
+                urgency: urgency,
+                location: location,
+                contact: contact
+            };
+         fetch('php/add_emergency_request.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(newRequest)
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                newRequest.id = result.id || Date.now();
-                // Priority to new request
-                requests.unshift(newRequest);
-                
-                form.reset();
-                
-                // Requests shows in UI
-                const feedHeader = document.querySelector('h2');
-                if (feedHeader) {
-                    const originalText = feedHeader.innerText;
-                    feedHeader.innerText = "REQUEST POSTED SUCCESSFULLY!";
-                    feedHeader.classList.add('text-green-600');
-                    
-                    setTimeout(() => {
-                        feedHeader.innerText = originalText;
-                        feedHeader.classList.remove('text-green-600');
-                    }, 3000);
+                body: JSON.stringify(requestData)
+            })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    alert('Request posted successfully!');
+                    form.reset();
+                    loadRequests();//update live feed after submit
+                } else {
+                    alert('Backend Error: ' + result.message);
                 }
-
-                renderRequests();
-            } else {
-                alert('Database Error: ' + (result.message || 'Could not save request.'));
-            }
-        } catch (err) {
-            console.error('Request submission failed:', err);
-            // Prevent Network errors
-            requests.unshift(newRequest);
-            form.reset();
-            renderRequests();
-        }
-    });
-});
-
-function filterRequests() {
-    currentFilter = document.getElementById('bloodTypeFilter').value;
-    renderRequests();
-}
-
-function formatTimeAgo(date) {
-    const seconds = Math.floor((new Date() - date) / 1000);
-    let interval = seconds / 31536000;
-    if (interval > 1) return Math.floor(interval) + " years ago";
-    interval = seconds / 2592000;
-    if (interval > 1) return Math.floor(interval) + " months ago";
-    interval = seconds / 86400;
-    if (interval > 1) return Math.floor(interval) + " days ago";
-    interval = seconds / 3600;
-    if (interval > 1) return Math.floor(interval) + " hours ago";
-    interval = seconds / 60;
-    if (interval > 1) return Math.floor(interval) + " mins ago";
-    return "Just now";
-}
-
-function getBloodTypeColor(type) {
-    if (type.includes('-')) return 'bg-purple-50 text-purple-800 border-purple-200';
-    return 'bg-red-50 text-blood-700 border-red-200';
-}
-
-function handleContactClick(contact, id) {
-    const btn = document.getElementById(`contact-btn-${id}`);
-    if (!btn) return;
-    const originalHTML = btn.innerHTML;
-    
-    btn.innerHTML = `<i class="fa-solid fa-check"></i> ${contact}`;
-    btn.classList.replace('bg-blood-100', 'bg-green-100');
-    btn.classList.replace('text-blood-700', 'text-green-700');
-    
-    try {
-        navigator.clipboard.writeText(contact);
-    } catch(e) {
-        const tempInput = document.createElement("input");
-        tempInput.value = contact;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand("copy");
-        document.body.removeChild(tempInput);
-    }
-
-    setTimeout(() => {
-        btn.innerHTML = originalHTML;
-        btn.classList.replace('bg-green-100', 'bg-blood-100');
-        btn.classList.replace('text-green-700', 'text-blood-700');
-    }, 3000);
-}
-
-function renderRequests() {
-    const feedContainer = document.getElementById('requestsFeed');
-    if (!feedContainer) return;
-    feedContainer.innerHTML = '';
-    
-    const filteredRequests = currentFilter === 'all' 
-        ? requests 
-        : requests.filter(r => r.bloodType === currentFilter);
-
-    if (filteredRequests.length === 0) {
-        feedContainer.innerHTML = `
-            <div class="text-center py-12 bg-white rounded-xl border border-dashed border-gray-300 animate-fade-in-up">
-                <i class="fa-solid fa-face-smile-beam text-4xl text-gray-300 mb-3"></i>
-                <h3 class="text-lg font-medium text-gray-600">No active requests</h3>
-                <p class="text-gray-400 text-sm mt-1">There are currently no urgent requests for this blood type.</p>
-            </div>
-        `;
-        return;
-    }
-
-    filteredRequests.forEach((req, index) => {
-        const isCritical = req.urgency === 'Critical';
-        const urgencyColor = isCritical ? 'text-red-600 bg-red-50 border-red-200' : 'text-orange-600 bg-orange-50 border-orange-200';
-        const urgencyIcon = isCritical ? 'fa-triangle-exclamation pulse-animation' : 'fa-clock';
-        const typeStyle = getBloodTypeColor(req.bloodType);
-        const animationDelay = (index * 0.1) + 0.3; 
-
-        const cardHTML = `
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow relative overflow-hidden group animate-fade-in-up" style="animation-delay: ${animationDelay}s;">
-                <div class="flex flex-col sm:flex-row justify-between gap-4">
-                    <div class="flex sm:flex-col items-center sm:items-start gap-4 sm:gap-2 sm:w-24 shrink-0">
-                        <div class="w-16 h-16 rounded-xl flex items-center justify-center font-bold text-2xl border ${typeStyle} shadow-inner">
-                            ${req.bloodType}
-                        </div>
-                        <div class="text-xs font-semibold px-2 py-1 rounded border ${urgencyColor} flex items-center gap-1 w-full justify-center sm:justify-start">
-                            <i class="fa-solid ${urgencyIcon}"></i> ${req.urgency}
-                        </div>
-                    </div>
-                    
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start mb-1">
-                            <h3 class="font-bold text-lg text-gray-900">${req.patientName} <span class="text-sm font-semibold text-gray-500 ml-2">Needs ${req.units || 1} Unit${(req.units && req.units > 1) ? 's' : ''}</span></h3>
-                            <span class="text-xs text-gray-400 font-medium flex items-center gap-1 whitespace-nowrap">
-                                <i class="fa-regular fa-clock"></i> ${formatTimeAgo(req.timestamp)}
-                            </span>
-                        </div>
-                        
-                        <div class="text-sm text-gray-600 space-y-1 mb-3">
-                            <p class="flex items-start gap-2">
-                                <i class="fa-solid fa-location-dot mt-1 text-gray-400 w-4 text-center"></i> 
-                                <span>${req.location}</span>
-                            </p>
-                            ${req.notes ? `
-                            <p class="flex items-start gap-2">
-                                <i class="fa-solid fa-file-medical mt-1 text-gray-400 w-4 text-center"></i> 
-                                <span class="italic text-gray-500">${req.notes}</span>
-                            </p>` : ''}
-                        </div>
-                    </div>
-
-                    <div class="flex sm:flex-col gap-2 justify-end sm:justify-center min-w-[120px]">
-                        <button id="contact-btn-${req.id}" onclick="handleContactClick('${req.contact}', ${req.id})" class="w-full bg-blood-100 text-blood-700 hover:bg-blood-200 hover:text-blood-800 font-bold py-2.5 px-3 rounded-full transition-colors text-sm flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-phone"></i> Contact
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-        feedContainer.insertAdjacentHTML('beforeend', cardHTML);
-    });
-}
-
-setInterval(renderRequests, 60000);
+            })
+            .catch(error => {
+                console.log('Error:', error);
+                alert('Request failed: ' + error.message);
+            });
+        };
+    }}};
