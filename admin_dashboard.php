@@ -145,7 +145,7 @@
               </ul>
             </div>
           </div>
-          <a href="blood_stock_update.php" class="btn-portal btn-portal-red">
+          <a href="php/admin_stock.php" class="btn-portal btn-portal-red">
             <span>Open Stock Portal</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
