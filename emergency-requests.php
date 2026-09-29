@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urgent Blood Requests - BloodLink</title>
+    <title>Emergency Blood Requests - BloodLink</title>
     
     <!-- load tailwind and setup our custom colors -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -80,7 +80,7 @@
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 relative overflow-hidden animate-fade-in-up" style="animation-delay: 0.2s;">
                     <div class="absolute top-0 left-0 w-full h-1 bg-blood-600"></div>
                     <h3 class="text-lg font-bold mb-4 text-blood-700 flex items-center gap-2 uppercase tracking-wide">
-                        <i class="fa-solid fa-truck-medical"></i> Post Urgent Request
+                        <i class="fa-solid fa-truck-medical"></i> Post Emergency Request
                     </h3>
                     <form id="newRequestForm" class="space-y-4">
                         <div>
@@ -108,8 +108,8 @@
                             </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">Urgency Level</label>
-                            <select id="urgency" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all bg-white">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Emergency Level</label>
+                            <select id="Emergency" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all bg-white">
                                 <option value="High" class="text-orange-600 font-semibold">High (Within 24h)</option>
                                 <option value="Critical" class="text-red-600 font-bold" selected>Critical (Immediate)</option>
                             </select>
@@ -143,7 +143,7 @@
                 <div class="flex justify-between items-end mb-4 animate-fade-in-up" style="animation-delay: 0.3s;">
                     <div>
                         <h2 class="text-2xl font-bold text-gray-900 uppercase tracking-tight">Live Emergency Feed</h2>
-                        <p class="text-sm text-gray-500 font-medium">Real-time requests from hospitals and individuals.</p>
+                        <p class="text-sm text-gray-500 font-medium">Real time requests from hospitals and individuals</p>
                     </div>
                     <div class="flex gap-2">
                         <!-- filter dropdown -->
