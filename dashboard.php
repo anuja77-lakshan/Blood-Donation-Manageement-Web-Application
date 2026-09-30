@@ -1,5 +1,18 @@
 <?php
 session_start();
+
+// Block unauthorized user access
+if (!isset($_SESSION['user_email'])) {
+    header("Location: login-register.php#login");
+    exit();
+}
+
+// Redirect admin to admin dashboard
+if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true) {
+    header("Location: admin_dashboard.php");
+    exit();
+}
+
 require_once 'php/db.php';
 
 // User login name

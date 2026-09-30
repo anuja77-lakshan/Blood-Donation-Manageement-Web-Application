@@ -1,7 +1,24 @@
 <?php
 session_start();
-// Check if user is logged in, otherwise default to Guest
-$user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Guest';
+
+// Check login status for user and admin
+$is_user_logged_in  = isset($_SESSION['user_email']);
+$is_admin_logged_in = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true;
+
+// Block unauthorized access
+if (!$is_user_logged_in && !$is_admin_logged_in) {
+    header("Location: login-register.php#login");
+    exit();
+}
+
+// Set display name and dashboard target based on role
+if ($is_admin_logged_in) {
+    $user_display_name = 'Administrator';
+    $dashboard_link    = 'admin_dashboard.php';
+} else {
+    $user_display_name = $_SESSION['user_name'] ?? 'Guest';
+    $dashboard_link    = 'dashboard.php';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +42,7 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
 <body>
 
   <!-- Top Full Width Navbar -->
- <header class="header-section">
+  <header class="header-section">
     <div class="full-screen-container navbar">
       <a href="home.php" class="brand-logo">
         <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
@@ -34,15 +51,33 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
 
       <!-- Desktop Navigation -->
       <ul class="nav-links">
-        <li><a href="home.php">Home</a></li>
-        <li><a href="dashboard.php">Dashboard</a></li>
+        <?php if (!$is_admin_logged_in): ?>
+          <!-- Visible only for regular users -->
+          <li><a href="home.php">Home</a></li>
+        <?php endif; ?>
+
+        <li><a href="<?php echo $dashboard_link; ?>">Dashboard</a></li>
         <li><a href="camps.php" class="active">Camps</a></li>
-        <li><a href="contact.php">Contact</a></li>
+
+        <?php if (!$is_admin_logged_in): ?>
+          <!-- Visible only for regular users -->
+          <li><a href="contact.php">Contact</a></li>
+        <?php endif; ?>
+
         <li>
-          <a href="personal-account.php" class="user-greeting">
-            <i class="fa-regular fa-circle-user"></i>
-            <span><?php echo htmlspecialchars($user_display_name); ?></span>
-          </a>
+          <?php if ($is_admin_logged_in): ?>
+            <!-- Disabled link for admin -->
+            <span class="user-greeting" style="cursor: default; pointer-events: none;">
+              <i class="fa-regular fa-circle-user"></i>
+              <span><?php echo htmlspecialchars($user_display_name); ?></span>
+            </span>
+          <?php else: ?>
+            <!-- Active link for user -->
+            <a href="personal-account.php" class="user-greeting">
+              <i class="fa-regular fa-circle-user"></i>
+              <span><?php echo htmlspecialchars($user_display_name); ?></span>
+            </a>
+          <?php endif; ?>
         </li>
       </ul>
 
@@ -55,14 +90,32 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
     <!-- Mobile Dropdown Drawer -->
     <div id="mobile-menu" class="mobile-menu menu-closed">
       <nav class="mobile-nav">
-        <a href="home.php">Home</a>
-        <a href="dashboard.php">Dashboard</a>
+        <?php if (!$is_admin_logged_in): ?>
+          <!-- Visible only for regular users -->
+          <a href="home.php">Home</a>
+        <?php endif; ?>
+
+        <a href="<?php echo $dashboard_link; ?>">Dashboard</a>
         <a href="camps.php">Camps</a>
-        <a href="contact.php">Contact</a>
-        <a href="personal-account.php" class="mobile-user-link">
-          <i class="fa-regular fa-circle-user"></i>
-          <span><?php echo htmlspecialchars($user_display_name); ?></span>
-        </a>
+
+        <?php if (!$is_admin_logged_in): ?>
+          <!-- Visible only for regular users -->
+          <a href="contact.php">Contact</a>
+        <?php endif; ?>
+
+        <?php if ($is_admin_logged_in): ?>
+          <!-- Disabled mobile link for admin -->
+          <span class="mobile-user-link" style="cursor: default; pointer-events: none;">
+            <i class="fa-regular fa-circle-user"></i>
+            <span><?php echo htmlspecialchars($user_display_name); ?></span>
+          </span>
+        <?php else: ?>
+          <!-- Active mobile link for user -->
+          <a href="personal-account.php" class="mobile-user-link">
+            <i class="fa-regular fa-circle-user"></i>
+            <span><?php echo htmlspecialchars($user_display_name); ?></span>
+          </a>
+        <?php endif; ?>
       </nav>
     </div>
   </header>

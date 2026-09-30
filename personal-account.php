@@ -20,6 +20,21 @@ if ($result && mysqli_num_rows($result) > 0) {
     header("Location: login-register.php");
     exit();
 }
+
+// Fetch donation stats from donations table using user_id
+$user_id = $user['id'] ?? 0;
+$total_donations = 0;
+$last_donation_date = 'None Recorded';
+
+$donation_sql = "SELECT COUNT(*) AS total, DATE(MAX(donation_date)) AS last_date 
+                 FROM donations 
+                 WHERE user_id = '$user_id'";
+$donation_result = mysqli_query($conn, $donation_sql);
+
+if ($donation_result && $row = mysqli_fetch_assoc($donation_result)) {
+    $total_donations = $row['total'] ?? 0;
+    $last_donation_date = !empty($row['last_date']) ? $row['last_date'] : 'None Recorded';
+}
 ?>
 
 <!DOCTYPE html>
@@ -118,8 +133,8 @@ if ($result && mysqli_num_rows($result) > 0) {
               <p style="margin-top: 10px;"><span>Weight (kg):</span></p>
               <input type="number" name="weight" value="<?php echo htmlspecialchars($user['weight']); ?>" min="45" max="180" required style="width: 100%; padding: 7px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 6px;">
 
-              <p><span>Last Donation Date:</span> <?php echo !empty($user['last_donation_date']) ? htmlspecialchars($user['last_donation_date']) : 'None Recorded'; ?></p>
-              <p><span>Total Donations:</span> <?php echo isset($user['total_donations']) ? htmlspecialchars($user['total_donations']) : '0'; ?></p>
+              <p><span>Last Donation Date:</span> <?php echo htmlspecialchars($last_donation_date); ?></p>
+              <p><span>Total Donations:</span> <?php echo htmlspecialchars($total_donations); ?></p>
 
               <button type="submit" style="margin-top: 20px; width: 100%; padding: 10px; background-color: var(--primary-color); color: #ffffff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">Save Changes</button>
             </div>
