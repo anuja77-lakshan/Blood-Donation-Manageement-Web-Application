@@ -1,9 +1,8 @@
 <?php
-// history.php
 session_start();
 require_once __DIR__ . '/config/db.php';
 
-// 1. Check if user is logged in via email (Matches logic in donor_qr.php)
+// 1. Check if user is logged in via email
 if (isset($_SESSION['user_email'])) {
     $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email LIMIT 1");
     $stmt->execute(['email' => $_SESSION['user_email']]);
@@ -29,10 +28,7 @@ if (!$donor) {
     $donor = ['id' => 1, 'full_name' => 'Senith Chethiya', 'blood_group' => 'O+'];
 }
 
-// Extract first name for the navbar greeting 
-$firstName = explode(' ', trim($donor['full_name']))[0];
-
-// 4. Fetch past donations from your existing donations table
+// 4. Fetch past donations
 $sql = "SELECT id, user_id, donation_date, location, camp_name, status 
         FROM donations 
         WHERE user_id = :user_id 
@@ -70,39 +66,8 @@ if ($lastDonationDate) {
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- CSS Links -->
-    <link rel="stylesheet" href="css/camps.css">
-    <link rel="stylesheet" href="css/style.css">
-
-    <style>
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .stat-box {
-            background: #ffffff;
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            padding: 18px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-        }
-
-        .stat-value {
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--primary);
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-    </style>
+    <!-- CSS Links (Added ?v=2 to force cache refresh) -->
+    <link rel="stylesheet" href="css/history.css?v=2">
 </head>
 <body>
 
@@ -119,12 +84,11 @@ if ($lastDonationDate) {
                 <li><a href="home.php">Home</a></li>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="camps.php">Camps</a></li>
-                <li><a href="donor_qr.php">My QR Code</a></li>
-                <li><a href="history.php" class="active">History</a></li>
+                <a href="contact.php">Contact</a>
                 <li>
                     <a href="personal-account.php" class="user-greeting">
                         <i class="fa-regular fa-circle-user"></i>
-                        <span>Hi, <?= htmlspecialchars($firstName); ?></span>
+                        <span><?= htmlspecialchars($donor['full_name']); ?></span>
                     </a>
                 </li>
             </ul>
@@ -141,11 +105,10 @@ if ($lastDonationDate) {
                 <a href="home.php">Home</a>
                 <a href="dashboard.php">Dashboard</a>
                 <a href="camps.php">Camps</a>
-                <a href="donor_qr.php">My QR Code</a>
-                <a href="history.php" class="active">History</a>
+                <a href="contact.php">Contact</a>
                 <a href="personal-account.php" class="mobile-user-link">
                     <i class="fa-regular fa-circle-user"></i>
-                    <span>Hi, <?= htmlspecialchars($firstName); ?></span>
+                    <span><?= htmlspecialchars($donor['full_name']); ?></span>
                 </a>
             </nav>
         </div>
