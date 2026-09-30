@@ -1,3 +1,15 @@
+<?php
+// Start session to access session variables
+session_start();
+
+// Check if user is logged in as admin
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+    // Redirect unauthorized users back to login page
+    header("Location: login-register.php#admin");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

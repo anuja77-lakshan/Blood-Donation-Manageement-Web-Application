@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloodLink - Register & Log in</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/login-register.css">
 </head>
 <body>
@@ -33,7 +34,8 @@
                 
                 <div class="input-col">
                     <input type="text" name="full_name" placeholder="Full Name" required>
-                    <input type="text" name="nic" placeholder="NIC / Passport Number" required>
+                    <input type="text" name="nic" placeholder="NIC / Passport Number" pattern="^([0-9]{9}[vVxX]|[0-9]{12})$" 
+                    title="NIC must be 9 numbers followed by a letter (e.g., 123456789V) or 12 digits" required>
                 </div>
                 
                 <div class="input-row">
@@ -97,8 +99,29 @@
                 </div>
 
                 <div class="input-row">
-                    <input type="password" name="password" placeholder="Password" required>
-                    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                    <!-- Password field with pattern validation -->
+                    <div class="password-wrapper">
+                        <input 
+                            type="password" 
+                            name="password" 
+                            id="reg_password"
+                            placeholder="Password" 
+                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()_+=\-\[\]{}|;:,.<>]).{8,}" 
+                            title="Password must contain at least 8 characters, including uppercase, lowercase, numbers, and symbols" 
+                            required>
+                        <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility('reg_password', this)"></i>
+                    </div>
+
+                    <!-- Confirm password field -->
+                    <div class="password-wrapper">
+                        <input 
+                            type="password" 
+                            name="confirm_password" 
+                            id="reg_confirm_password"
+                            placeholder="Confirm Password" 
+                            required>
+                        <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility('reg_confirm_password', this)"></i>
+                    </div>
                 </div>
 
                 <button type="submit" class="submit-btn">Register</button>
@@ -108,22 +131,27 @@
             <form id="login-form" class="form-content hidden" action="php/login.php" method="POST">
                 <div class="input-col">
                     <input type="email" name="email" placeholder="Email" required>
-                    <input type="password" name="password" placeholder="Password" required>
+                    <div class="password-wrapper">
+                        <input type="password" name="password" id="login_password" placeholder="Password" required>
+                        <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility('login_password', this)"></i>
+                    </div>
                 </div>
                 
                 <button type="submit" class="submit-btn">Log in</button>
             </form>
 
+            <!-- ADMIN LOGIN FORM -->
             <form id="admin-form" class="form-content hidden" action="php/admin_login.php" method="POST">
                 <div class="input-col">
-                    <input type="email" name="admin_email" placeholder="Admin Email" required>
-                    
-                    <input type="password" name="admin_password" placeholder="Admin Password (6 Characters)" minlength="6" maxlength="6" required title="Password must be exactly 6 characters">
+                    <input type="text" name="admin_username" placeholder="Username" required>
+                    <div class="password-wrapper">
+                        <input type="password" name="admin_password" id="admin_password" placeholder="Password" required>
+                        <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility('admin_password', this)"></i>
+                    </div>
                 </div>
                 
-                <button type="submit" class="submit-btn";>Admin Log in</button>
+                <button type="submit" class="submit-btn">Log in</button>
             </form>
-
 
         </main>
     </div>

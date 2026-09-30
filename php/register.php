@@ -28,6 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
+    // Check NIC format (9 numbers with a letter, or 12 numbers)
+    if (!preg_match("/^([0-9]{9}[vVxX]|[0-9]{12})$/", $nic)) {
+        echo "<script>alert('NIC must contain at least 9 numbers followed by a letter (e.g., 123456789V) or 12 digits'); window.history.back();</script>";
+        exit();
+    }
+
     // Check minimum donor age (18+)
     $birthDate = new DateTime($dob);
     $today = new DateTime();
@@ -43,9 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Check minimum password length
-    if (strlen($password) < 6) {
-        echo "<script>alert('Password must be at least 6 characters long'); window.history.back();</script>";
+    // Check password complexity (lowercase, uppercase, number, symbol, min 8 chars)
+    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()_+=\-\[\]{}|;:,.<>]).{8,}$/', $password)) {
+        echo "<script>alert('Password must contain at least 8 characters, including uppercase, lowercase, numbers, and symbols'); window.history.back();</script>";
         exit();
     }
 

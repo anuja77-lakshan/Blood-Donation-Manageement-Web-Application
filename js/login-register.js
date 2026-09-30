@@ -1,3 +1,19 @@
+// Toggle password visibility
+function togglePasswordVisibility(fieldId, icon) {
+    const passwordField = document.getElementById(fieldId);
+    if (!passwordField) return;
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    } else {
+        passwordField.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    }
+}
+
 function switchTab(tab) {
     // Forms
     const registerForm = document.getElementById('register-form');
@@ -9,12 +25,12 @@ function switchTab(tab) {
     const btnLogin = document.getElementById('btn-login');
     const btnAdmin = document.getElementById('btn-admin');
 
-    // 1. සියලු Forms සඟවන්න (Hide all forms)
+    // 1. Hide all forms
     registerForm.classList.add('hidden');
     loginForm.classList.add('hidden');
     if (adminForm) adminForm.classList.add('hidden');
 
-    // 2. සියලු Buttons Inactive කරන්න
+    // 2. Set all buttons to inactive
     [btnRegister, btnLogin, btnAdmin].forEach(btn => {
         if (btn) {
             btn.classList.remove('active');
@@ -22,7 +38,7 @@ function switchTab(tab) {
         }
     });
 
-    // 3. තෝරාගත් Tab එක සහ Form එක පමණක් පෙන්වන්න
+    // 3. Show selected tab and form
     if (tab === 'login') {
         loginForm.classList.remove('hidden');
         btnLogin.classList.add('active');
@@ -68,12 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const password = registerForm.querySelector('input[name="password"]').value;
             const confirmPassword = registerForm.querySelector('input[name="confirm_password"]').value;
             const phone = registerForm.querySelector('input[name="phone"]').value.trim();
+            const nic = registerForm.querySelector('input[name="nic"]').value.trim();
             const dob = new Date(dobInput.value);
             const today = new Date();
 
-            // 1. Password length check
-            if (password.length < 6) {
-                alert("Password must be at least 6 characters long.");
+            // 1. Password complexity check (min 8 chars, uppercase, lowercase, numbers, symbols)
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()_+=\-\[\]{}|;:,.<>]).{8,}$/;
+            if (!passwordRegex.test(password)) {
+                alert("Password must contain at least 8 characters, including uppercase, lowercase, numbers, and symbols.");
                 e.preventDefault();
                 return;
             }
@@ -93,7 +111,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // 4. Age 18+ check
+            // 4. NIC format check (9 numbers followed by a letter, or 12 numbers)
+            const nicRegex = /^([0-9]{9}[vVxX]|[0-9]{12})$/;
+            if (!nicRegex.test(nic)) {
+                alert("NIC must contain at least 9 numbers followed by a letter (e.g., 123456789V) or 12 digits.");
+                e.preventDefault();
+                return;
+            }
+
+            // 5. Age 18+ check
             let age = today.getFullYear() - dob.getFullYear();
             const monthDiff = today.getMonth() - dob.getMonth();
             if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
