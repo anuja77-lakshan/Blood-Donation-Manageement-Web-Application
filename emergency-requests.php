@@ -1,3 +1,8 @@
+<?php
+session_start();
+// Check if user is logged in or otherwise default to Guest
+$user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Guest';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,18 +14,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        blood: {
-                            50: '#fef2f2',
-                            100: '#fee2e2',
-                            500: '#ef4444',
-                            600: '#ef3446',
-                            700: '#d92636',
-                            800: '#991b1b',
-                            900: '#7f1d1d',
-                        }
+        theme: {
+        extend: {
+            colors: {
+            blood: {
+                 50: '#fef2f2',
+                100: '#fee2e2',
+                500: '#ef4444',
+                600: '#ef3446',
+                700: '#d92636',
+                800: '#991b1b',
+                900: '#7f1d1d',
+                 }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -50,11 +55,12 @@
                 <li><a href="home.php">Home</a></li>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="camps.php">Camps</a></li>
-                <li><a href="../contact.php">Contact</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <li>
+                    //login name
                     <a href="personal-account.php" class="user-greeting">
                         <i class="fa-regular fa-circle-user"></i>
-                        <span>#</span>
+                        <span><?php echo htmlspecialchars($user_display_name); ?></span>
                     </a>
                 </li>
             </ul>
@@ -70,7 +76,7 @@
         <!-- page heading -->
         <div class="mb-8 border-l-4 border-blood-600 pl-4 animate-fade-in-up" style="animation-delay: 0.1s;">
             <h1 class="text-3xl font-black text-gray-900 uppercase tracking-tight">Emergency Blood Requests</h1>
-            <p class="text-gray-600 mt-1">Connecting critical hospital patients with life-saving donors instantly.</p>
+            <p class="text-gray-600 mt-1">Connecting critical hospital patients with life saving donors instantly </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -106,8 +112,8 @@
                                 <label class="block text-sm font-semibold text-gray-700 mb-1">Units</label>
                                 <input type="number" id="units" min="1" max="20" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all" placeholder="e.g. 2">
                             </div>
-                        </div>
-                        <div>
+                </div>
+                <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-1">Emergency Level</label>
                             <select id="Emergency" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all bg-white">
                                 <option value="High" class="text-orange-600 font-semibold">High (Within 24h)</option>
@@ -120,8 +126,8 @@
                                 <i class="fa-solid fa-hospital absolute left-3 top-2.5 text-gray-400 text-sm"></i>
                                 <input type="text" id="location" required class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all" placeholder="City General Hospital">
                             </div>
-                        </div>
-                        <div>
+                </div>
+                <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-1">Contact Number</label>
                             <div class="relative">
                                 <i class="fa-solid fa-phone absolute left-3 top-2.5 text-gray-400 text-sm"></i>
@@ -132,9 +138,9 @@
                             <label class="block text-sm font-semibold text-gray-700 mb-1">Notes (Optional)</label>
                             <textarea id="notes" rows="2" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blood-500 outline-none transition-all resize-none" placeholder="Specific instructions..."></textarea>
                         </div>
-                        <button type="submit" class="w-full mt-2 py-3 bg-blood-600 text-white rounded-full hover:bg-blood-700 transition-colors font-bold shadow-md flex items-center justify-center gap-2 uppercase text-sm tracking-wide">
+                     <button type="submit" class="w-full mt-2 py-3 bg-blood-600 text-white rounded-full hover:bg-blood-700 transition-colors font-bold shadow-md flex items-center justify-center gap-2 uppercase text-sm tracking-wide">
                             <i class="fa-solid fa-paper-plane"></i> Submit Request
-                        </button>
+                    </button>
                     </form>
                 </div>
             </div>
@@ -147,7 +153,7 @@
                     </div>
                     <div class="flex gap-2">
                         <!-- filter dropdown -->
-                        <select id="bloodTypeFilter" class="bg-white border border-gray-300 text-gray-700 text-sm font-semibold rounded-lg focus:ring-blood-500 focus:border-blood-500 block p-2 outline-none shadow-sm" onchange="filterRequests()">
+                        <select id="bloodTypeFilter" class="bg-white border border-gray-300 text-gray-700 text-sm font-semibold rounded-lg focus:ring-blood-500 focus:border-blood-500 block p-2 outline-none shadow-sm">
                             <option value="all">All Types</option>
                             <option value="A+">A+</option>
                             <option value="A-">A-</option>
@@ -167,8 +173,8 @@
                         <i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i>
                         <p>Loading emergency requests...</p>
                     </div>
-                </div>
-            </div>
+        </div>
+        </div>
         </div>
     </main>
 
@@ -179,8 +185,8 @@
         </div>
     </footer>
 
-    <!-- link our script -->
-    <script src="js/emergency-requests.js"></script>
+    <!-- despite the browser cashe and refresh-->
+    <script src="js/emergency-requests.js?v=<?php echo time(); ?>"></script>
     
 </body>
 </html>
