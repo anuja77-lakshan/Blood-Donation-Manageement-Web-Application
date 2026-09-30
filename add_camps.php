@@ -36,7 +36,7 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
         <li>
           <a href="personal-account.php" class="user-greeting">
             <i class="fa-regular fa-circle-user"></i>
-            <span>Hi, <?php echo htmlspecialchars($user_display_name); ?></span>
+            <span><?php echo htmlspecialchars($user_display_name); ?></span>
           </a>
         </li>
       </ul>
