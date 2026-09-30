@@ -1,3 +1,8 @@
+<?php
+session_start();
+// Check if user is logged in, otherwise default to Guest
+$user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Guest';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,9 +34,9 @@
         <li><a href="camps.php" class="active">Camps</a></li>
         <li><a href="contact.php">Contact</a></li>
         <li>
-          <a href="personal_account.html" class="user-greeting">
+          <a href="personal-account.php" class="user-greeting">
             <i class="fa-regular fa-circle-user"></i>
-            <span>Hi, Pasan</span>
+            <span>Hi, <?php echo htmlspecialchars($user_display_name); ?></span>
           </a>
         </li>
       </ul>
@@ -92,18 +97,19 @@
         </div>
 
         <!-- Latitude and Longitude Inputs -->
-<div style="display: flex; gap: 15px; margin-top: 15px;">
-   <div style="flex: 1;">
-      <label style="font-weight: bold; font-size: 14px;">Latitude </label>
-        <input type="text" name="latitude" placeholder="e.g., 6.028417" required 
-               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
-    </div>
-    <div style="flex: 1;">
-        <label style="font-weight: bold; font-size: 14px;">Longitude </label>
-        <input type="text" name="longitude" placeholder="e.g., 80.217751" required 
-               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
-    </div>
-</div> 
+        <div style="display: flex; gap: 15px; margin-top: 15px;">
+           <div style="flex: 1;">
+              <label style="font-weight: bold; font-size: 14px;">Latitude <span style="color: var(--primary);">*</span></label>
+              <input type="text" name="latitude" placeholder="e.g., 6.028417" required 
+                     style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+            </div>
+            <div style="flex: 1;">
+                <label style="font-weight: bold; font-size: 14px;">Longitude <span style="color: var(--primary);">*</span></label>
+                <input type="text" name="longitude" placeholder="e.g., 80.217751" required 
+                       style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;">
+            </div>
+        </div> 
+        
         <!-- Cover Image upload -->
         <div class="form-group full-width">
           <label>Cover Image (Upload)</label>
