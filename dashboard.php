@@ -210,7 +210,7 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
                         <i class="fa-solid fa-campground" style="font-size: 36px; color: #cbd5e1; margin-bottom: 10px;"></i>
                         <h4 style="margin: 0 0 8px 0; color: #475569;">No Active Camps Found</h4>
                         <p style="margin: 0 0 15px 0; color: #64748b; font-size: 14px;">Organize or add a blood donation drive to see it listed here.</p>
-                        <a href="camps.php" class="btn btn-green btn-sm" style="display: inline-block;">Add Blood Camp</a>
+                        <a href="add_camps.php" class="btn btn-green btn-sm" style="display: inline-block;">Add Blood Camp</a>
                     </div>
                 <?php endif; ?>
             </div>

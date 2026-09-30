@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             VALUES ('$full_name', '$nic', '$dob', '$gender', '$email', '$phone', '$location', '$district', '$blood_group', '$weight', '$hashed_password')";
 
     if (mysqli_query($conn, $sql)) {
-        echo "<script>alert('Registration successful! Please login.'); window.location.href='../login-register.php';</script>";
+        echo "<script>alert('Registration successful! Please login.'); window.location.href='../login-register.php#login';</script>";
         exit();
     } else {
         echo "Error: " . mysqli_error($conn);

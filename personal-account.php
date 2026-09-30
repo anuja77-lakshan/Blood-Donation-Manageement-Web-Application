@@ -50,7 +50,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         <li>
           <a href="personal-account.php" class="user-greeting">
             <i class="fa-regular fa-circle-user"></i>
-            <span>Hi, <?php echo htmlspecialchars($user['full_name']); ?></span>
+            <span><?php echo htmlspecialchars($user['full_name']); ?></span>
           </a>
         </li>
       </ul>
