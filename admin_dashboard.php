@@ -1,11 +1,29 @@
 <?php
-// Start session to access session variables
 session_start();
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {$_SESSION = array();
+
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(
+            session_name(),
+            '',
+            time() - 42000,
+            $params["path"],
+            $params["domain"],
+            $params["secure"],
+            $params["httponly"]
+        );
+    }
+
+    session_destroy();
+    header("Location: login-register.php#admin");
+    exit();
+}
 
 // Check if user is logged in as admin
 if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     // Redirect unauthorized users back to login page
-    header("Location: login-register.php#admin");
+    header("Location: login.php#admin");
     exit();
 }
 ?>
@@ -18,7 +36,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
   <title>BloodLink - Central Admin Terminal</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="css/admin_dashboard.css" />
@@ -42,10 +60,10 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
           <span>Administrator</span>
         </div>
 
-        <button onclick="showToast('Logged out of administrator session securely.')" class="topbar-logout-btn">
+        <a href="admin_dashboard.php?action=logout" class="topbar-logout-btn">
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
           <span>Logout</span>
-        </button>
+        </a>
       </div>
     </header>
 
@@ -76,7 +94,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
           </div>
         </div>
         <p class="instruction-desc">
-          Use this centralized terminal to coordinate blood donation operations across regional hospitals and campus donation drives. The three primary modules below handle real-time field workflows:
+          Manage donors, blood stock, and check ins from one place. Use the 3 tools below:
         </p>
 
         <div class="instruction-steps">
@@ -85,7 +103,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
               <span class="step-number">PORTAL 01</span>
             </div>
             <h4>Users History & Records</h4>
-            <p>Audit donor profiles, track lifetime units donated, check past medical deferrals, and view certificate eligibility.</p>
+            <p>Look up donors and see their past donations.</p>
           </div>
 
           <div class="step-box">
@@ -93,7 +111,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
               <span class="step-number">PORTAL 02</span>
             </div>
             <h4>Live Blood Stock Updater</h4>
-            <p>Directly adjust reserves for all 8 blood groups (A+, B+, O+, AB+ and Rh-) after drives or emergency hospital cross-matches.</p>
+            <p>Add or remove blood units for all 8 blood groups.</p>
           </div>
 
           <div class="step-box">
@@ -101,7 +119,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
               <span class="step-number">PORTAL 03</span>
             </div>
             <h4>QR Code Arrival Scanner</h4>
-            <p>Instantly scan a donor's digital BloodLink Pass via mobile camera or webcam to log on-site attendance and approve donations.</p>
+            <p>Scan donor QR passes to mark attendance.</p>
           </div>
         </div>
       </section>
@@ -122,7 +140,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
             <div class="card-content">
               <h3>Users History</h3>
               <p>
-                Access comprehensive donor transaction records, NIC registries, blood group records, and medical screening logs across Sri Lanka.
+                Search donors and view their donation history.
               </p>
               <ul class="card-features-list">
                 <li><i class="fa-solid fa-check"></i> Search donors by User ID </li>
@@ -130,10 +148,10 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
               </ul>
             </div>
           </div>
-          <a href="user_history.php" class="btn-portal btn-portal-dark">
-            <span>Open Users History</span>
+          <button type="button" onclick="openHistoryModal()" class="btn-portal btn-portal-dark">
+            <span>OPEN USERS HISTORY</span>
             <i class="fa-solid fa-arrow-right"></i>
-          </a>
+          </button>
         </div>
 
         <div class="portal-card card-featured">
@@ -149,7 +167,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
             <div class="card-content">
               <h3>Blood Stock System</h3>
               <p>
-                Interactive management portal allowing administrators to add new collected units or log critical emergency hospital cross-matches instantly.
+                Update blood stock instantly after donations or hospital use.
               </p>
               <ul class="card-features-list">
                 <li><i class="fa-solid fa-check"></i> Monitor all 8 blood groups in real time</li>
@@ -178,7 +196,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
             <div class="card-content">
               <h3>QR Code Scanner</h3>
               <p>
-                Scan the digital BloodLink Pass presented on a donor's smartphone or printed card during on-site donation drives for instant processing.
+                Scan donor passes with your camera at donation camps.
               </p>
               <ul class="card-features-list">
                 <li><i class="fa-solid fa-check"></i> Scan passes via device camera or scanner </li>
@@ -197,12 +215,121 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     </main>
   </div>
 
+  <!-- Search Modal for User History -->
+  <div id="userHistoryModal" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <h3>Donor Last Donation Lookup</h3>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeHistoryModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-subtitle">Search registered donor records to retrieve their most recent donation timestamp.</p>
+        
+        <div class="modal-search-box">
+          <input type="text" inputmode="numeric" pattern="[0-9]*" id="donorUserIdInput" placeholder="Enter User ID (e.g. 11)" />
+          <button type="button" onclick="searchUserHistory()" class="btn-portal btn-portal-dark modal-search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i> Search
+          </button>
+        </div>
+
+        <div id="searchResultArea"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
   <div id="adminToast">
     <i class="fa-solid fa-circle-check" style="color: #10b981; font-size: 16px;"></i>
     <span id="toastMsg">Action completed successfully.</span>
   </div>
 
   <script>
+    function openHistoryModal() {
+      document.getElementById('userHistoryModal').classList.add('active');
+      document.getElementById('donorUserIdInput').value = '';
+      document.getElementById('searchResultArea').innerHTML = '';
+      document.getElementById('donorUserIdInput').focus();
+    }
+
+    function closeHistoryModal() {
+      document.getElementById('userHistoryModal').classList.remove('active');
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('userHistoryModal');
+      if (event.target === modal) {
+        closeHistoryModal();
+      }
+    };
+
+    document.getElementById('donorUserIdInput').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        searchUserHistory();
+      }
+    });
+
+    function searchUserHistory() {
+      const userId = document.getElementById('donorUserIdInput').value.trim();
+      const resultArea = document.getElementById('searchResultArea');
+
+      if (!userId) {
+        resultArea.innerHTML = '<div class="alert-box alert-error"><i class="fa-solid fa-circle-exclamation"></i> Please enter a User ID.</div>';
+        return;
+      }
+
+      resultArea.innerHTML = '<div class="alert-box alert-loading"><i class="fa-solid fa-spinner fa-spin"></i> Retrieving donor records...</div>';
+
+      fetch(`php/get_last_donation.php?user_id=${encodeURIComponent(userId)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            resultArea.innerHTML = `
+              <div class="result-card">
+                <div class="result-row">
+                  <span class="result-label">Donor Name:</span>
+                  <span class="result-value">${data.full_name}</span>
+                </div>
+                <div class="result-row">
+                  <span class="result-label">Blood Group:</span>
+                  <span class="result-badge">${data.blood_group}</span>
+                </div>
+                <div class="result-highlight-box">
+                  <span class="highlight-title"><i class="fa-regular fa-calendar-check"></i> Last Donation Details</span>
+                  <div class="highlight-item">
+                    <span>Date:</span> <strong>${data.last_donation_date}</strong>
+                  </div>
+                  <div class="highlight-item">
+                    <span>Time:</span> <strong>${data.last_donation_time}</strong>
+                  </div>
+                  <div class="highlight-item">
+                    <span>Location:</span> <strong>${data.location} (${data.camp_name})</strong>
+                  </div>
+                </div>
+              </div>
+            `;
+          } else if (data.status === 'warning') {
+            resultArea.innerHTML = `
+              <div class="alert-box alert-warning">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <div>
+                  <strong>${data.full_name} (Blood Group: ${data.blood_group})</strong>
+                  <p style="margin-top: 4px; font-size: 13px;">${data.message}</p>
+                </div>
+              </div>
+            `;
+          } else {
+            resultArea.innerHTML = `<div class="alert-box alert-error"><i class="fa-solid fa-circle-xmark"></i> ${data.message}</div>`;
+          }
+        })
+        .catch(() => {
+          resultArea.innerHTML = '<div class="alert-box alert-error"><i class="fa-solid fa-circle-xmark"></i> An error occurred while retrieving data.</div>';
+        });
+    }
+
     function showToast(message) {
       const toast = document.getElementById('adminToast');
       const toastMsg = document.getElementById('toastMsg');
