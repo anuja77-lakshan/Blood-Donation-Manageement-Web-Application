@@ -10,12 +10,16 @@ if ($conn->connect_error) {
     echo json_encode([]);
     exit();
 }
+//auto delete after 24hours
+$conn->query("DELETE FROM blood_camps WHERE TIMESTAMP(camp_date, end_time) < NOW() - INTERVAL 24 HOUR");
 
-// Fetch all camps where date is today or upcoming
-$sql = "SELECT *, DATEDIFF(camp_date, CURDATE()) AS days_diff 
+// get active or ended but not exceed 24 hour camps
+$sql = "SELECT *, 
+        DATEDIFF(camp_date, CURDATE()) AS days_diff,
+        TIMESTAMPDIFF(MINUTE, NOW(), TIMESTAMP(camp_date, end_time)) AS minutes_left 
         FROM blood_camps 
-        WHERE camp_date >= CURDATE() 
-        ORDER BY camp_date ASC";
+        WHERE TIMESTAMP(camp_date, end_time) >= NOW() - INTERVAL 24 HOUR 
+        ORDER BY camp_date ASC, start_time ASC";
 
 $result = $conn->query($sql);
 

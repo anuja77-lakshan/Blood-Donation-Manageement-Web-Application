@@ -13,16 +13,16 @@ if ($conn->connect_error) {
 $conn->query("ALTER TABLE blood_camps ADD COLUMN IF NOT EXISTS latitude DECIMAL(10, 8) NULL");
 $conn->query("ALTER TABLE blood_camps ADD COLUMN IF NOT EXISTS longitude DECIMAL(11, 8) NULL");
 
-//Read Today or Upcoming Camps
-$sql = "SELECT id, camp_name, org_name, camp_date, start_time, end_time, location, latitude, longitude 
+// Read Active camps and camps ended within 24 hours
+$sql = "SELECT id, camp_name, org_name, camp_date, start_time, end_time, location, latitude, longitude,
+        TIMESTAMPDIFF(MINUTE, NOW(), TIMESTAMP(camp_date, end_time)) AS minutes_left 
         FROM blood_camps 
-        WHERE camp_date >= CURDATE() 
+        WHERE TIMESTAMP(camp_date, end_time) >= NOW() - INTERVAL 24 HOUR 
         ORDER BY camp_date ASC";
 
 $result = $conn->query($sql);
 $camps = [];
 
-//Coordinates Map for Main Cities
 $cityMap = [
     'colombo' => [6.9271, 79.8612],
     'narahenpita' => [6.8941, 79.8776],
@@ -48,7 +48,6 @@ if ($result && $result->num_rows > 0) {
         $lng = !empty($row['longitude']) ? floatval($row['longitude']) : null;
         $locationRaw = strtolower(trim($row['location']));
 
-        // If No Coordinates first find in City List 
         if (!$lat || !$lng) {
             foreach ($cityMap as $city => $coords) {
                 if (strpos($locationRaw, $city) !== false) {
@@ -59,34 +58,11 @@ if ($result && $result->num_rows > 0) {
             }
         }
 
-        // City is not find Nomination API Find It
-        if (!$lat || !$lng) {
-            $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($row['location'] . ", Sri Lanka");
-            $opts = [
-                "http" => [
-                    "header" => "User-Agent: BloodLinkMap/1.0\r\n",
-                    "timeout" => 1.5
-                ]
-            ];
-            $context = stream_context_create($opts);
-            $geoData = @file_get_contents($url, false, $context);
-
-            if ($geoData) {
-                $geoJson = json_decode($geoData, true);
-                if (!empty($geoJson)) {
-                    $lat = floatval($geoJson[0]['lat']);
-                    $lng = floatval($geoJson[0]['lon']);
-                }
-            }
-        }
-
-        // Markers
         if (!$lat || !$lng) {
             $lat = 6.9271 + (mt_rand(-30, 30) / 1000);
             $lng = 79.8612 + (mt_rand(-30, 30) / 1000);
         }
 
-        // Save in Database
         $campId = (int)$row['id'];
         $conn->query("UPDATE blood_camps SET latitude = $lat, longitude = $lng WHERE id = $campId");
 

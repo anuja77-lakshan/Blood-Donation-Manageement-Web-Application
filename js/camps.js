@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Scroll animations
+    // Scroll animations
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
     
     if ('IntersectionObserver' in window) {
@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
                     
-                    // Refresh map view
                     if (entry.target.classList.contains('map-section')) {
                         setTimeout(() => {
                             window.dispatchEvent(new Event('resize'));
@@ -25,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         revealElements.forEach(el => el.classList.add('is-visible'));
     }
 
-    // 2. Carousel buttons
+    // Carousel buttons
     const slider = document.getElementById('campsSlider');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -40,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Dynamic Data Fetch & Search Filter Integration
+    // Dynamic Data Fetch & Expired Badge Integration
     const searchInput = document.getElementById('searchInput');
 
     async function loadCampsFromDB() {
@@ -53,17 +52,22 @@ document.addEventListener('DOMContentLoaded', () => {
             slider.innerHTML = '';
 
             if (!camps || camps.length === 0) {
-                slider.innerHTML = `<p style="padding: 24px; color: var(--text-muted); font-size: 14px;">No upcoming blood camps available right now.</p>`;
+                slider.innerHTML = `<p style="padding: 24px; color: var(--text-muted); font-size: 14px;">No upcoming or active blood camps available right now.</p>`;
                 return;
             }
 
             camps.forEach(camp => {
-                // Calculate Dynamic Badges based on day difference & current time
                 const days = parseInt(camp.days_diff, 10);
+                const minutesLeft = parseInt(camp.minutes_left, 10);
+
                 let badgeClass = "badge-upcoming";
                 let badgeText = "Upcoming";
 
-                if (days === 0) {
+                // ended camps shows as expired for 24hours
+                if (minutesLeft <= 0) {
+                    badgeClass = "badge-ended";
+                    badgeText = "Expired";
+                } else if (days === 0) {
                     const now = new Date();
                     const currentHours = String(now.getHours()).padStart(2, '0');
                     const currentMinutes = String(now.getMinutes()).padStart(2, '0');
@@ -75,10 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (currentTime >= camp.start_time && currentTime <= camp.end_time) {
                         badgeClass = "badge-open";
                         badgeText = "Open";
-                    } else {
-                        // Camp time expired today
-                        badgeClass = "badge-ended";
-                        badgeText = "Ended";
                     }
                 } else if (days === 1) {
                     badgeClass = "badge-tomorrow";
@@ -102,8 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
 
                 const displayTime = `${formatTime(camp.start_time)} – ${formatTime(camp.end_time)}`;
-
-                // Generate Card Element
                 const cleanImagePath = camp.cover_image ? camp.cover_image.replace(/^(\.\.\/)+/, '') : 'images/card1.png';
 
                 const card = document.createElement('div');
