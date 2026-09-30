@@ -94,7 +94,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
           </div>
         </div>
         <p class="instruction-desc">
-          Manage donors, blood stock, and check ins from one place. Use the 3 tools below:
+          Manage donors, blood stock, and check-ins from one place. Use the 3 tools below:
         </p>
 
         <div class="instruction-steps">
@@ -214,6 +214,12 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
 
     </main>
   </div>
+
+  <footer class="footer-section reveal-on-scroll">
+    <div class="full-screen-container footer-content">
+      <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
+    </div>
+  </footer>
 
   <!-- Search Modal for User History -->
   <div id="userHistoryModal" class="modal-backdrop">
@@ -341,6 +347,24 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
         toast.classList.remove('show-toast');
       }, 3200);
     }
+
+    // Reveal on scroll for footer
+    document.addEventListener('DOMContentLoaded', function() {
+      const reveals = document.querySelectorAll('.reveal-on-scroll');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+      } else {
+        reveals.forEach(el => el.classList.add('is-visible'));
+      }
+    });
   </script>
 </body>
 </html>

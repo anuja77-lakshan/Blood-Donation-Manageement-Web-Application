@@ -784,6 +784,38 @@ a {
   opacity: 1;
 }
 
+/* ---------- Footer Section ---------- */
+.footer-section {
+  width: 100%;
+  background-color: #000000;
+  color: #a3a3a3;
+  padding: 24px 0;
+  border-top: 1px solid #1a1a1a;
+}
+
+.footer-content {
+  text-align: center;
+}
+
+.footer-content p {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+
+/* ---------- Animations & Scroll Reveal ---------- */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Tablet & Mobile Breakpoints */
 @media (max-width: 860px) {
   .admin-topbar {
