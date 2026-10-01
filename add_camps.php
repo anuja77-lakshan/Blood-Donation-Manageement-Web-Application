@@ -97,7 +97,7 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
 
         <!-- Google Maps Location Link Input -->
         <div class="form-group full-width" style="margin-top: 10px; margin-bottom: 12px;">
-          <label for="mapUrl">Google Maps Location Link <span style="font-weight: normal; color: #64748b;">(Link එක paste කරන්න හෝ map එකෙන් තෝරන්න)</span></label>
+          <label for="mapUrl">Google Maps Location Link <span style="font-weight: normal; color: #64748b;">(Paste google map link or click in the map)</span></label>
           <div style="position: relative;">
             <input type="text" id="mapUrl" placeholder="Paste Google Maps location link here (e.g., https://maps.app.goo.gl/... or https://maps.google.com/...)" 
                    style="width: 100%; padding-right: 36px;">
