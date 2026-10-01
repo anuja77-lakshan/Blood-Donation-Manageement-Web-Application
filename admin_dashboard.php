@@ -16,7 +16,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {$_SESSION = array()
     }
 
     session_destroy();
-    header("Location: login-register.php#admin");
+    header("Location: home.php");
     exit();
 }
 

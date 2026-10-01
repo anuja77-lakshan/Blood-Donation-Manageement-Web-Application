@@ -125,6 +125,73 @@
         border-color: #fca5a5;
         color: var(--primary-color);
         }
+
+        /* Mobile Hamburger Button */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: var(--text-dark);
+            cursor: pointer;
+            padding: 6px;
+        }
+
+        /* Mobile Dropdown Drawer */
+        .mobile-menu {
+            display: none;
+            transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            overflow: hidden;
+            background: #ffffff;
+            border-top: 1px solid var(--border-light);
+            width: 100%;
+        }
+
+        .menu-closed {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .menu-open {
+            max-height: 380px;
+            opacity: 1;
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            padding: 16px 24px 20px 24px;
+            gap: 12px;
+        }
+
+        .mobile-nav a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 8px 0;
+            transition: color 0.2s ease;
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a.active {
+            color: var(--primary-color);
+        }
+
+        .mobile-user-link {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-dark) !important;
+            margin-top: 6px;
+            font-weight: 700 !important;
+            text-decoration: none;
+        }
+
+        .mobile-user-link i {
+            color: var(--primary-color);
+            font-size: 18px;
+        }
                 
             /* Header Section */
             .header {
@@ -370,6 +437,20 @@
 
 
         @media (max-width: 768px) {
+        /* Mobile Navbar View adjustments */
+        .navbar {
+            padding: 12px 20px;
+        }
+        .nav-links {
+            display: none;
+        }
+        .mobile-toggle {
+            display: block;
+        }
+        .mobile-menu {
+            display: block;
+        }
+
         .info-cards-wrapper {
             grid-template-columns: 1fr;
         }

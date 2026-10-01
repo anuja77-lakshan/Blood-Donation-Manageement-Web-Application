@@ -69,6 +69,25 @@ if ($donation_result && $row = mysqli_fetch_assoc($donation_result)) {
           </a>
         </li>
       </ul>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Drawer -->
+    <div id="mobile-menu" class="mobile-menu menu-closed">
+      <nav class="mobile-nav">
+        <a href="home.php">Home</a>
+        <a href="dashboard.php">Dashboard</a>
+        <a href="camps.php">Camps</a>
+        <a href="contact.php">Contact</a>
+        <a href="personal-account.php" class="mobile-user-link">
+          <i class="fa-regular fa-circle-user"></i>
+          <span><?php echo htmlspecialchars($user['full_name']); ?></span>
+        </a>
+      </nav>
     </div>
   </header>
 
@@ -178,5 +197,25 @@ if ($donation_result && $row = mysqli_fetch_assoc($donation_result)) {
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = mobileMenu.classList.toggle('menu-open');
+          mobileMenu.classList.toggle('menu-closed', !isOpen);
+          
+          const icon = menuToggle.querySelector('i');
+          if (isOpen) {
+            icon.classList.replace('fa-bars', 'fa-xmark');
+          } else {
+            icon.classList.replace('fa-xmark', 'fa-bars');
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
