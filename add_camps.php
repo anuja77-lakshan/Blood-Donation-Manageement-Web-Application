@@ -122,7 +122,7 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
                    style="width: 100%; padding-right: 36px;">
             <i class="fa-solid fa-location-crosshairs" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 16px;"></i>
           </div>
-          <span id="mapStatusText" style="font-size: 12px; margin-top: 5px; display: block; font-weight: 600;"></span>
+          <span id="mapStatusText" style="font-size: 12px; margin-top: 5px; display: none; font-weight: 600;"></span>
         </div>
 
         <!-- Hidden Coordinates for save_camps.php-->
