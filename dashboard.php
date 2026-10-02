@@ -95,6 +95,70 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Leaflet.js and Map CSS Code -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        /* Mobile Hamburger Button */
+        .mobile-hamburger-btn {
+            display: none;
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            font-size: 24px;
+            color: #0f172a;
+            cursor: pointer;
+            padding: 4px;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+        }
+
+        .mobile-hamburger-btn:hover {
+            color: #ef3446;
+        }
+
+        .mobile-dropdown-menu {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none !important;
+            }
+
+            .mobile-hamburger-btn {
+                display: flex !important;
+            }
+
+            .mobile-dropdown-menu.active {
+                display: flex !important;
+                flex-direction: column;
+                background-color: #ffffff;
+                border-top: 1px solid #e2e8f0;
+                padding: 16px 20px;
+                gap: 12px;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+            }
+
+            .mobile-dropdown-menu a {
+                text-decoration: none;
+                color: #334155;
+                font-weight: 600;
+                font-size: 15px;
+                padding: 4px 0;
+            }
+
+            .mobile-dropdown-menu a.active-mobile,
+            .mobile-dropdown-menu a:hover {
+                color: #ef3446;
+            }
+
+            .mobile-user-row {
+                padding-top: 10px;
+                border-top: 1px solid #e2e8f0;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -105,6 +169,8 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
         <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
+      
+      <!-- Navigation Links -->
       <ul class="nav-links">
         <li><a href="home.php">Home</a></li>
         <li><a href="dashboard.php" class="active">Dashboard</a></li>
@@ -117,6 +183,25 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
           </a>
         </li>
       </ul>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobileMenuBtn" type="button" class="mobile-hamburger-btn" aria-label="Toggle navigation">
+        <i id="menuIcon" class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="mobile-dropdown-menu">
+      <a href="home.php">Home</a>
+      <a href="dashboard.php" class="active-mobile">Dashboard</a>
+      <a href="camps.php">Camps</a>
+      <a href="contact.php">Contact</a>
+      <div class="mobile-user-row">
+        <a href="personal-account.php">
+          <i class="fa-regular fa-circle-user"></i>
+          <span><?php echo htmlspecialchars($userName); ?></span>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -185,11 +270,29 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
             <div class="camps-grid-custom">
                 <?php if (!empty($featuredCamps)): ?>
                     <?php foreach ($featuredCamps as $camp): 
-                        $cName = isset($camp['camp_name']) ? $camp['camp_name'] : (isset($camp['name']) ? $camp['name'] : 'Blood Donation Drive');
-                        $cDate = isset($camp['camp_date']) ? $camp['camp_date'] : (isset($camp['date']) ? $camp['date'] : 'Upcoming');
-                        $cLoc = isset($camp['location']) ? $camp['location'] : 'Local Community Center';
-                        $cContact = isset($camp['contact_no']) ? $camp['contact_no'] : (isset($camp['contact']) ? $camp['contact'] : '1990');
-                        $cOrg = isset($camp['organization']) ? $camp['organization'] : 'Red Cross / BloodLink';
+                        // Camp Title
+                        $cName = !empty($camp['camp_name']) ? $camp['camp_name'] : 
+                                 (!empty($camp['name']) ? $camp['name'] : 
+                                 (!empty($camp['title']) ? $camp['title'] : 'Blood Donation Drive'));
+
+                        // Camp Date
+                        $cDate = !empty($camp['camp_date']) ? $camp['camp_date'] : 
+                                 (!empty($camp['date']) ? $camp['date'] : 'Upcoming');
+
+                        // Location
+                        $cLoc = !empty($camp['location']) ? $camp['location'] : 
+                                (!empty($camp['address']) ? $camp['address'] : 'Local Community Center');
+
+                        // Conatact details
+                        $cContact = !empty($camp['contact_no']) ? $camp['contact_no'] : 
+                                    (!empty($camp['contact']) ? $camp['contact'] : 
+                                    (!empty($camp['phone']) ? $camp['phone'] : '1990'));
+
+                        // Organizer
+                        $cOrg = !empty($camp['organization']) ? $camp['organization'] : 
+                                (!empty($camp['organizer']) ? $camp['organizer'] : 
+                                (!empty($camp['organizer_name']) ? $camp['organizer_name'] : 
+                                (!empty($camp['conducted_by']) ? $camp['conducted_by'] : $cName)));
                     ?>
                         <div class="featured-camp-card">
                             <div class="camp-card-header">
@@ -231,7 +334,7 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
 
         <!--Blood level-->
         <section class="stock-dashboard-section">
-            <p class="tagline text-center">REAL-TIME RESERVE STATUS</p>
+            <p class="tagline text-center">REAL TIME RESERVE STATUS</p>
             <h2 class="title text-center">Current Blood Stock Levels</h2>
             <div class="stock-dashboard-grid">
                 <div class="stock-box">
@@ -321,11 +424,9 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
                         const fillBar = box.querySelector('.meter .fill');
                         const statusBadge = box.querySelector('.box-top .badge');
 
-                        // Value Update
                         if (percentText) percentText.innerText = data.val + '%';
                         if (fillBar) fillBar.style.width = data.val + '%';
 
-                        // Dynamic Styling
                         if (data.val < 30) {
                             if (statusBadge) {
                                 statusBadge.innerText = 'CRITICAL ALERT';
@@ -357,6 +458,40 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
     }
 
     document.addEventListener('DOMContentLoaded', loadLiveStockFromDB);
+    </script>
+
+    <!-- Mobile Hamburger toggole-->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+
+        if (menuBtn && mobileMenu && menuIcon) {
+          menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isOpen = mobileMenu.classList.toggle('active');
+            
+            if (isOpen) {
+              menuIcon.classList.remove('fa-bars');
+              menuIcon.classList.add('fa-xmark');
+            } else {
+              menuIcon.classList.remove('fa-xmark');
+              menuIcon.classList.add('fa-bars');
+            }
+          });
+
+          document.addEventListener('click', function(e) {
+            if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+              if (mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+              }
+            }
+          });
+        }
+      });
     </script>
 </body>
 </html>

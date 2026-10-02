@@ -37,6 +37,7 @@ body {
     width: 100%;
     border-bottom: 1px solid var(--border-color);
     background: #ffffff;
+    position: relative;
 }
 
 .navbar {
@@ -141,6 +142,30 @@ body {
     color: var(--blood-red);
     transform: none !important;
     box-shadow: none !important;
+}
+
+/* Mobile Controling*/
+.mobile-hamburger-btn {
+    display: none;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: 24px;
+    color: #0f172a;
+    cursor: pointer;
+    padding: 4px;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.mobile-hamburger-btn:hover {
+    color: var(--blood-red);
+}
+
+.mobile-dropdown-menu {
+    display: none;
 }
 
 /* Main Dashboard */
@@ -381,7 +406,7 @@ a.metric-card.highlight-green {
     color: #ffffff;
 }
 
-/*Camps*/
+/* Camps Spotlight */
 .spotlight-head {
     display: flex;
     justify-content: space-between;
@@ -529,7 +554,6 @@ a.metric-card.highlight-green {
     transform: scale(1.2) rotate(5deg);
 }
 
-/* User Greeting Icon popup disabled */
 .user-greeting:hover i {
     transform: none !important;
 }
@@ -609,85 +633,94 @@ a.metric-card.highlight-green {
 /* Smartphones */
 @media (max-width: 768px) {
     .header-section .full-screen-container {
-        padding-left: 8px !important;
-        padding-right: 8px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
     }
 
+    /* Navbar and logo placement  */
     .navbar {
         display: flex !important;
-        flex-direction: column !important;
+        flex-direction: row !important;
         align-items: center !important;
-        justify-content: center !important;
-        padding: 12px 4px 8px 4px !important;
-        gap: 10px !important;
+        justify-content: space-between !important;
+        padding: 14px 0 !important;
         width: 100% !important;
     }
 
     .brand-logo {
-        display: flex !important;
+        display: inline-flex !important;
         align-items: center !important;
-        justify-content: center !important;
-        gap: 6px !important;
-        margin: 0 auto !important;
+        gap: 8px !important;
+        margin: 0 !important;
     }
 
     .brand-logo-img {
-        width: 30px !important;
-        height: 30px !important;
+        width: 32px !important;
+        height: 32px !important;
     }
 
     .brand-logo-text {
-        font-size: 18px !important;
+        font-size: 19px !important;
         letter-spacing: 0.5px !important;
     }
     
+    /* Desktop navigation links */
     .nav-links {
+        display: none !important;
+    }
+
+    /* Plain Hamburger Button*/
+    .mobile-hamburger-btn {
         display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        width: 100% !important;
-        max-width: 360px !important;
-        gap: 6px !important;
-        margin: 0 auto !important;
-        padding: 0 !important;
-        overflow: visible !important;
     }
 
-    .nav-links li {
-        flex-shrink: 0 !important;
+    /* Dropdown Menu Style */
+    .mobile-dropdown-menu {
+        display: none;
+        flex-direction: column;
+        background-color: #ffffff;
+        border-top: 1px solid var(--border-color);
+        padding: 16px 20px;
+        gap: 14px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
     }
 
-    .nav-links a {
-        font-size: 14px !important; 
-        white-space: nowrap !important;
-        padding: 3px 2px !important;
+    .mobile-dropdown-menu.active {
+        display: flex !important;
     }
 
-    .nav-links a.active {
-        border-bottom-width: 2px !important;
-        padding-bottom: 2px !important;
+    .mobile-dropdown-menu a {
+        text-decoration: none;
+        color: #334155;
+        font-weight: 600;
+        font-size: 15px;
+        padding: 4px 0;
+        transition: color 0.2s ease;
     }
 
-    .user-greeting {
-        padding: 4px 7px !important;
-        font-size: 13px !important; 
-        gap: 4px !important;
-        border-radius: 16px !important;
-        white-space: nowrap !important;
+    .mobile-dropdown-menu a.active-mobile,
+    .mobile-dropdown-menu a:hover {
+        color: var(--blood-red);
     }
 
-    .user-greeting i {
-        font-size: 14px !important; 
-        transform: none !important;
+    .mobile-user-row {
+        padding-top: 10px;
+        border-top: 1px solid var(--border-color);
     }
 
-    .user-greeting span {
-        font-size: 13px !important; 
-        max-width: 85px !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
+    .mobile-user-row a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #0f172a !important;
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration: none;
+    }
+
+    .mobile-user-row i {
+        color: var(--blood-red);
+        font-size: 18px;
     }
 
     .dashboard-wrapper {

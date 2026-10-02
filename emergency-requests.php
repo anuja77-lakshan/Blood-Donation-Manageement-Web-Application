@@ -41,33 +41,77 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
     
     <!-- link our custom styles -->
     <link rel="stylesheet" href="css/emergency-requests.css">
+
+    <style>
+        /* Mobile Hamburger Button */
+        .mobile-hamburger-btn {
+            display: none;
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            font-size: 24px;
+            color: #0f172a;
+            cursor: pointer;
+            padding: 4px;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+        }
+
+        .mobile-hamburger-btn:hover {
+            color: #ef3446;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-hamburger-btn {
+                display: flex !important;
+            }
+        }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
 
     <!-- top navbar -->
-    <header class="header-section shadow-sm sticky top-0 z-50">
-        <div class="full-screen-container navbar">
-            <a href="home.php" class="brand-logo">
-                <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
-                <span class="brand-logo-text">BLOODLINK</span>
+    <header class="header-section shadow-sm sticky top-0 z-50 bg-white">
+        <div class="full-screen-container navbar flex justify-between items-center py-3.5 px-4 md:px-8">
+            <a href="home.php" class="brand-logo flex items-center gap-2">
+                <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img w-8 h-8">
+                <span class="brand-logo-text font-black text-black text-xl tracking-tight">BLOODLINK</span>
             </a>
-            <ul class="nav-links hidden md:flex">
-                <li><a href="home.php">Home</a></li>
-                <li><a href="dashboard.php">Dashboard</a></li>
-                <li><a href="camps.php">Camps</a></li>
-                <li><a href="contact.php">Contact</a></li>
+
+            <!-- Desktop Navigation Links -->
+            <ul class="nav-links hidden md:flex items-center gap-6 list-none m-0 p-0 text-sm font-semibold">
+                <li><a href="home.php" class="text-gray-700 hover:text-red-600 transition">Home</a></li>
+                <li><a href="dashboard.php" class="text-gray-700 hover:text-red-600 transition">Dashboard</a></li>
+                <li><a href="camps.php" class="text-gray-700 hover:text-red-600 transition">Camps</a></li>
+                <li><a href="contact.php" class="text-gray-700 hover:text-red-600 transition">Contact</a></li>
                 <li>
-                    //login name
-                    <a href="personal-account.php" class="user-greeting">
-                        <i class="fa-regular fa-circle-user"></i>
+                    <a href="personal-account.php" class="user-greeting flex items-center gap-1.5 px-3 py-1.5 bg-red-50 text-red-600 rounded-full font-bold text-xs border border-red-200">
+                        <i class="fa-regular fa-circle-user text-sm"></i>
                         <span><?php echo htmlspecialchars($user_display_name); ?></span>
                     </a>
                 </li>
             </ul>
-            <!-- mobile menu button -->
-            <button class="md:hidden text-gray-700 hover:text-blood-600 text-2xl">
-                <i class="fa-solid fa-bars"></i>
+
+            <!-- Mobile Hamburger Button-->
+            <button id="mobileMenuBtn" type="button" class="mobile-hamburger-btn" aria-label="Toggle navigation">
+                <i id="menuIcon" class="fa-solid fa-bars"></i>
             </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100 px-5 py-4 space-y-3.5 shadow-lg">
+            <a href="home.php" class="block font-semibold text-gray-700 hover:text-red-600 text-base">Home</a>
+            <a href="dashboard.php" class="block font-semibold text-gray-700 hover:text-red-600 text-base">Dashboard</a>
+            <a href="camps.php" class="block font-semibold text-gray-700 hover:text-red-600 text-base">Camps</a>
+            <a href="contact.php" class="block font-semibold text-gray-700 hover:text-red-600 text-base">Contact</a>
+            <div class="pt-2 border-t border-gray-100">
+                <a href="personal-account.php" class="inline-flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-full font-bold text-xs border border-red-200">
+                    <i class="fa-regular fa-circle-user text-sm"></i>
+                    <span><?php echo htmlspecialchars($user_display_name); ?></span>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -188,5 +232,40 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
     <!-- despite the browser cashe and refresh-->
     <script src="js/emergency-requests.js?v=<?php echo time(); ?>"></script>
     
+    <!-- Mobile Hamburger Toggle & Icon Switch Script (Bars <-> Xmark) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+
+            if (menuBtn && mobileMenu && menuIcon) {
+                menuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isHidden = mobileMenu.classList.toggle('hidden');
+                    
+                    // Icon line
+                    if (!isHidden) {
+                        menuIcon.classList.remove('fa-bars');
+                        menuIcon.classList.add('fa-xmark');
+                    } else {
+                        menuIcon.classList.remove('fa-xmark');
+                        menuIcon.classList.add('fa-bars');
+                    }
+                });
+
+                // Button clicking
+                document.addEventListener('click', function(e) {
+                    if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                            menuIcon.classList.remove('fa-xmark');
+                            menuIcon.classList.add('fa-bars');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
