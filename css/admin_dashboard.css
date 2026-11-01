@@ -816,6 +816,16 @@ a {
     transform: translateY(0);
 }
 
+@keyframes heroEntrance {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-badge-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
+.hero-title-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both; }
+.hero-desc-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.40s both; }
+.hero-actions-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.52s both; }
+
 /* Tablet & Mobile Breakpoints */
 @media (max-width: 860px) {
   .admin-topbar {

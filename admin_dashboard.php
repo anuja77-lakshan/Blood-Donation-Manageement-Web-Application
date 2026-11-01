@@ -72,19 +72,19 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
       <!-- Page Header -->
       <div class="page-header">
         <div>
-          <span class="section-badge">
+          <span class="section-badge hero-badge-animate">
             <i class="fa-solid fa-shield-halved"></i> CENTRAL COMMAND CONSOLE
           </span>
-          <h1 class="main-heading">ADMIN TERMINAL</h1>
+          <h1 class="main-heading hero-title-animate">ADMIN TERMINAL</h1>
         </div>
         <div>
-          <a href="camps.php" class="btn-portal btn-portal-red" style="padding: 12px 24px; font-size: 12.5px;">
+          <a href="camps.php" class="btn-portal btn-portal-red hero-actions-animate" style="padding: 12px 24px; font-size: 12.5px;">
             <i class="fa-solid fa-tent"></i> Public Camps View
           </a>
         </div>
       </div>
 
-      <section class="instruction-card">
+      <section class="instruction-card reveal-on-scroll">
         <div class="instruction-head">
           <div class="instruction-title-wrap">
             <div class="instruction-icon">
@@ -93,7 +93,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
             <h2>Admin Operating Instructions & Portal Overview</h2>
           </div>
         </div>
-        <p class="instruction-desc">
+        <p class="instruction-desc hero-desc-animate">
           Manage donors, blood stock, and check-ins from one place. Use the 3 tools below:
         </p>
 
@@ -125,7 +125,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
       </section>
 
       <!-- 3 Cards -->
-      <section class="portal-cards-grid">
+      <section class="portal-cards-grid reveal-on-scroll">
         
         <div class="portal-card">
           <div>
