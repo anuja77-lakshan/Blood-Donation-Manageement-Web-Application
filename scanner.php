@@ -91,9 +91,7 @@ require_once __DIR__ . '/config/db.php';
             <img src="images/bloodlink_logo.png" alt="BloodLink Logo" style="width: 35px; height: 35px; object-fit: contain;">
             <span style="color: black; font-weight: 900;">BLOODLINK</span> <span style="font-weight: 500;">Hospital Intake Scanner(ADMIN)</span>
         </a>
-        <div class="nav-links">
-            <a href="donor_qr.php" target="_blank">Donor QR View ↗</a>
-        </div>
+        
     </nav>
 
     <div class="container scanner-container">
