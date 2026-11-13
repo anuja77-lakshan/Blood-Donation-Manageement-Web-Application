@@ -30,7 +30,7 @@
         <li><a href="contact.php" class="active">Contact</a></li>
       </ul>
 
-      <!-- Mobile Hamburger Button -->
+      <!-- Mobile menu toggle -->
       <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
         <i class="fa-solid fa-bars"></i>
       </button>
