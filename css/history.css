@@ -1,4 +1,3 @@
-
 :root {
   --primary: #ef3446;
   --primary-hover: #cc141e;
@@ -7,6 +6,7 @@
   --border-light: #e2e8f0;
 }
 
+/* Global Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,6 +14,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* HTML & Body */
 html, body {
   width: 100vw;
   min-height: 100vh;
@@ -22,18 +23,11 @@ html, body {
   overflow-x: hidden;
   background-color: #ffffff;
   color: var(--text-dark);
-
   display: flex;
   flex-direction: column;
 }
 
-.main-content {
-  padding-top: 36px;
-  padding-bottom: 50px;
-
-  flex: 1; 
-}
-
+/* Container */
 .full-screen-container {
   width: 100%;
   max-width: 100% !important;
@@ -41,7 +35,7 @@ html, body {
   padding-right: clamp(24px, 4.5vw, 70px);
 }
 
-
+/* Header & Navbar */
 .header-section {
   width: 100%;
   border-bottom: 1px solid var(--border-light, #e2e8f0);
@@ -59,6 +53,7 @@ html, body {
   padding-bottom: 18px;
 }
 
+/* Brand Logo */
 .brand-logo {
   display: flex;
   align-items: center;
@@ -83,6 +78,7 @@ html, body {
   color: black;
 }
 
+/* Navigation Links */
 .nav-links {
   display: flex;
   align-items: center;
@@ -109,7 +105,7 @@ html, body {
   font-weight: 600;
 }
 
-
+/* User Greeting */
 .user-greeting {
   display: inline-flex;
   align-items: center;
@@ -151,7 +147,7 @@ html, body {
   color: var(--primary);
 }
 
-
+/* Mobile Toggle */
 .mobile-toggle {
   display: none;
   background: none;
@@ -162,6 +158,7 @@ html, body {
   padding: 6px;
 }
 
+/* Mobile Menu */
 .mobile-menu {
   transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
   overflow: hidden;
@@ -214,10 +211,11 @@ html, body {
   font-size: 18px;
 }
 
-
+/* Main Content */
 .main-content {
   padding-top: 36px;
   padding-bottom: 50px;
+  flex: 1;
 }
 
 .page-title-row {
@@ -262,7 +260,7 @@ html, body {
   line-height: 1.5;
 }
 
-
+/* Stats Grid */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -291,7 +289,7 @@ html, body {
   margin-top: 4px;
 }
 
-
+/* Footer */
 .footer-section {
   width: 100%;
   background-color: #000000;
@@ -311,6 +309,7 @@ html, body {
   margin: 0;
 }
 
+/* Animations */
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(28px);
@@ -339,7 +338,7 @@ html, body {
 .hero-desc-animate    { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.40s both; }
 .hero-actions-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.52s both; }
 
-/* Responsive */
+/* Responsive Media Queries */
 @media (max-width: 768px) {
   .nav-links {
     display: none;

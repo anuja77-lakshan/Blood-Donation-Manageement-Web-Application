@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 let badgeClass = "badge-upcoming";
                 let badgeText = "Upcoming";
 
-                // ended camps shows as expired for 24hours
                 if (minutesLeft <= 0) {
                     badgeClass = "badge-ended";
                     badgeText = "Expired";
@@ -92,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dateObj = new Date(camp.camp_date + 'T00:00:00');
                 const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-                // Format Time to 12-hour AM/PM
+                // Format Time
                 const formatTime = (timeStr) => {
                     const [hours, minutes] = timeStr.split(':');
                     const h = parseInt(hours, 10);
@@ -128,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 slider.appendChild(card);
             });
 
-            // Rebind Search filter to dynamically generated cards
+            // Search filter
             if (searchInput) {
                 searchInput.addEventListener('input', (e) => {
                     const query = e.target.value.toLowerCase().trim();

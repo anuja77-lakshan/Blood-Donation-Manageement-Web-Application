@@ -1,6 +1,6 @@
 let allRequestsData = [];
 
-//get data from the backend
+// Get data from backend
 function loadRequests() {
     fetch('php/get_emergency_requests.php')
         .then(response => {
@@ -11,7 +11,7 @@ function loadRequests() {
         })
         .then(data => {
             allRequestsData = Array.isArray(data) ? data : [];
-            filterRequests(); //render feed after data given
+            filterRequests();
         })
         .catch(err => {
             console.error('Error loading requests:', err);
@@ -22,7 +22,7 @@ function loadRequests() {
         });
 }
 
-// render using blood group
+// Filter and render requests
 function filterRequests() {
     let container = document.getElementById('requestsFeed');
     if (!container) return;
@@ -52,22 +52,22 @@ function filterRequests() {
 
         let card = `
             <div class="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all flex items-center justify-between mb-3">
-        <div class="flex items-center gap-4">
-         <div class="w-12 h-12 bg-red-100 text-blood-600 font-black rounded-xl flex items-center justify-center text-lg border border-red-200">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-red-100 text-blood-600 font-black rounded-xl flex items-center justify-center text-lg border border-red-200">
                         ${item.blood_group}
-         </div>
-            <div>
-         <div class="flex items-center gap-2">
-            <h4 class="font-bold text-gray-900">${item.patient_name}</h4>
-                 <span class="text-xs px-2.5 py-0.5 rounded-full font-bold border ${badgeClass} flex items-center gap-1">
-                 <i class="fa-solid ${icon}"></i> ${badgeText}
-                </span>
-         </div>
-                <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
-                <i class="fa-solid fa-hospital text-gray-400"></i> ${item.hospital}
-                </p>
-        </div>
-        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-bold text-gray-900">${item.patient_name}</h4>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full font-bold border ${badgeClass} flex items-center gap-1">
+                                <i class="fa-solid ${icon}"></i> ${badgeText}
+                            </span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                            <i class="fa-solid fa-hospital text-gray-400"></i> ${item.hospital}
+                        </p>
+                    </div>
+                </div>
                 <div>
                     <a href="tel:${item.contact_no}" class="border border-blood-600 text-blood-600 hover:bg-blood-50 px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
                         <i class="fa-solid fa-phone"></i> Contact
@@ -79,29 +79,27 @@ function filterRequests() {
     });
 }
 
-// initial setup
+// Initial setup and event listeners
 document.addEventListener('DOMContentLoaded', function() {
     loadRequests();
-    setInterval(loadRequests, 15000); // refresh every 15 sec
+    setInterval(loadRequests, 15000);
 
-    // Filter dropdown 
     let filterElem = document.getElementById('bloodTypeFilter');
     if (filterElem) {
         filterElem.addEventListener('change', filterRequests);
     }
 
-    // Form Submit 
     let form = document.getElementById('newRequestForm');
     if (form) {
         form.onsubmit = function(e) {
             e.preventDefault();
 
             let patientName = document.getElementById('patientName') ? document.getElementById('patientName').value.trim() : '';
-            let bloodType   = document.getElementById('bloodType') ? document.getElementById('bloodType').value : '';
-            let location    = document.getElementById('location') ? document.getElementById('location').value.trim() : '';
-            let contact     = document.getElementById('contact') ? document.getElementById('contact').value.trim() : '';
+            let bloodType = document.getElementById('bloodType') ? document.getElementById('bloodType').value : '';
+            let location = document.getElementById('location') ? document.getElementById('location').value.trim() : '';
+            let contact = document.getElementById('contact') ? document.getElementById('contact').value.trim() : '';
             let urgencyElem = document.getElementById('Emergency');
-            let urgency     = urgencyElem ? urgencyElem.value : 'Critical';
+            let urgency = urgencyElem ? urgencyElem.value : 'Critical';
 
             if (!patientName || !bloodType || !location || !contact) {
                 alert('Please fill all required fields!');
@@ -128,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (result.success) {
                     alert('Request posted successfully!');
                     form.reset();
-                    loadRequests(); // live feed update after submit
+                    loadRequests();
                 } else {
                     alert('Backend Error: ' + result.message);
                 }

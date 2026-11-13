@@ -17,6 +17,7 @@
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Global Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -24,6 +25,7 @@
   font-family: var(--font-main);
 }
 
+/* Body */
 body {
   background-color: var(--bg-page);
   color: #0f172a;
@@ -44,7 +46,7 @@ a {
   width: 100%;
 }
 
-/* Topbar Navigation */
+/* Topbar */
 .admin-topbar {
   min-height: 70px;
   height: auto;
@@ -151,7 +153,7 @@ a {
   transform: translateY(-1px);
 }
 
-/* Main Content Body */
+/* Dashboard Body */
 .dashboard-body {
   max-width: 1440px;
   width: 100%;
@@ -195,7 +197,7 @@ a {
   line-height: 1.15;
 }
 
-/* Instructions Overview Card */
+/* Instruction Card */
 .instruction-card {
   background: #ffffff;
   border: 1.5px solid var(--border-light);
@@ -300,7 +302,7 @@ a {
   line-height: 1.55;
 }
 
-/* 3 Main Portal Feature Cards */
+/* Portal Cards Grid */
 .portal-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
@@ -520,7 +522,7 @@ a {
   box-shadow: 0 8px 24px rgba(126, 34, 206, 0.35);
 }
 
-/* Modal Dialog & Popup Styling */
+/* Modal Dialog */
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -631,7 +633,6 @@ a {
   box-shadow: 0 0 0 3px var(--primary-glow);
 }
 
-/* Hide number input spinners */
 .modal-search-box input::-webkit-outer-spin-button,
 .modal-search-box input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -755,7 +756,7 @@ a {
   justify-content: center;
 }
 
-/* Toast Notification Popup */
+/* Toast Notification */
 #adminToast {
   position: fixed;
   bottom: 20px;
@@ -784,7 +785,7 @@ a {
   opacity: 1;
 }
 
-/* ---------- Footer Section ---------- */
+/* Footer */
 .footer-section {
   width: 100%;
   background-color: #000000;
@@ -804,21 +805,21 @@ a {
   margin: 0;
 }
 
-/* ---------- Animations & Scroll Reveal ---------- */
+/* Animations */
 .reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @keyframes heroEntrance {
-    from { opacity: 0; transform: translateY(22px); }
-    to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .hero-badge-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
@@ -826,7 +827,7 @@ a {
 .hero-desc-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.40s both; }
 .hero-actions-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.52s both; }
 
-/* Tablet & Mobile Breakpoints */
+/* Responsive Media Queries */
 @media (max-width: 860px) {
   .admin-topbar {
     padding: 10px 16px;

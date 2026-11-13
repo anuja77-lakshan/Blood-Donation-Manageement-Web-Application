@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Mobile Menu Toggle
+    // Mobile menu toggle
     const menuToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
 
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Scroll Reveal Animations
+    // Scroll reveal animations
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {

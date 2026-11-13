@@ -8,7 +8,7 @@
   --bg-light: #f8fafc;
 }
 
-/* Global Reset and Box Sizing */
+/* Global Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,7 +16,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Page Layout & Viewport Configuration */
+/* Body Styles */
 body {
   width: 100vw;
   min-height: 100vh;
@@ -27,7 +27,7 @@ body {
   color: var(--text-dark);
 }
 
-/* Fluid Full Width Container */
+/* Layout Container */
 .full-screen-container {
   width: 100%;
   max-width: 100%;
@@ -50,6 +50,7 @@ body {
   padding-bottom: 18px;
 }
 
+/* Brand Logo */
 .brand-logo {
   display: flex;
   align-items: center;
@@ -73,6 +74,8 @@ body {
   font-weight: 900;
   color: black;
 }
+
+/* Navigation Links */
 .nav-links {
   display: flex;
   align-items: center;
@@ -99,7 +102,7 @@ body {
   font-weight: 600;
 }
 
-/*profile greeting*/
+/* User Greeting */
 .user-greeting {
   display: inline-flex;
   align-items: center;
@@ -141,7 +144,7 @@ body {
   color: var(--primary);
 }
 
-/* Mobile Hamburger Toggle */
+/* Mobile Toggle */
 .mobile-toggle {
   display: none;
   background: none;
@@ -152,7 +155,7 @@ body {
   padding: 6px;
 }
 
-/* Mobile Dropdown Drawer */
+/* Mobile Menu */
 .mobile-menu {
   display: none;
   transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
@@ -206,7 +209,7 @@ body {
   font-size: 18px;
 }
 
-/* Main Content Area */
+/* Main Content */
 .form-main {
   padding-top: 30px;
   padding-bottom: 60px;
@@ -215,7 +218,7 @@ body {
   align-items: center;
 }
 
-/* Back Link Styling */
+/* Back Link */
 .back-link {
   align-self: flex-start;
   color: var(--text-muted);
@@ -233,7 +236,7 @@ body {
   color: var(--primary);
 }
 
-/* Form Container Card */
+/* Form Wrapper */
 .form-wrapper {
   width: 100%;
   max-width: 780px;
@@ -244,7 +247,7 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
-/* Form Heading Section */
+/* Form Header */
 .form-header {
   margin-bottom: 30px;
 }
@@ -283,7 +286,7 @@ body {
   line-height: 1.5;
 }
 
-/* Grid Rows for Form Inputs */
+/* Form Rows & Groups */
 .form-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -339,6 +342,7 @@ body {
   margin-top: 4px;
 }
 
+/* File Dropzone */
 .file-dropzone {
   position: relative;
   width: 100%;
@@ -437,7 +441,7 @@ body {
   transform: translateY(-1px);
 }
 
-/* ---------- Animations & Entrance Effects ---------- */
+/* Animations */
 @keyframes formEntrance {
   from {
     opacity: 0;

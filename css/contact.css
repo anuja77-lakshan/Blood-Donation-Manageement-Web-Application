@@ -22,7 +22,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Top Full Width Navbar */
+/* Header & Navbar */
 .header-section {
   width: 100%;
   border-bottom: 1px solid var(--color-bordergray);
@@ -47,6 +47,7 @@ body {
   padding-bottom: 18px;
 }
 
+/* Brand Logo */
 .brand-logo {
   display: flex;
   align-items: center;
@@ -71,6 +72,7 @@ body {
   color: black;
 }
 
+/* Navigation Links */
 .nav-links {
   display: flex;
   align-items: center;
@@ -103,7 +105,7 @@ body {
   cursor: pointer;
 }
 
-/* Profile greeting */
+/* User Greeting */
 .user-greeting {
   display: inline-flex;
   align-items: center;
@@ -145,7 +147,7 @@ body {
   color: var(--color-red);
 }
 
-/* Mobile Hamburger Toggle */
+/* Mobile Toggle */
 .mobile-toggle {
   display: none;
   background: none;
@@ -156,7 +158,7 @@ body {
   padding: 6px;
 }
 
-/* Mobile Dropdown Drawer */
+/* Mobile Menu */
 .mobile-menu {
   transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
   overflow: hidden;
@@ -209,13 +211,14 @@ body {
   font-size: 18px;
 }
 
-/* Main Content Layout */
+/* Main Content */
 .main-content {
   max-width: 1440px;
   margin: 0 auto;
   padding: 3.5rem 1.5rem 6rem;
 }
 
+/* Hero Section */
 .hero-section {
   text-align: center;
   max-width: 48rem;
@@ -245,7 +248,7 @@ body {
   color: #0f172a;
 }
 
-/* Two-Column Grid */
+/* Contact Grid */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -253,14 +256,7 @@ body {
   align-items: start;
 }
 
-@media (min-width: 1024px) {
-  .contact-grid {
-    grid-template-columns: 5fr 7fr;
-    gap: 4.5rem;
-  }
-}
-
-/* Section Header Typography */
+/* Section Header */
 .section-badge {
   font-size: 0.65rem;
   font-weight: 700;
@@ -294,7 +290,7 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Left Column: Reach Us Directly */
+/* Contact Cards */
 .contact-cards-list {
   display: flex;
   flex-direction: column;
@@ -353,7 +349,7 @@ body {
   color: #0f172a;
 }
 
-/* Follow Network */
+/* Social Section */
 .social-section {
   padding-top: 1.25rem;
   border-top: 1px solid #f1f5f9;
@@ -394,7 +390,7 @@ body {
   border-color: #cbd5e1;
 }
 
-/* Right Column: Send Us A Message Form Box */
+/* Contact Form */
 .form-container {
   background-color: #ffffff;
   border: 1px solid var(--color-bordergray);
@@ -413,12 +409,6 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
-}
-
-@media (min-width: 640px) {
-  .form-row {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 .form-group {
@@ -503,12 +493,6 @@ body {
   gap: 2rem;
 }
 
-@media (min-width: 768px) {
-  .emergency-container {
-    flex-direction: row;
-  }
-}
-
 .emergency-text-group {
   display: flex;
   align-items: flex-start;
@@ -559,7 +543,7 @@ body {
   background-color: #f1f5f9;
 }
 
-/* Footer Section */
+/* Footer */
 .footer-section {
   width: 100%;
   background-color: #000000;
@@ -591,7 +575,26 @@ body {
   transform: translateY(0);
 }
 
-/* Responsive Breakpoints */
+/* Responsive Media Queries */
+@media (min-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .emergency-container {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: 5fr 7fr;
+    gap: 4.5rem;
+  }
+}
+
 @media (max-width: 1024px) {
   .nav-links {
     gap: 20px;

@@ -14,23 +14,22 @@ function togglePasswordVisibility(fieldId, icon) {
     }
 }
 
+// Switch between tabs
 function switchTab(tab) {
-    // Forms
     const registerForm = document.getElementById('register-form');
     const loginForm = document.getElementById('login-form');
     const adminForm = document.getElementById('admin-form');
 
-    // Tab Buttons
     const btnRegister = document.getElementById('btn-register');
     const btnLogin = document.getElementById('btn-login');
     const btnAdmin = document.getElementById('btn-admin');
 
-    // 1. Hide all forms
+    // Hide all forms
     registerForm.classList.add('hidden');
     loginForm.classList.add('hidden');
     if (adminForm) adminForm.classList.add('hidden');
 
-    // 2. Set all buttons to inactive
+    // Set all buttons to inactive
     [btnRegister, btnLogin, btnAdmin].forEach(btn => {
         if (btn) {
             btn.classList.remove('active');
@@ -38,7 +37,7 @@ function switchTab(tab) {
         }
     });
 
-    // 3. Show selected tab and form
+    // Show selected tab and form
     if (tab === 'login') {
         loginForm.classList.remove('hidden');
         btnLogin.classList.add('active');
@@ -49,14 +48,14 @@ function switchTab(tab) {
             btnAdmin.classList.add('active');
             btnAdmin.classList.remove('inactive');
         }
-    } else { // register tab
+    } else {
         registerForm.classList.remove('hidden');
         btnRegister.classList.add('active');
         btnRegister.classList.remove('inactive');
     }
 }
 
-// Check the URL hash when the page finishes loading
+// Handle URL hash on load
 document.addEventListener("DOMContentLoaded", () => {
     if (window.location.hash === "#login") {
         switchTab('login');
@@ -67,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Registration Form Validation
+// Registration form validation and DOB restriction
 document.addEventListener("DOMContentLoaded", () => {
     const registerForm = document.getElementById('register-form');
     const dobInput = document.querySelector('input[name="dob"]');
@@ -88,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const dob = new Date(dobInput.value);
             const today = new Date();
 
-            // 1. Password complexity check (min 8 chars, uppercase, lowercase, numbers, symbols)
+            // Password complexity check
             const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()_+=\-\[\]{}|;:,.<>]).{8,}$/;
             if (!passwordRegex.test(password)) {
                 alert("Password must contain at least 8 characters, including uppercase, lowercase, numbers, and symbols.");
@@ -96,14 +95,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // 2. Password matching check
+            // Password matching check
             if (password !== confirmPassword) {
                 alert("Passwords do not match.");
                 e.preventDefault();
                 return;
             }
 
-            // 3. Phone number format check (10 digits starting with 0)
+            // Phone number format check
             const phoneRegex = /^0\d{9}$/;
             if (!phoneRegex.test(phone)) {
                 alert("Please enter a valid 10-digit phone number starting with 0.");
@@ -111,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // 4. NIC format check (9 numbers followed by a letter, or 12 numbers)
+            // NIC format check
             const nicRegex = /^([0-9]{9}[vVxX]|[0-9]{12})$/;
             if (!nicRegex.test(nic)) {
                 alert("NIC must contain at least 9 numbers followed by a letter (e.g., 123456789V) or 12 digits.");
@@ -119,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // 5. Age 18+ check
+            // Age 18+ check
             let age = today.getFullYear() - dob.getFullYear();
             const monthDiff = today.getMonth() - dob.getMonth();
             if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {

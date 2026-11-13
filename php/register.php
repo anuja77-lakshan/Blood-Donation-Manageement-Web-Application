@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db.php'; // Same directory
+require_once 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $full_name        = mysqli_real_escape_string($conn, trim($_POST['full_name']));
@@ -16,25 +16,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password         = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    // Check valid email format
+    // Validate email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "<script>alert('Invalid email format'); window.history.back();</script>";
         exit();
     }
 
-    // Check phone number format (10 digits starting with 0)
+    // Validate phone
     if (!preg_match("/^0[0-9]{9}$/", $phone)) {
         echo "<script>alert('Phone number must be exactly 10 digits starting with 0'); window.history.back();</script>";
         exit();
     }
 
-    // Check NIC format (9 numbers with a letter, or 12 numbers)
+    // Validate NIC
     if (!preg_match("/^([0-9]{9}[vVxX]|[0-9]{12})$/", $nic)) {
         echo "<script>alert('NIC must contain at least 9 numbers followed by a letter (e.g., 123456789V) or 12 digits'); window.history.back();</script>";
         exit();
     }
 
-    // Check minimum donor age (18+)
+    // Validate age (18+)
     $birthDate = new DateTime($dob);
     $today = new DateTime();
     $age = $today->diff($birthDate)->y;
@@ -43,19 +43,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Check minimum donor weight (45 kg)
+    // Validate weight
     if ($weight < 45) {
         echo "<script>alert('Minimum weight requirement for blood donation is 45 kg'); window.history.back();</script>";
         exit();
     }
 
-    // Check password complexity (lowercase, uppercase, number, symbol, min 8 chars)
+    // Validate password complexity
     if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()_+=\-\[\]{}|;:,.<>]).{8,}$/', $password)) {
         echo "<script>alert('Password must contain at least 8 characters, including uppercase, lowercase, numbers, and symbols'); window.history.back();</script>";
         exit();
     }
 
-    // Check passwords match
+    // Validate passwords match
     if ($password !== $confirm_password) {
         echo "<script>alert('Passwords do not match'); window.history.back();</script>";
         exit();

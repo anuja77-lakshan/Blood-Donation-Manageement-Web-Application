@@ -2,12 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const mapElement = document.getElementById('bloodLinkMap');
     if (!mapElement) return;
 
-    // Sri Lanka Center View
+    // Initialize map
     const map = L.map('bloodLinkMap', {
         maxZoom: 19
     }).setView([7.8731, 80.7718], 7.5);
 
-    // OpenStreetMap Street level High  Zoom Layer
+    // Add tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors',
         maxZoom: 19
@@ -17,8 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         map.invalidateSize();
     }, 300);
 
-    // 
-    // 
+    // Custom marker icons
     const campIcon = L.divIcon({
         className: 'custom-pin',
         html: '<div style="background-color:#ef3446; color:white; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid white; box-shadow:0 3px 8px rgba(0,0,0,0.4);"><i class="fa-solid fa-tent" style="font-size:14px;"></i></div>',
@@ -27,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         popupAnchor: [0, -16]
     });
 
-    // Custom Icon for Hospitals & Blood Banks 
     const hospitalIcon = L.divIcon({
         className: 'custom-pin',
         html: '<div style="background-color:#0284c7; color:white; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.3);"><i class="fa-solid fa-hospital" style="font-size:12px;"></i></div>',
@@ -36,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         popupAnchor: [0, -14]
     });
 
-    // Hospital list
+    // Hospital list data
     const hospitals = [
         // --- Western Province ---
         { name: "National Blood Center (NBTS)", type: "National Blood Transfusion Service Headquarters", contact: "+94 11 269 8888", coords: [6.8941, 79.8776] },
@@ -117,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Base Hospital Point Pedro", type: "Base Hospital", contact: "+94 21 226 2261", coords: [9.8242, 80.2331] }
     ];
 
-    // Render Hospitals on Map
+    // Render hospitals on map
     hospitals.forEach(hosp => {
         L.marker(hosp.coords, { icon: hospitalIcon })
             .addTo(map)
@@ -134,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `);
     });
 
-    // Load Live Active Donation Camps from Database
+    // Load live active donation camps from database
     async function loadDynamicCamps() {
         try {
             const response = await fetch('php/get_camps_locations.php');

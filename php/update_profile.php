@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once 'db.php'; // DB connection
+require_once 'db.php';
 
-// Check if user is logged in
+// Check login
 if (!isset($_SESSION['user_email'])) {
     header("Location: ../login-register.php");
     exit();
@@ -19,23 +19,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $district  = mysqli_real_escape_string($conn, $_POST['district']);
     $weight    = mysqli_real_escape_string($conn, $_POST['weight']);
 
-    // Validation checks
+    // Validate email
     if (!filter_var($new_email, FILTER_VALIDATE_EMAIL)) {
         echo "<script>alert('Invalid email format'); window.history.back();</script>";
         exit();
     }
 
+    // Validate phone
     if (!preg_match("/^0[0-9]{9}$/", $phone)) {
         echo "<script>alert('Phone number must be exactly 10 digits starting with 0'); window.history.back();</script>";
         exit();
     }
 
+    // Validate weight
     if ($weight < 45) {
         echo "<script>alert('Minimum weight requirement is 45 kg'); window.history.back();</script>";
         exit();
     }
 
-    // Check if new email is already taken by another user
+    // Check duplicate email
     if ($new_email !== $current_email) {
         $check_email = mysqli_query($conn, "SELECT id FROM users WHERE email = '$new_email' LIMIT 1");
         if (mysqli_num_rows($check_email) > 0) {
@@ -44,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Update user profile in database
+    // Update profile
     $sql = "UPDATE users 
             SET full_name = '$full_name', 
                 phone = '$phone', 
@@ -55,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             WHERE email = '$current_email'";
 
     if (mysqli_query($conn, $sql)) {
-        // Update active session values
         $_SESSION['user_email'] = $new_email;
         $_SESSION['user_name']  = $full_name;
 

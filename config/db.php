@@ -1,10 +1,8 @@
 <?php
-// config/db.php
-
 $host    = 'localhost';
 $db      = 'bloodlink_db';
 $user    = 'root';
-$pass    = ''; // Default XAMPP MySQL password is empty
+$pass    = ''; 
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -20,13 +18,9 @@ try {
     die("Database connection failed: " . htmlspecialchars($e->getMessage()));
 }
 
-// Server Secret Key for cryptographic HMAC token signing
 define('BLOODLINK_APP_SECRET', 'BL00DL1NK_S3CUR3_HMAC_K3Y_2026_@RJT');
 
-/**
- * Generates a signed tamper-proof token for a donor.
- * Output: base64(json({uid, ts, nonce})).hmac_sha256_signature
- */
+/* Generate signed token */
 function generateDonorToken(int $userId): string {
     $payload = [
         'uid'   => $userId,
@@ -39,10 +33,7 @@ function generateDonorToken(int $userId): string {
     return $encodedPayload . '.' . $signature;
 }
 
-/**
- * Decodes and verifies the scanned QR token.
- * Prevents raw ID spoofing. Returns int user_id or false if tampered.
- */
+/* Verify and decode token */
 function verifyDonorToken(string $token) {
     $parts = explode('.', trim($token));
     if (count($parts) !== 2) {
@@ -51,10 +42,9 @@ function verifyDonorToken(string $token) {
 
     [$encodedPayload, $signature] = $parts;
 
-    // Verify HMAC signature in constant time
     $expectedSignature = hash_hmac('sha256', $encodedPayload, BLOODLINK_APP_SECRET);
     if (!hash_equals($expectedSignature, $signature)) {
-        return false; // Signature mismatch! Tampered QR Code.
+        return false;
     }
 
     $data = json_decode(base64_decode($encodedPayload), true);

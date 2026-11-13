@@ -1,7 +1,6 @@
 :root {
-    /*Colors from the image*/
     --primary-color: #ea1822; 
-    --hover-color:  #ea1822;
+    --hover-color: #ea1822;
     --card-bg: #f8fafc; 
     --bg-color: #FFFFFF;
     --text-dark: #2D3748;
@@ -9,6 +8,7 @@
     --border-light: #e2e8f0;
 }
 
+/* Global Reset */
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +16,7 @@
     font-family: 'Inter', sans-serif;
 }
 
-/* Background Gradient from the image */
+/* Body */
 body {
     background: var(--bg-color);
     min-height: 100vh;
@@ -26,6 +26,7 @@ body {
     padding: 20px;
 }
 
+/* Page Wrapper */
 .page-wrapper {
     width: 100%;
     max-width: 550px;
@@ -34,7 +35,7 @@ body {
     align-items: center;
 }
 
-/* Logo Styles */
+/* Logo */
 .logo-area {
     display: flex;
     align-items: center;
@@ -49,12 +50,12 @@ body {
 
 .logo-area h1 {
     font-size: 22px;
-    color:var(--text-dark);
+    color: var(--text-dark);
     font-weight: 700;
     letter-spacing: 1.5px;
 }
 
-/* Main Form Card */
+/* Form Card */
 .form-card {
     background-color: var(--card-bg);
     border-radius: 16px;
@@ -63,11 +64,12 @@ body {
     position: relative;
 }
 
-/* Tab Navigation */
+/* Tabs */
 .tabs {
     display: flex;
     height: 60px;
 }
+
 .tab-btn {
     flex: 1;
     border: none;
@@ -109,7 +111,7 @@ body {
     border-top-right-radius: 16px;
 }
 
-/* Form Layout */
+/* Form Content */
 .form-content {
     padding: 30px 40px 40px 40px;
     display: flex;
@@ -132,18 +134,18 @@ body {
     gap: 15px;
 }
 
-/* Input Fields */
+/* Inputs */
 .input-row input, 
 .input-row select, 
 .input-col input {
     flex: 1;
     width: 100%;
     padding: 14px 18px;
-    border:1px solid rgb(228, 224, 224);
+    border: 1px solid rgb(228, 224, 224);
     border-radius: 8px;
-    background-color:var(--card-bg); /* Lighter cyan for inputs */
+    background-color: var(--card-bg);
     font-size: 14px;
-    color:var(--text-dark);
+    color: var(--text-dark);
     outline: none;
     transition: box-shadow 0.3s ease;
 }
@@ -156,15 +158,14 @@ body {
 
 .input-row input::placeholder, 
 .input-col input::placeholder {
-    color:var(--text-dark);
+    color: var(--text-dark);
 }
 
-/* Select Box Placeholder color fix */
 select:required:invalid {
-    color:var(--text-dark);
+    color: var(--text-dark);
 }
 
-/* Password wrapper to position eye toggle icon */
+/* Password Wrapper */
 .password-wrapper {
     position: relative;
     width: 100%;
@@ -177,7 +178,7 @@ select:required:invalid {
     padding-right: 45px !important;
 }
 
-/* Eye icon styling */
+/* Eye Icon */
 .toggle-password {
     position: absolute;
     right: 15px;
@@ -209,17 +210,18 @@ select:required:invalid {
 }
 
 .submit-btn:hover {
-    background-color:rgb(212, 16, 16);
+    background-color: rgb(212, 16, 16);
     box-shadow: 0 8px 20px rgba(23, 22, 22, 0.5);
     transform: translateY(-2px);
 }
 
-/* Mobile Responsiveness */
+/* Responsive */
 @media (max-width: 500px) {
     .input-row {
         flex-direction: column;
         gap: 15px;
     }
+    
     .form-content {
         padding: 25px 20px 30px 20px;
     }

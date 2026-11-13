@@ -3,7 +3,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Include database connection
 require_once 'db.php';
 
 // Check if form is submitted via POST
@@ -56,7 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$stmt) {
         die("Query prepare failed: " . $conn->error);
     }
+    
     $stmt->bind_param("ssssssdds", $campName, $orgName, $campDate, $startTime, $endTime, $campLocation, $latitude, $longitude, $imagePath);
+    
     if ($stmt->execute()) {
         header("Location: ../camps.php");
         exit();

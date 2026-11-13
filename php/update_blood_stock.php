@@ -7,6 +7,7 @@ $input = json_decode(file_get_contents('php://input'), true);
 if (isset($input['stocks']) && is_array($input['stocks'])) {
     $stmt = $conn->prepare("UPDATE blood_stocks SET percentage = ? WHERE blood_group = ?");
     
+    // Update each blood stock item
     foreach ($input['stocks'] as $item) {
         $val = (int)$item['val'];
         $group = $item['type'];

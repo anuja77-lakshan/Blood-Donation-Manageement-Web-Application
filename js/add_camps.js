@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. File Upload Dropzone visual logic
+  // File upload dropzone visual logic
   const fileInput = document.getElementById('coverImage');
   const dropzoneTitle = document.querySelector('.dropzone-title');
   const dropzoneHint = document.querySelector('.dropzone-hint');
@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const file = fileInput.files[0];
         const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
 
-        // Update dropzone UI with success state
         if (dropzoneIcon) {
           dropzoneIcon.className = 'fa-solid fa-circle-check dropzone-icon';
           dropzoneIcon.style.color = '#16a34a';
@@ -34,26 +33,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Leaflet Map Setup with street-level zoom (Max Zoom: 19)
+  // Leaflet map setup
   const mapElement = document.getElementById('campPickerMap');
   if (!mapElement) return;
 
-  // Default coordinates (Colombo, Sri Lanka)
   let defaultLat = 6.9271;
   let defaultLng = 79.8612;
 
-  // Initialize Leaflet map
   const pickerMap = L.map('campPickerMap', {
     maxZoom: 19
   }).setView([defaultLat, defaultLng], 12);
 
-  // Add OpenStreetMap tile layer
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors',
     maxZoom: 19
   }).addTo(pickerMap);
 
-  // Custom marker pin design
   const redCampIcon = L.divIcon({
     className: 'custom-pin',
     html: '<div style="background-color:#ef3446; color:white; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid white; box-shadow:0 3px 8px rgba(0,0,0,0.4);"><i class="fa-solid fa-tent" style="font-size:13px;"></i></div>',
@@ -62,82 +57,72 @@ document.addEventListener('DOMContentLoaded', () => {
     popupAnchor: [0, -15]
   });
 
-  // Add draggable marker to map
   const marker = L.marker([defaultLat, defaultLng], {
     icon: redCampIcon,
     draggable: true
   }).addTo(pickerMap);
 
-  // Get DOM elements
   const latInput = document.getElementById('latitude');
   const lngInput = document.getElementById('longitude');
   const mapUrlInput = document.getElementById('mapUrl');
   const statusText = document.getElementById('mapStatusText');
 
-  // Function to update map coordinates and inputs
+  // Update map coordinates and inputs
   function updateCoordinates(lat, lng, sourceMsg = '') {
     latInput.value = parseFloat(lat).toFixed(6);
     lngInput.value = parseFloat(lng).toFixed(6);
     marker.setLatLng([lat, lng]);
     pickerMap.setView([lat, lng], 16);
 
-    // Show success message only when user updates location (not on page load)
     if (statusText && sourceMsg !== '') {
       statusText.style.display = 'block';
       statusText.innerHTML = `<span style="color: #16a34a;"><i class="fa-solid fa-circle-check"></i> Location set successfully! ${sourceMsg}</span>`;
     }
   }
 
-  // Set default location initially without showing status message
   updateCoordinates(defaultLat, defaultLng, '');
 
-  // Update coordinates when marker is dragged
+  // Update on marker drag
   marker.on('dragend', function () {
     const pos = marker.getLatLng();
     updateCoordinates(pos.lat, pos.lng, '(Pin dragged)');
   });
 
-  // Update coordinates when map is clicked
+  // Update on map click
   pickerMap.on('click', function (e) {
     updateCoordinates(e.latlng.lat, e.latlng.lng, '(Selected on map)');
   });
 
-  // Function to extract coordinates from various map URL formats
+  // Extract coordinates from map URL
   function extractCoords(input) {
     if (!input) return null;
     const text = decodeURIComponent(input.trim());
 
-    // Apple Maps format
     let appleMatch = text.match(/[?&](?:ll|sll|q)=(-?\d+\.\d+),(-?\d+\.\d+)/);
     if (appleMatch) {
       return { lat: parseFloat(appleMatch[1]), lng: parseFloat(appleMatch[2]) };
     }
 
-    // Google Maps @lat,lng format
     let gAtMatch = text.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
     if (gAtMatch) {
       return { lat: parseFloat(gAtMatch[1]), lng: parseFloat(gAtMatch[2]) };
     }
 
-    // Google Maps query format (?q=lat,lng)
     let gQMatch = text.match(/[?&](?:q|ll)=(-?\d+\.\d+),(-?\d+\.\d+)/);
     if (gQMatch) {
       return { lat: parseFloat(gQMatch[1]), lng: parseFloat(gQMatch[2]) };
     }
 
-    // Google Maps place data format (!3dlat!4dlng)
     let gPlaceMatch = text.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
     if (gPlaceMatch) {
       return { lat: parseFloat(gPlaceMatch[1]), lng: parseFloat(gPlaceMatch[2]) };
     }
 
-    // Path format (/search/lat,lng or /place/lat,lng)
     let pathMatch = text.match(/\/(?:search|place|dir)\/(-?\d+\.\d+)[,+](-?\d+\.\d+)/);
     if (pathMatch) {
       return { lat: parseFloat(pathMatch[1]), lng: parseFloat(pathMatch[2]) };
     }
 
-    // Raw coordinates format (lat, lng)
     let rawMatch = text.match(/^(-?\d+\.\d+)[,\s]+(-?\d+\.\d+)$/);
     if (rawMatch) {
       return { lat: parseFloat(rawMatch[1]), lng: parseFloat(rawMatch[2]) };
@@ -146,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return null;
   }
 
-  // Handle URL input and paste events
+  // Handle URL input and paste
   if (mapUrlInput) {
     const handleUrlInput = () => {
       const val = mapUrlInput.value.trim();
@@ -173,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mapUrlInput.addEventListener('paste', () => setTimeout(handleUrlInput, 100));
   }
 
-  // Validate coordinates before form submission
+  // Validate coordinates on submit
   const campForm = document.querySelector('form');
   if (campForm) {
     campForm.addEventListener('submit', (e) => {

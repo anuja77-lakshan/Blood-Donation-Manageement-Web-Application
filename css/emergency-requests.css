@@ -8,7 +8,7 @@ body {
     font-family: 'Inter', sans-serif; 
 }
 
-/* navbar stuff */
+/* Header & Navbar */
 .header-section {
     width: 100%;
     border-bottom: 1px solid var(--border-light);
@@ -30,6 +30,7 @@ body {
     padding-bottom: 18px;
 }
 
+/* Brand Logo */
 .brand-logo {
     display: flex;
     align-items: center;
@@ -54,6 +55,7 @@ body {
     color: black;
 }
 
+/* Navigation Links */
 .nav-links {
     display: flex;
     align-items: center;
@@ -82,7 +84,7 @@ body {
     font-weight: 600;
 }
 
-/* right side user button */
+/* User Greeting */
 .user-greeting {
     display: inline-flex;
     align-items: center;
@@ -124,7 +126,27 @@ body {
     color: var(--primary);
 }
 
-/* Base Animations (Fade In Down removed) */
+/* Mobile Hamburger Button */
+.mobile-hamburger-btn {
+    display: none;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: 24px;
+    color: #0f172a;
+    cursor: pointer;
+    padding: 4px;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.mobile-hamburger-btn:hover {
+    color: #ef3446;
+}
+
+/* Animations */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -138,10 +160,9 @@ body {
 
 .animate-fade-in-up {
     animation: fadeInUp 0.5s ease-out forwards;
-    opacity: 0; /* starts hidden */
+    opacity: 0;
 }
 
-/* custom animations for the emergency icons */
 .pulse-animation {
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
@@ -151,23 +172,26 @@ body {
     50% { opacity: .7; transform: scale(1.05); }
 }
 
-/* make the scrollbar look nicer */
+/* Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-track {
     background: #f1f1f1; 
     border-radius: 4px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb {
     background: #cbd5e1; 
     border-radius: 4px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #94a3b8; 
 }
 
-/* footer styling */
+/* Footer */
 .footer-section {
     width: 100%;
     background-color: #000000;
@@ -187,13 +211,18 @@ body {
     margin: 0;
 }
 
-/* make footer smaller on mobile */
+/* Responsive */
 @media (max-width: 768px) {
     .footer-section {
         padding: 18px 0;
     }
+    
     .footer-content p {
         font-size: 12px;
         line-height: 1.4;
+    }
+
+    .mobile-hamburger-btn {
+        display: flex !important;
     }
 }

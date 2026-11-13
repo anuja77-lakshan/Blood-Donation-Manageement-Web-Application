@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db.php'; // Same directory
+require_once 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email    = mysqli_real_escape_string($conn, trim($_POST['email']));
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Verify password
         if (password_verify($password, $user['password']) || $password === $user['password']) {
             $_SESSION['user_email'] = $user['email'];
-            $_SESSION['user_name']  = $user['full_name']; // Store user full name in session
+            $_SESSION['user_name']  = $user['full_name'];
             header("Location: ../personal-account.php");
             exit();
         } else {

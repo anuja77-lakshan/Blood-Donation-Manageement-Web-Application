@@ -10,6 +10,7 @@
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Global Reset */
 * {
     margin: 0;
     padding: 0;
@@ -17,6 +18,7 @@
     font-family: var(--font-family);
 }
 
+/* Body */
 body {
     background-color: var(--bg-page);
     color: var(--text-primary);
@@ -24,7 +26,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Container Helper */
+/* Container */
 .full-screen-container {
     width: 100%;
     max-width: 100% !important;
@@ -32,7 +34,7 @@ body {
     padding-right: clamp(16px, 4.5vw, 70px);
 }
 
-/* Headers*/
+/* Header & Navbar */
 .header-section {
     width: 100%;
     border-bottom: 1px solid var(--border-color);
@@ -48,6 +50,7 @@ body {
     padding-bottom: 18px;
 }
 
+/* Brand Logo */
 .brand-logo {
     display: flex;
     align-items: center;
@@ -72,6 +75,7 @@ body {
     color: black;
 }
 
+/* Navigation Links */
 .nav-links {
     display: flex;
     align-items: center;
@@ -98,7 +102,7 @@ body {
     font-weight: 600;
 }
 
-/* Profile Greeting */
+/* User Greeting */
 .user-greeting {
     display: inline-flex;
     align-items: center;
@@ -144,7 +148,7 @@ body {
     box-shadow: none !important;
 }
 
-/* Mobile Controling*/
+/* Mobile Controls & Hamburger */
 .mobile-hamburger-btn {
     display: none;
     background: transparent !important;
@@ -168,7 +172,7 @@ body {
     display: none;
 }
 
-/* Main Dashboard */
+/* Dashboard Wrapper */
 .dashboard-wrapper {
     width: 100%;
     max-width: 100%;
@@ -187,11 +191,23 @@ body {
     color: var(--text-secondary);
     margin-bottom: 6px;
 }
-.tagline.emergency-tag { color: var(--blood-red); }
-.title { font-size: 24px; font-weight: 800; margin-bottom: 20px; letter-spacing: -0.5px; }
-.text-center { text-align: center; }
 
-/* Metrics Grid Lines */
+.tagline.emergency-tag { 
+    color: var(--blood-red); 
+}
+
+.title { 
+    font-size: 24px; 
+    font-weight: 800; 
+    margin-bottom: 20px; 
+    letter-spacing: -0.5px; 
+}
+
+.text-center { 
+    text-align: center; 
+}
+
+/* Metrics Grid */
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -205,6 +221,7 @@ body {
     border-radius: 10px;
     border: 1px solid var(--border-color);
 }
+
 .metric-card.highlight-card {
     background: #ef3446;
     color: #ffffff;
@@ -221,9 +238,8 @@ a.metric-card {
     text-decoration: none;
     color: var(--text-primary);
 }
-a.metric-card.highlight-card {
-    color: #ffffff;
-}
+
+a.metric-card.highlight-card,
 a.metric-card.highlight-green {
     color: #ffffff;
 }
@@ -235,8 +251,14 @@ a.metric-card.highlight-green {
     font-weight: 600;
     color: var(--text-secondary);
 }
-.metric-card.highlight-card .card-top { color: #ffebee; }
-.metric-card.highlight-green .card-top { color: #dcfce7; }
+
+.metric-card.highlight-card .card-top { 
+    color: #ffebee; 
+}
+
+.metric-card.highlight-green .card-top { 
+    color: #dcfce7; 
+}
 
 .card-num {
     font-size: 28px;
@@ -245,12 +267,25 @@ a.metric-card.highlight-green {
     letter-spacing: -0.5px;
 }
 
-.trend { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
-.trend.success { color: #16a34a; }
-.metric-card.highlight-card .trend { color: #ffcdd2; }
-.metric-card.highlight-green .trend { color: #dcfce7; }
+.trend { 
+    font-size: 14px; 
+    color: var(--text-secondary); 
+    font-weight: 500; 
+}
 
-/* Action Banner Set */
+.trend.success { 
+    color: #16a34a; 
+}
+
+.metric-card.highlight-card .trend { 
+    color: #ffcdd2; 
+}
+
+.metric-card.highlight-green .trend { 
+    color: #dcfce7; 
+}
+
+/* Action Banner */
 .action-card-banner {
     display: grid;
     grid-template-columns: 450px 1fr;
@@ -261,9 +296,11 @@ a.metric-card.highlight-green {
     border-radius: 12px;
     border: 1px solid var(--border-color);
 }
+
 .action-card-banner.reverse-layout {
     grid-template-columns: 1.2fr 1fr;
 }
+
 .action-card-banner.reverse-layout .banner-img {
     order: 2;
 }
@@ -275,11 +312,27 @@ a.metric-card.highlight-green {
     border-radius: 8px;
 }
 
-.banner-details h2 { font-size: 26px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
-.banner-details p { color: var(--text-secondary); font-size: 16px; line-height: 1.6; margin-bottom: 20px; }
+.banner-details h2 { 
+    font-size: 26px; 
+    font-weight: 800; 
+    margin-bottom: 12px; 
+    letter-spacing: -0.5px; 
+}
 
-/*Buttons*/
-.btn-cluster { display: flex; gap: 12px; align-items: center; }
+.banner-details p { 
+    color: var(--text-secondary); 
+    font-size: 16px; 
+    line-height: 1.6; 
+    margin-bottom: 20px; 
+}
+
+/* Buttons */
+.btn-cluster { 
+    display: flex; 
+    gap: 12px; 
+    align-items: center; 
+}
+
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -291,18 +344,23 @@ a.metric-card.highlight-green {
     font-family: var(--font-family);
     transition: background-color 0.2s ease;
 }
+
 .btn-red {
     background: var(--blood-red);
     color: #ffffff;
     border: 1px solid var(--blood-red);
 }
-.btn-red:hover { background: var(--blood-dark); }
+
+.btn-red:hover { 
+    background: var(--blood-dark); 
+}
 
 .btn-green {
     background: #16a34a;
     color: #ffffff;
     border: 1px solid #16a34a;
 }
+
 .btn-green:hover { 
     background: #15803d; 
 }
@@ -312,16 +370,24 @@ a.metric-card.highlight-green {
     color: var(--text-primary);
     border: 1px solid #cbd5e1;
 }
-.btn-border:hover { background: #f1f5f9; }
-.btn-sm { padding: 8px 14px; font-size: 14px; }
 
-/* Modern Featured Camps Grid Styling */
+.btn-border:hover { 
+    background: #f1f5f9; 
+}
+
+.btn-sm { 
+    padding: 8px 14px; 
+    font-size: 14px; 
+}
+
+/* Camps Grid */
 .camps-grid-custom {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
+
 .featured-camp-card {
     background: #ffffff;
     border: 1px solid #f1f5f9;
@@ -332,10 +398,12 @@ a.metric-card.highlight-green {
     display: flex;
     flex-direction: column;
 }
+
 .featured-camp-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
+
 .camp-card-header {
     background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
     padding: 16px 20px;
@@ -344,6 +412,7 @@ a.metric-card.highlight-green {
     justify-content: space-between;
     align-items: center;
 }
+
 .camp-card-header h3 {
     margin: 0;
     font-size: 16px;
@@ -353,6 +422,7 @@ a.metric-card.highlight-green {
     text-overflow: ellipsis;
     max-width: 200px;
 }
+
 .camp-date-badge {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(4px);
@@ -364,6 +434,7 @@ a.metric-card.highlight-green {
     align-items: center;
     gap: 5px;
 }
+
 .camp-card-body {
     padding: 20px;
     flex: 1;
@@ -371,6 +442,7 @@ a.metric-card.highlight-green {
     flex-direction: column;
     gap: 12px;
 }
+
 .camp-info-row {
     display: flex;
     align-items: flex-start;
@@ -378,16 +450,19 @@ a.metric-card.highlight-green {
     font-size: 14px;
     color: #475569;
 }
+
 .camp-info-row i {
     color: #ef4444;
     margin-top: 3px;
     width: 16px;
 }
+
 .camp-card-footer {
     padding: 14px 20px;
     border-top: 1px solid #f1f5f9;
     background: #fafafa;
 }
+
 .btn-camp-view {
     display: block;
     text-align: center;
@@ -401,18 +476,20 @@ a.metric-card.highlight-green {
     text-decoration: none;
     transition: all 0.2s;
 }
+
 .btn-camp-view:hover {
     background: #dc2626;
     color: #ffffff;
 }
 
-/* Camps Spotlight */
+/* Spotlight */
 .spotlight-head {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 16px;
 }
+
 .campaign-highlight-card {
     display: flex;
     gap: 24px;
@@ -421,20 +498,39 @@ a.metric-card.highlight-green {
     border-radius: 10px;
     border: 1px solid var(--border-color);
 }
+
 .thumb-wrapper img {
     width: 220px;
     height: 140px;
     object-fit: cover;
     border-radius: 6px;
 }
+
 .urgent-indicator {
     font-size: 13px; 
     font-weight: 800;
     color: var(--blood-red);
 }
-.info-wrapper h3 { margin: 6px 0; font-size: 18px; font-weight: 700; }
-.info-wrapper p { font-size: 15px; color: var(--text-secondary); margin-bottom: 15px; line-height: 1.5; }
-.link-forward { font-size: 14px; color: var(--text-primary); text-decoration: none; font-weight: 700; }
+
+.info-wrapper h3 { 
+    margin: 6px 0; 
+    font-size: 18px; 
+    font-weight: 700; 
+}
+
+.info-wrapper p { 
+    font-size: 15px; 
+    color: var(--text-secondary); 
+    margin-bottom: 15px; 
+    line-height: 1.5; 
+}
+
+.link-forward { 
+    font-size: 14px; 
+    color: var(--text-primary); 
+    text-decoration: none; 
+    font-weight: 700; 
+}
 
 /* Blood Stock Levels */
 .stock-dashboard-grid {
@@ -442,24 +538,35 @@ a.metric-card.highlight-green {
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
 }
+
 .stock-box {
     background: #ffffff;
     padding: 16px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
 }
+
 .stock-box.critical-box {
     background: var(--critical-bg);
     border-color: var(--critical-border);
 }
+
 .box-top {
     display: flex;
     justify-content: space-between;
     font-size: 18px;
     margin-bottom: 12px;
 }
-.badge { font-size: 12px; font-weight: 700; color: #94a3b8; }
-.badge.critical { color: var(--blood-red); }
+
+.badge { 
+    font-size: 12px; 
+    font-weight: 700; 
+    color: #94a3b8; 
+}
+
+.badge.critical { 
+    color: var(--blood-red); 
+}
 
 .meter {
     height: 6px;
@@ -468,11 +575,22 @@ a.metric-card.highlight-green {
     overflow: hidden;
     margin-bottom: 6px;
 }
-.meter .fill { height: 100%; background: #0f172a; }
-.meter .fill-critical { background: var(--blood-red); }
-.meter-num { font-size: 13px; font-weight: 700; }
 
-/* Map Location Indicator */
+.meter .fill { 
+    height: 100%; 
+    background: #0f172a; 
+}
+
+.meter .fill-critical { 
+    background: var(--blood-red); 
+}
+
+.meter-num { 
+    font-size: 13px; 
+    font-weight: 700; 
+}
+
+/* Map Section */
 .map-header-flex {
     display: flex;
     justify-content: space-between;
@@ -499,8 +617,13 @@ a.metric-card.highlight-green {
     border-radius: 50%;
 }
 
-.camp-dot { background-color: var(--blood-red); }
-.hospital-dot { background-color: #0284c7; }
+.camp-dot { 
+    background-color: var(--blood-red); 
+}
+
+.hospital-dot { 
+    background-color: #0284c7; 
+}
 
 .map-render-area {
     height: 420px;
@@ -510,7 +633,7 @@ a.metric-card.highlight-green {
     z-index: 1;
 }
 
-/*Transitions to dashboard elements*/
+/* Animations & Transitions */
 .btn, .btn-pill, .btn-tactile {
     transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease !important;
 }
@@ -590,7 +713,7 @@ a.metric-card.highlight-green {
     transform: translateY(0);
 }
 
-/* Footer Section */
+/* Footer */
 .footer-section {
     width: 100%;
     background-color: #000000;
@@ -610,34 +733,37 @@ a.metric-card.highlight-green {
     margin: 0;
 }
 
+/* Responsive Media Queries */
 @media (max-width: 1024px) {
     .metrics-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
     .stock-dashboard-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
     .action-card-banner,
     .action-card-banner.reverse-layout {
         grid-template-columns: 1fr;
         gap: 24px;
     }
+
     .action-card-banner.reverse-layout .banner-img {
         order: -1;
     }
+
     .banner-img img {
         height: 240px;
     }
 }
 
-/* Smartphones */
 @media (max-width: 768px) {
     .header-section .full-screen-container {
         padding-left: 16px !important;
         padding-right: 16px !important;
     }
 
-    /* Navbar and logo placement  */
     .navbar {
         display: flex !important;
         flex-direction: row !important;
@@ -664,29 +790,22 @@ a.metric-card.highlight-green {
         letter-spacing: 0.5px !important;
     }
     
-    /* Desktop navigation links */
-    .nav-links {
+    .navbar .nav-links {
         display: none !important;
     }
 
-    /* Plain Hamburger Button*/
     .mobile-hamburger-btn {
         display: flex !important;
     }
 
-    /* Dropdown Menu Style */
-    .mobile-dropdown-menu {
-        display: none;
-        flex-direction: column;
-        background-color: #ffffff;
-        border-top: 1px solid var(--border-color);
-        padding: 16px 20px;
-        gap: 14px;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-    }
-
     .mobile-dropdown-menu.active {
         display: flex !important;
+        flex-direction: column;
+        background-color: #ffffff;
+        border-top: 1px solid #e2e8f0;
+        padding: 16px 20px;
+        gap: 12px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
     }
 
     .mobile-dropdown-menu a {
@@ -705,22 +824,7 @@ a.metric-card.highlight-green {
 
     .mobile-user-row {
         padding-top: 10px;
-        border-top: 1px solid var(--border-color);
-    }
-
-    .mobile-user-row a {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        color: #0f172a !important;
-        font-weight: 700;
-        font-size: 15px;
-        text-decoration: none;
-    }
-
-    .mobile-user-row i {
-        color: var(--blood-red);
-        font-size: 18px;
+        border-top: 1px solid #e2e8f0;
     }
 
     .dashboard-wrapper {
