@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-// Block access
+// Block unauthorized user access
 if (!isset($_SESSION['user_email'])) {
     header("Location: login-register.php#login");
     exit();
 }
 
-// Admin redirect
+// Redirect admin to admin dashboard
 if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true) {
     header("Location: admin_dashboard.php");
     exit();
@@ -15,10 +15,10 @@ if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true) {
 
 require_once 'php/db.php';
 
-// User name
+// User login name
 $userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Donor';
 
-// Track visitor
+// Visitor Tracking in Page 
 $conn->query("CREATE TABLE IF NOT EXISTS site_visitors (
     id INT AUTO_INCREMENT PRIMARY KEY,
     ip_address VARCHAR(100) NOT NULL,
@@ -30,45 +30,45 @@ $conn->query("CREATE TABLE IF NOT EXISTS site_visitors (
 $visitor_ip = !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
 $today_date = date('Y-m-d');
 
-// Log visit
+// Record current visit
 $conn->query("INSERT IGNORE INTO site_visitors (ip_address, visit_date) VALUES ('$visitor_ip', '$today_date')");
 
-// Today count
+// Today's count
 $todayVisitors = 1;
 $resVisitors = $conn->query("SELECT COUNT(*) as total FROM site_visitors WHERE visit_date = '$today_date'");
 if ($resVisitors && $row = $resVisitors->fetch_assoc()) {
     $todayVisitors = max(1, (int)$row['total']);
 }
 
-// Donors count
+// Registered Donors Count
 $donorCount = 0;
 $resUsers = $conn->query("SELECT COUNT(*) as total FROM users");
 if ($resUsers && $row = $resUsers->fetch_assoc()) {
     $donorCount = $row['total'];
 }
 
-// Today donors
+// Today Registered Donors Count
 $todayDonors = 0;
 $resToday = $conn->query("SELECT COUNT(*) as today_total FROM users WHERE DATE(created_at) = CURDATE()");
 if ($resToday && $row = $resToday->fetch_assoc()) {
     $todayDonors = $row['today_total'];
 }
 
-// Active camps
+// Active Camps 
 $campCount = 0;
 $resCamps = $conn->query("SELECT COUNT(*) as total FROM blood_camps");
 if ($resCamps && $row = $resCamps->fetch_assoc()) {
     $campCount = $row['total'];
 }
 
-// Request count
+// Emergency Requests Count
 $requestCount = 0;
 $resRequests = $conn->query("SELECT COUNT(*) as total FROM emergency_requests");
 if ($resRequests && $row = $resRequests->fetch_assoc()) {
     $requestCount = $row['total'];
 }
 
-// Fetch camps
+// Fetch Featured Camps from Database 
 $featuredCamps = [];
 $resFeatured = $conn->query("SELECT * FROM blood_camps ORDER BY camp_date ASC LIMIT 3");
 if ($resFeatured && $resFeatured->num_rows > 0) {
@@ -84,21 +84,85 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloodLink - Dashboard</title>
     
-    <!-- Fonts -->
+    <!--Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- CSS styles -->
+    <!-- CSS File Set -->
     <link rel="stylesheet" href="css/dashboard.css?v=<?php echo time(); ?>">
+    <!-- Font-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet.js and Map CSS Code -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-    
+    <style>
+        /* Mobile Hamburger Button */
+        .mobile-hamburger-btn {
+            display: none;
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            font-size: 24px;
+            color: #0f172a;
+            cursor: pointer;
+            padding: 4px;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+        }
+
+        .mobile-hamburger-btn:hover {
+            color: #ef3446;
+        }
+
+        .mobile-dropdown-menu {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none !important;
+            }
+
+            .mobile-hamburger-btn {
+                display: flex !important;
+            }
+
+            .mobile-dropdown-menu.active {
+                display: flex !important;
+                flex-direction: column;
+                background-color: #ffffff;
+                border-top: 1px solid #e2e8f0;
+                padding: 16px 20px;
+                gap: 12px;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+            }
+
+            .mobile-dropdown-menu a {
+                text-decoration: none;
+                color: #334155;
+                font-weight: 600;
+                font-size: 15px;
+                padding: 4px 0;
+            }
+
+            .mobile-dropdown-menu a.active-mobile,
+            .mobile-dropdown-menu a:hover {
+                color: #ef3446;
+            }
+
+            .mobile-user-row {
+                padding-top: 10px;
+                border-top: 1px solid #e2e8f0;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Top navbar -->
+  <!-- Header and Navigation Bar -->
   <header class="header-section">
     <div class="full-screen-container navbar">
       <a href="dashboard.php" class="brand-logo">
@@ -106,7 +170,7 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
       
-      <!-- Nav links -->
+      <!-- Navigation Links -->
       <ul class="nav-links">
         <li><a href="home.php">Home</a></li>
         <li><a href="dashboard.php" class="active">Dashboard</a></li>
@@ -120,13 +184,13 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
         </li>
       </ul>
 
-      <!-- Mobile toggle -->
+      <!-- Mobile Hamburger Button -->
       <button id="mobileMenuBtn" type="button" class="mobile-hamburger-btn" aria-label="Toggle navigation">
         <i id="menuIcon" class="fa-solid fa-bars"></i>
       </button>
     </div>
 
-    <!-- Mobile menu -->
+    <!-- Mobile Dropdown -->
     <div id="mobileMenu" class="mobile-dropdown-menu">
       <a href="home.php">Home</a>
       <a href="dashboard.php" class="active-mobile">Dashboard</a>
@@ -142,19 +206,19 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
   </header>
 
     <main class="dashboard-wrapper">
-        <!-- Metrics bar -->
+        <!--System Metrics Bar-->
         <section class="overview-section">
             <p class="tagline">LIVE SYSTEM DASHBOARD</p>
             <h2 class="title">Donation Network Overview</h2>
             <div class="metrics-grid">
-                <!-- Camp metric -->
+                <!--Active Camps Card-->
                 <a href="camps.php" class="metric-card highlight-green">
                     <div class="card-top"><span>Active Camps</span> <i class="fa-regular fa-flag"></i></div>
                     <div class="card-num"><?php echo number_format($campCount); ?></div>
                     <span class="trend">Click here for more...</span>
                 </a>
 
-                <!-- Emergency metric -->
+                <!--Emergency Requests Card-->
                 <a href="emergency-requests.php" class="metric-card highlight-card">
                     <div class="card-top"><span>Emergency Requests</span> <i class="fa-regular fa-message"></i></div>
                     <div class="card-num"><?php echo number_format($requestCount); ?></div>
@@ -163,7 +227,7 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
             </div>
         </section>
 
-        <!-- Donor banner -->
+        <!-- Cards for emergency -->
         <section class="action-card-banner">
             <div class="banner-img">
                 <img src="images/card1.png" alt="Become a Donor">
@@ -178,7 +242,6 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
             </div>
         </section>
 
-        <!-- Emergency banner -->
         <section class="action-card-banner reverse-layout">
             <div class="banner-img">
                 <img src="images/card2.png" alt="Urgent Blood Assistance">
@@ -194,7 +257,7 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
             </div>
         </section>
 
-        <!-- Featured camps -->
+        <!--Featured Camps (Dynamic Cards from Database)-->
         <section class="campaign-spotlight">
             <div class="spotlight-head">
                 <div>
@@ -207,20 +270,20 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
             <div class="camps-grid-custom">
                 <?php if (!empty($featuredCamps)): ?>
                     <?php foreach ($featuredCamps as $camp): 
-                        // Camp title
+                        // Camp Title
                         $cName = !empty($camp['camp_name']) ? $camp['camp_name'] : 
-                                   (!empty($camp['name']) ? $camp['name'] : 
-                                   (!empty($camp['title']) ? $camp['title'] : 'Blood Donation Drive'));
+                                 (!empty($camp['name']) ? $camp['name'] : 
+                                 (!empty($camp['title']) ? $camp['title'] : 'Blood Donation Drive'));
 
-                        // Camp date
+                        // Camp Date
                         $cDate = !empty($camp['camp_date']) ? $camp['camp_date'] : 
-                                   (!empty($camp['date']) ? $camp['date'] : 'Upcoming');
+                                 (!empty($camp['date']) ? $camp['date'] : 'Upcoming');
 
                         // Location
                         $cLoc = !empty($camp['location']) ? $camp['location'] : 
                                 (!empty($camp['address']) ? $camp['address'] : 'Local Community Center');
 
-                        // Contact info
+                        // Conatact details
                         $cContact = !empty($camp['contact_no']) ? $camp['contact_no'] : 
                                     (!empty($camp['contact']) ? $camp['contact'] : 
                                     (!empty($camp['phone']) ? $camp['phone'] : '1990'));
@@ -269,7 +332,7 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
             </div>
         </section>
 
-        <!-- Stock levels -->
+        <!--Blood level-->
         <section class="stock-dashboard-section">
             <p class="tagline text-center">REAL TIME RESERVE STATUS</p>
             <h2 class="title text-center">Current Blood Stock Levels</h2>
@@ -317,7 +380,7 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
             </div>
         </section>
 
-        <!-- Map section -->
+        <!--Sri Lanka Map Using leaflet js-->
         <section class="nearby-section">
             <div class="map-header-flex">
                 <div>
@@ -334,18 +397,17 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
         </section>
     </main>
 
-  <!-- Footer -->
   <footer class="footer-section">
     <div class="full-screen-container footer-content">
       <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
     </div>
   </footer>
 
-    <!-- Leaflet JS -->
+    <!--Leaflet JS Map-->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/map.js"></script>
 
-    <!-- Stock update -->
+    <!-- Real-time Blood Stock Live Update -->
     <script>
     async function loadLiveStockFromDB() {
         try {
@@ -398,7 +460,7 @@ if ($resFeatured && $resFeatured->num_rows > 0) {
     document.addEventListener('DOMContentLoaded', loadLiveStockFromDB);
     </script>
 
-    <!-- Mobile menu -->
+    <!-- Mobile Hamburger toggole-->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const menuBtn = document.getElementById('mobileMenuBtn');

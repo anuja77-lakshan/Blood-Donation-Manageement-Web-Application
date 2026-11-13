@@ -31,18 +31,7 @@ if (!isset($_SESSION['staff_logged_in']) || $_SESSION['staff_logged_in'] !== tru
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Staff Authentication - BloodLink</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        body { background-color: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
-        .login-box { background: #ffffff; padding: 35px; border-radius: 12px; border: 1px solid #e2e8f0; width: 100%; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
-        h2 { color: #ef3446; margin-bottom: 8px; font-weight: 800; font-size: 1.5rem; }
-        p { color: #64748b; font-size: 0.9rem; margin-bottom: 24px; }
-        input[type="password"] { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; margin-bottom: 16px; outline: none; }
-        input[type="password"]:focus { border-color: #ef3446; }
-        .btn-submit { width: 100%; padding: 12px; background: #ef3446; color: #fff; border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; }
-        .btn-submit:hover { background: #d92636; }
-        .error { color: #dc2626; background: #fee2e2; padding: 10px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 16px; font-weight: 600; }
-    </style>
+    <link rel="stylesheet" href="css/admin_stock.css">
 </head>
 <body>
     <div class="login-box">

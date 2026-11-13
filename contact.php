@@ -8,20 +8,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
   <link rel="stylesheet" href="css/contact.css" />
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="header-section">
+    <header class="header-section">
     <div class="full-screen-container navbar">
       <a href="home.php" class="brand-logo">
         <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
 
-      <!-- Desktop nav -->
+      <!-- Desktop Navigation -->
       <ul class="nav-links">
         <li><a href="home.php">Home</a></li>
         <li><a href="dashboard.php">Dashboard</a></li>
@@ -29,13 +30,13 @@
         <li><a href="contact.php" class="active">Contact</a></li>
       </ul>
 
-      <!-- Mobile toggle -->
+      <!-- Mobile Hamburger Button -->
       <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
 
-    <!-- Mobile drawer -->
+    <!-- Mobile Dropdown Drawer -->
     <div id="mobile-menu" class="mobile-menu menu-closed">
       <nav class="mobile-nav">
         <a href="home.php">Home</a>
@@ -46,10 +47,8 @@
     </div>
   </header>
 
-  <!-- Main content -->
   <main class="main-content">
     
-    <!-- Hero section -->
     <section class="hero-section reveal-on-scroll">
       <h1 class="hero-title">GET IN TOUCH WITH <span class="text-red">BLOODLINK.</span></h1>
       <p class="hero-subtitle">
@@ -57,10 +56,8 @@
       </p>
     </section>
 
-    <!-- Contact grid -->
     <div class="contact-grid">
       
-      <!-- Channels column -->
       <div class="channels-column reveal-on-scroll">
         <div class="section-badge">CONTACT CHANNELS</div>
         <h2 class="section-title">REACH US DIRECTLY</h2>
@@ -110,7 +107,6 @@
 
         </div>
 
-        <!-- Social links -->
         <div class="social-section">
           <span class="social-label">FOLLOW OUR NETWORK</span>
           <div class="social-icons-group">
@@ -127,7 +123,6 @@
         </div>
       </div>
 
-      <!-- Form container -->
       <div class="form-container reveal-on-scroll">
         <div class="section-badge">ONLINE INQUIRY</div>
         <h2 class="section-title">SEND US A MESSAGE</h2>
@@ -163,7 +158,6 @@
     </div>
   </main>
 
-  <!-- Emergency banner -->
   <section class="emergency-banner reveal-on-scroll">
     <div class="emergency-container">
       <div class="emergency-text-group">
@@ -187,7 +181,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer-section reveal-on-scroll">
     <div class="full-screen-container footer-content">
       <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
@@ -196,7 +189,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Mobile menu
+      // Mobile Menu
       const menuToggle = document.getElementById('mobile-menu-toggle');
       const mobileMenu = document.getElementById('mobile-menu');
 
@@ -214,7 +207,7 @@
         });
       }
 
-      // Scroll observer
+      // Scroll Animations
       const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -228,7 +221,6 @@
         revealObserver.observe(element);
       });
 
-      // Form submit
       const contactForm = document.getElementById('contactForm');
       if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
