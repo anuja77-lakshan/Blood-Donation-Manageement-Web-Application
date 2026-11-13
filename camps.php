@@ -1,17 +1,17 @@
 <?php
 session_start();
 
-// Check login status for user and admin
+// Check auth
 $is_user_logged_in  = isset($_SESSION['user_email']);
 $is_admin_logged_in = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true;
 
-// Block unauthorized access
+// Block access
 if (!$is_user_logged_in && !$is_admin_logged_in) {
     header("Location: login-register.php#login");
     exit();
 }
 
-// Set display name and dashboard target based on role
+// Set details
 if ($is_admin_logged_in) {
     $user_display_name = 'Administrator';
     $dashboard_link    = 'admin_dashboard.php';
@@ -27,13 +27,13 @@ if ($is_admin_logged_in) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BloodLink - Upcoming Blood Camps</title>
   
-  <!-- Font Awesome Icons -->
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Leaflet Map CSS -->
+  <!-- Map CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-  <!-- Google Fonts -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Custom CSS -->
@@ -41,7 +41,7 @@ if ($is_admin_logged_in) {
 </head>
 <body>
 
-  <!-- Top Full Width Navbar -->
+  <!-- Navbar -->
   <header class="header-section">
     <div class="full-screen-container navbar">
       <a href="home.php" class="brand-logo">
@@ -49,10 +49,10 @@ if ($is_admin_logged_in) {
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
 
-      <!-- Desktop Navigation -->
+      <!-- Desktop nav -->
       <ul class="nav-links">
         <?php if (!$is_admin_logged_in): ?>
-          <!-- Visible only for regular users -->
+          <!-- User link -->
           <li><a href="home.php">Home</a></li>
         <?php endif; ?>
 
@@ -60,19 +60,19 @@ if ($is_admin_logged_in) {
         <li><a href="camps.php" class="active">Camps</a></li>
 
         <?php if (!$is_admin_logged_in): ?>
-          <!-- Visible only for regular users -->
+          <!-- User link -->
           <li><a href="contact.php">Contact</a></li>
         <?php endif; ?>
 
         <li>
           <?php if ($is_admin_logged_in): ?>
-            <!-- Disabled link for admin -->
+            <!-- Admin link -->
             <span class="user-greeting" style="cursor: default; pointer-events: none;">
               <i class="fa-regular fa-circle-user"></i>
               <span><?php echo htmlspecialchars($user_display_name); ?></span>
             </span>
           <?php else: ?>
-            <!-- Active link for user -->
+            <!-- User link -->
             <a href="personal-account.php" class="user-greeting">
               <i class="fa-regular fa-circle-user"></i>
               <span><?php echo htmlspecialchars($user_display_name); ?></span>
@@ -81,17 +81,17 @@ if ($is_admin_logged_in) {
         </li>
       </ul>
 
-      <!-- Mobile Hamburger Button -->
+      <!-- Mobile toggle -->
       <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
 
-    <!-- Mobile Dropdown Drawer -->
+    <!-- Mobile drawer -->
     <div id="mobile-menu" class="mobile-menu menu-closed">
       <nav class="mobile-nav">
         <?php if (!$is_admin_logged_in): ?>
-          <!-- Visible only for regular users -->
+          <!-- User link -->
           <a href="home.php">Home</a>
         <?php endif; ?>
 
@@ -99,18 +99,18 @@ if ($is_admin_logged_in) {
         <a href="camps.php">Camps</a>
 
         <?php if (!$is_admin_logged_in): ?>
-          <!-- Visible only for regular users -->
+          <!-- User link -->
           <a href="contact.php">Contact</a>
         <?php endif; ?>
 
         <?php if ($is_admin_logged_in): ?>
-          <!-- Disabled mobile link for admin -->
+          <!-- Admin link -->
           <span class="mobile-user-link" style="cursor: default; pointer-events: none;">
             <i class="fa-regular fa-circle-user"></i>
             <span><?php echo htmlspecialchars($user_display_name); ?></span>
           </span>
         <?php else: ?>
-          <!-- Active mobile link for user -->
+          <!-- User link -->
           <a href="personal-account.php" class="mobile-user-link">
             <i class="fa-regular fa-circle-user"></i>
             <span><?php echo htmlspecialchars($user_display_name); ?></span>
@@ -120,10 +120,10 @@ if ($is_admin_logged_in) {
     </div>
   </header>
 
-  <!-- Main Full Screen Content -->
+  <!-- Main content -->
   <main class="full-screen-container main-content">
     
-    <!-- Title & Add Button Row -->
+    <!-- Title row -->
     <div class="page-title-row">
       <div class="title-group">
         <div class="section-tag hero-badge-animate">Save a Life Today</div>
@@ -135,23 +135,23 @@ if ($is_admin_logged_in) {
       </a>
     </div>
 
-    <!-- 100% Full-Width Search Input -->
+    <!-- Search input -->
     <div class="search-box hero-desc-animate">
       <i class="fa-solid fa-magnifying-glass"></i>
       <input type="text" id="searchInput" placeholder="Search by camp name, organization name or location...">
     </div>
 
-    <!-- Scrollable Cards Slider (Dynamic Content via JS) -->
+    <!-- Cards slider -->
     <div class="camps-carousel-wrap reveal-on-scroll">
       <button class="arrow-btn prev" id="prevBtn" title="Previous"><i class="fa-solid fa-chevron-left"></i></button>
       
-      <!-- Cards will be dynamically injected here from MySQL Database -->
+      <!-- Dynamic cards -->
       <div class="camps-slider" id="campsSlider"></div>
 
       <button class="arrow-btn next" id="nextBtn" title="Next"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
 
-    <!-- Nearby Camps Map Section -->
+    <!-- Map section -->
     <div class="map-section reveal-on-scroll">
       <div class="map-header">
         <span class="vertical-bar"></span>
@@ -169,13 +169,13 @@ if ($is_admin_logged_in) {
     </div>
   </footer>
 
-  <!-- Leaflet Map JS -->
+  <!-- Map script -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Custom JS -->
   <script src="js/map.js"></script>
-  
   <script src="js/camps.js"></script>
   <script>
+    // Menu toggle
     document.addEventListener('DOMContentLoaded', () => {
       const menuToggle = document.getElementById('mobile-menu-toggle');
       const mobileMenu = document.getElementById('mobile-menu');

@@ -20,14 +20,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {$_SESSION = array()
     exit();
 }
 
-// Check if user is logged in as admin
+// Auth check
 if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
-    // Redirect unauthorized users back to login page
+    // Redirect login
     header("Location: login.php#admin");
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +44,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
 
   <div class="admin-wrapper">
 
-    <!-- Navbar -->
+    <!-- Top navbar -->
     <header class="admin-topbar">
       <div class="topbar-left">
         <a href="admin_dashboard.php" class="brand-logo">
@@ -69,7 +68,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
 
     <main class="dashboard-body">
 
-      <!-- Page Header -->
+      <!-- Page header -->
       <div class="page-header">
         <div>
           <span class="section-badge hero-badge-animate">
@@ -84,6 +83,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
         </div>
       </div>
 
+      <!-- Instruction card -->
       <section class="instruction-card reveal-on-scroll">
         <div class="instruction-head">
           <div class="instruction-title-wrap">
@@ -124,7 +124,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
         </div>
       </section>
 
-      <!-- 3 Cards -->
+      <!-- Portal cards -->
       <section class="portal-cards-grid reveal-on-scroll">
         
         <div class="portal-card">
@@ -215,13 +215,14 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     </main>
   </div>
 
+  <!-- Page footer -->
   <footer class="footer-section reveal-on-scroll">
     <div class="full-screen-container footer-content">
       <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <!-- Search Modal for User History -->
+  <!-- Search modal -->
   <div id="userHistoryModal" class="modal-backdrop">
     <div class="modal-dialog">
       <div class="modal-header">
@@ -247,13 +248,14 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     </div>
   </div>
 
-  <!-- Toast Notification -->
+  <!-- Toast alert -->
   <div id="adminToast">
     <i class="fa-solid fa-circle-check" style="color: #10b981; font-size: 16px;"></i>
     <span id="toastMsg">Action completed successfully.</span>
   </div>
 
   <script>
+    // Open modal
     function openHistoryModal() {
       document.getElementById('userHistoryModal').classList.add('active');
       document.getElementById('donorUserIdInput').value = '';
@@ -261,10 +263,12 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
       document.getElementById('donorUserIdInput').focus();
     }
 
+    // Close modal
     function closeHistoryModal() {
       document.getElementById('userHistoryModal').classList.remove('active');
     }
 
+    // Backdrop click
     window.onclick = function(event) {
       const modal = document.getElementById('userHistoryModal');
       if (event.target === modal) {
@@ -272,12 +276,14 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
       }
     };
 
+    // Enter key submit
     document.getElementById('donorUserIdInput').addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
         searchUserHistory();
       }
     });
 
+    // Fetch history
     function searchUserHistory() {
       const userId = document.getElementById('donorUserIdInput').value.trim();
       const resultArea = document.getElementById('searchResultArea');
@@ -336,6 +342,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
         });
     }
 
+    // Show toast
     function showToast(message) {
       const toast = document.getElementById('adminToast');
       const toastMsg = document.getElementById('toastMsg');
@@ -348,7 +355,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
       }, 3200);
     }
 
-    // Reveal on scroll for footer
+    // Scroll reveal
     document.addEventListener('DOMContentLoaded', function() {
       const reveals = document.querySelectorAll('.reveal-on-scroll');
       if ('IntersectionObserver' in window) {

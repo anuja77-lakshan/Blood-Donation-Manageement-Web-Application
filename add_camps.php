@@ -1,7 +1,6 @@
 <?php
 session_start();
-// Check if user is logged in, otherwise default to Guest
-$user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Guest';
+$user_display_name = $_SESSION['user_name'] ?? 'Guest';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,27 +9,24 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Blood Camp - BloodLink</title>
 
-  <!-- Font Awesome Icons for UI Elements -->
+  <!-- Icons & Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Leaflet Map CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
-  <!-- Google Fonts: Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <!-- Custom Stylesheet -->
+  
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="css/add_camps.css">
 </head>
 <body>
 
-  <!-- Top Full Width Navbar -->
+  <!-- Header -->
   <header class="header-section">
     <div class="full-screen-container navbar">
       <a href="home.php" class="brand-logo">
-        <img src="images/bloodlink_logo.png" alt="BloodLink Logo" class="brand-logo-img">
+        <img src="images/bloodlink_logo.png" alt="Logo" class="brand-logo-img">
         <span class="brand-logo-text">BLOODLINK</span>
       </a>
+
       <ul class="nav-links">
         <li><a href="home.php">Home</a></li>
         <li><a href="dashboard.php">Dashboard</a></li>
@@ -44,13 +40,12 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
         </li>
       </ul>
 
-      <!-- Mobile Hamburger Button -->
       <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle navigation">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
 
-    <!-- Mobile Dropdown Drawer -->
+    <!-- Mobile Drawer -->
     <div id="mobile-menu" class="mobile-menu menu-closed">
       <nav class="mobile-nav">
         <a href="home.php">Home</a>
@@ -65,10 +60,9 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
     </div>
   </header>
 
-  <!-- Main Content Container -->
+  <!-- Main Section -->
   <main class="full-screen-container form-main">
     
-    <!-- Navigation Back Link -->
     <a href="camps.php" class="back-link">
       <i class="fa-solid fa-arrow-left"></i> Back to Camps
     </a>
@@ -80,7 +74,7 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
         <p class="sub-text hero-desc-animate">Fill in the details below to register and publish a new blood donation camp event.</p>
       </div>
 
-      <!-- Add Camp Form -->
+      <!-- Camp Form -->
       <form action="php/save_camp.php" method="POST" enctype="multipart/form-data">
         
         <div class="form-row">
@@ -114,30 +108,30 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
           <input type="text" id="campLocation" name="campLocation" placeholder="e.g., Community Hall, Main Street, Colombo" required>
         </div>
 
-        <!-- Google Maps Location Link Input -->
+        <!-- Map URL Input -->
         <div class="form-group full-width" style="margin-top: 10px; margin-bottom: 12px;">
-          <label for="mapUrl">Google Maps Location Link <span style="font-weight: normal; color: #64748b;">(Paste google map link or click in the map)</span></label>
+          <label for="mapUrl">Google Maps Location Link <span style="font-weight: normal; color: #64748b;">(Paste link or click map)</span></label>
           <div style="position: relative;">
-            <input type="text" id="mapUrl" placeholder="Paste Google Maps location link here (e.g., https://maps.app.goo.gl/... or https://maps.google.com/...)" 
-                   style="width: 100%; padding-right: 36px;">
+            <input type="text" id="mapUrl" placeholder="Paste Google Maps link (e.g., https://maps.app.goo.gl/...)" style="width: 100%; padding-right: 36px;">
             <i class="fa-solid fa-location-crosshairs" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 16px;"></i>
           </div>
           <span id="mapStatusText" style="font-size: 12px; margin-top: 5px; display: none; font-weight: 600;"></span>
         </div>
 
-        <!-- Hidden Coordinates for save_camps.php-->
+        <!-- Hidden Coords -->
         <input type="hidden" id="latitude" name="latitude">
         <input type="hidden" id="longitude" name="longitude">
 
-        <!-- Map Preview-->
+        <!-- Map Preview -->
         <div class="form-group full-width" style="margin-top: 0; margin-bottom: 25px;">
           <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <span>Selected Location Preview</span>
-            <span style="font-size: 11px; font-weight: normal; color: #64748b;">Drag pin or click on the map</span>
+            <span style="font-size: 11px; font-weight: normal; color: #64748b;">Drag pin or click map</span>
           </label>
           <div id="campPickerMap" style="width: 100%; height: 280px; border-radius: 12px; border: 1.5px solid #cbd5e1; z-index: 1;"></div>
         </div> 
         
+        <!-- Cover Upload -->
         <div class="form-group full-width">
           <label>Cover Image (Upload)</label>
           <div class="file-dropzone">
@@ -150,6 +144,7 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
           </div>
         </div>
 
+        <!-- Submit Actions -->
         <div class="form-actions hero-actions-animate">
           <a href="camps.php" class="btn-cancel">Cancel</a>
           <button type="submit" class="btn-submit">
@@ -159,15 +154,13 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
 
       </form>
     </div>
-
   </main>
 
-  <!-- Leaflet Map JS -->
+  <!-- Scripts -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <!-- Custom JS -->
   <script src="js/add_camps.js"></script>
-
   <script>
+    // Mobile menu toggle logic
     document.addEventListener('DOMContentLoaded', () => {
       const menuToggle = document.getElementById('mobile-menu-toggle');
       const mobileMenu = document.getElementById('mobile-menu');
@@ -178,11 +171,7 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
           mobileMenu.classList.toggle('menu-closed', !isOpen);
           
           const icon = menuToggle.querySelector('i');
-          if (isOpen) {
-            icon.classList.replace('fa-bars', 'fa-xmark');
-          } else {
-            icon.classList.replace('fa-xmark', 'fa-bars');
-          }
+          icon.classList.replace(isOpen ? 'fa-bars' : 'fa-xmark', isOpen ? 'fa-xmark' : 'fa-bars');
         });
       }
     });
