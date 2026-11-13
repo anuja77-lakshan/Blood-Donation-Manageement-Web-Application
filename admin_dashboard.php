@@ -94,7 +94,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
           </div>
         </div>
         <p class="instruction-desc hero-desc-animate">
-          Manage donors, blood stock, and check-ins from one place. Use the 3 tools below:
+          Manage donors, blood stock, and checkins from one place. Use the 3 tools below:
         </p>
 
         <div class="instruction-steps">
@@ -221,7 +221,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     </div>
   </footer>
 
-  <!-- Search Modal for User History -->
+  <!--User history Search Modal  -->
   <div id="userHistoryModal" class="modal-backdrop">
     <div class="modal-dialog">
       <div class="modal-header">
@@ -247,7 +247,6 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     </div>
   </div>
 
-  <!-- Toast Notification -->
   <div id="adminToast">
     <i class="fa-solid fa-circle-check" style="color: #10b981; font-size: 16px;"></i>
     <span id="toastMsg">Action completed successfully.</span>
