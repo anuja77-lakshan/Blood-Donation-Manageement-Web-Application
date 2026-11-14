@@ -31,7 +31,7 @@ if (!isset($_SESSION['staff_logged_in']) || $_SESSION['staff_logged_in'] !== tru
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Staff Authentication - BloodLink</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/admin_stock.css">
+    <link rel="stylesheet" href="../css/admin_stock_login.css">
 </head>
 <body>
     <div class="login-box">
@@ -59,24 +59,7 @@ endif;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloodLink - Hospital Stock Management (Admin)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        body { background-color: #f8fafc; padding: 40px 20px; color: #0f1115; }
-        .admin-container { max-width: 750px; margin: 0 auto; background: #ffffff; padding: 35px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0; }
-        .user-tag { font-size: 0.9rem; color: #64748b; }
-        .logout-btn { background: #fee2e2; color: #ef3446; text-decoration: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 0.85rem; }
-        .logout-btn:hover { background: #fca5a5; }
-        h2 { font-size: 1.6rem; color: #ef3446; margin-bottom: 8px; font-weight: 800; }
-        p { color: #64748b; font-size: 0.95rem; margin-bottom: 25px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .stock-control { background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0; }
-        .stock-header { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 10px; font-size: 1.1rem; }
-        .stock-slider { width: 100%; accent-color: #ef3446; cursor: pointer; }
-        .btn-save { margin-top: 25px; width: 100%; padding: 14px; background: #ef3446; color: #fff; border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.2s ease; }
-        .btn-save:hover { background: #d92636; }
-        .success-msg { display: none; margin-top: 15px; padding: 12px; background: #dcfce7; color: #166534; border-radius: 6px; text-align: center; font-weight: 600; font-size: 0.95rem; }
-    </style>
+    <link rel="stylesheet" href="../css/admin_stock_page.css">
 </head>
 <body>
 

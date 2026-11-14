@@ -607,6 +607,13 @@ ul {
         font-size: 12px;
         line-height: 1.4;
     }
+    .container {
+    width: 100%;
+    max-width: 1440px; 
+    margin: 0 auto;
+    padding-left: clamp(20px, 4vw, 70px);
+    padding-right: clamp(20px, 4vw, 70px);
+}
 }
 
 @media (max-width: 576px) {
