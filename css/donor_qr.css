@@ -31,7 +31,7 @@ body {
     background-color: var(--page-bg);
     color: var(--text-main);
     line-height: 1.6;
-    padding-bottom: 50px;
+    padding-bottom: none;
 }
 
 /* Layout */

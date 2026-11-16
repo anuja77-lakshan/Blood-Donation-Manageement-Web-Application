@@ -44,7 +44,7 @@ $secureToken = generateDonorToken((int)$donor['id']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Donor Pass - BloodLink</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/donor_qr.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- QRCode.js Library CDN -->
@@ -335,10 +335,7 @@ $secureToken = generateDonorToken((int)$donor['id']);
                         <span style="color: var(--text-muted, #64748b);">Donor ID:</span>
                         <strong>#BL-<?= str_pad($donor['id'], 4, '0', STR_PAD_LEFT); ?></strong>
                     </div>
-                    <div class="donor-meta-row">
-                        <span style="color: var(--text-muted, #64748b);">Security:</span>
-                        <strong style="color: var(--success, #10b981);">HMAC Anti-Spoof Active</strong>
-                    </div>
+                    
                 </div>
 
                 <div class="actions">

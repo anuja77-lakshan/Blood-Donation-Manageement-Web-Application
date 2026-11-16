@@ -8,7 +8,7 @@ require_once __DIR__ . '/config/db.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital QR Scanner - BloodLink</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/donor_qr.css">
 
     <!-- HTML5-QRCode Library CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>

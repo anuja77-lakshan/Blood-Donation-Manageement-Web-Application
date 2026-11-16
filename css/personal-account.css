@@ -293,6 +293,26 @@ body {
     text-decoration: none;
 }
 
+/* Logout Button Styles & Hover Effect */
+.logout-btn {
+    align-self: flex-end;
+    text-decoration: none;
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1.5px solid var(--primary-color);
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(234, 24, 34, 0.25);
+}
+
 .personal-details span {
     font-weight: 500;
     color: black;
