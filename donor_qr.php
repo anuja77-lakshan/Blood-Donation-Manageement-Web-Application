@@ -333,7 +333,13 @@ $secureToken = generateDonorToken((int)$donor['id']);
                     </div>
                     <div class="donor-meta-row">
                         <span style="color: var(--text-muted, #64748b);">Donor ID:</span>
-                        <strong>#BL-<?= str_pad($donor['id'], 4, '0', STR_PAD_LEFT); ?></strong>
+                            <strong>
+                                <?php if (isset($donor['id'])): ?>
+                                    #BL-<?= str_pad($donor['id'], 4, '0', STR_PAD_LEFT); ?>
+                                <?php else: ?>
+                                    #BL-0000 (ID Not Found)
+                                <?php endif; ?>
+                            </strong>
                     </div>
                     
                 </div>

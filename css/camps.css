@@ -505,4 +505,114 @@ html, body {
 
 .mobile-nav a {
   text-decoration: none;
-  color
+  color: #334155;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+}
+
+.mobile-nav a:hover,
+.mobile-nav a.active {
+  color: var(--primary);
+}
+
+.mobile-user-link {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  color: #0f1115 !important;
+  margin-top: 6px;
+  font-weight: 700 !important;
+}
+
+.mobile-user-link i {
+  color: var(--primary);
+  font-size: 18px;
+}
+
+/* Footer */
+.footer-section {
+  width: 100%;
+  background-color: #000000;
+  color: #a3a3a3;
+  padding: 24px 0;
+  border-top: 1px solid #1a1a1a;
+}
+
+.footer-content {
+  text-align: center;
+}
+
+.footer-content p {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+
+/* Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-badge-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
+.hero-title-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both; }
+.hero-desc-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.40s both; }
+.hero-actions-animate { animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.52s both; }
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .camp-card {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}
+
+@media (max-width: 768px) {
+  .camp-card {
+    flex: 0 0 100%;
+  }
+
+  .page-title-row {
+    flex-direction: column;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+
+  .footer-section {
+    padding: 18px 0;
+  }
+
+  .footer-content p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .arrow-btn.prev { left: 4px; }
+  .arrow-btn.next { right: 4px; }
+}
