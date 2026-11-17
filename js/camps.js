@@ -103,9 +103,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const displayTime = `${formatTime(camp.start_time)} – ${formatTime(camp.end_time)}`;
                 const cleanImagePath = camp.cover_image ? camp.cover_image.replace(/^(\.\.\/)+/, '') : 'images/card1.png';
 
+                // Check ownership or admin status for X (Delete) button
+                const currentUserId = window.currentUser ? window.currentUser.id : 0;
+                const isAdmin = window.currentUser ? window.currentUser.isAdmin : false;
+                const isOwnerOrAdmin = isAdmin || (currentUserId && parseInt(currentUserId, 10) === parseInt(camp.created_by, 10));
+
+                const deleteBtnHtml = isOwnerOrAdmin ? `
+                    <button type="button" class="card-delete-x" data-id="${camp.id}" title="Delete Camp">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                ` : '';
+
                 const card = document.createElement('div');
                 card.className = 'camp-card';
+                card.style.position = 'relative';
                 card.innerHTML = `
+                    ${deleteBtnHtml}
                     <div class="card-img-wrap">
                       <img src="${cleanImagePath}" alt="${camp.camp_name}" onerror="this.src='images/card1.png'">
                       <span class="badge ${badgeClass}">${badgeText}</span>
@@ -124,6 +137,40 @@ document.addEventListener('DOMContentLoaded', () => {
                       </div>
                     </div>
                 `;
+
+                // Handle AJAX Delete on X click
+                const deleteBtn = card.querySelector('.card-delete-x');
+                if (deleteBtn) {
+                    deleteBtn.addEventListener('click', async () => {
+                        if (!confirm('Do you really want to delete this blood camp?')) return;
+
+                        const campId = deleteBtn.getAttribute('data-id');
+                        try {
+                            const formData = new FormData();
+                            formData.append('camp_id', campId);
+
+                            const res = await fetch('php/delete_camp.php', {
+                                method: 'POST',
+                                body: formData
+                            });
+                            const result = await res.json();
+
+                            if (result.status === 'success') {
+                                // Smoothly remove card from UI without reloading page
+                                card.style.transition = 'all 0.3s ease';
+                                card.style.transform = 'scale(0.8)';
+                                card.style.opacity = '0';
+                                setTimeout(() => card.remove(), 300);
+                            } else {
+                                alert(result.message || 'Failed to delete camp.');
+                            }
+                        } catch (err) {
+                            console.error('Delete error:', err);
+                            alert('An error occurred while deleting.');
+                        }
+                    });
+                }
+
                 slider.appendChild(card);
             });
 

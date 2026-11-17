@@ -2,6 +2,7 @@
 session_start();
 // Check if user is logged in, otherwise default to Guest
 $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Guest';
+$current_user_id   = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,6 +84,9 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
       <!-- Add Camp Form -->
       <form action="php/save_camp.php" method="POST" enctype="multipart/form-data">
         
+        <!-- Hidden field to pass the current user's ID for camp creation tracking -->
+        <input type="hidden" name="created_by" value="<?php echo htmlspecialchars($current_user_id); ?>">
+
         <div class="form-row">
           <div class="form-group">
             <label for="campName">Camp Name <span>*</span></label>

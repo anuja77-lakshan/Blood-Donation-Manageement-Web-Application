@@ -19,6 +19,8 @@ if ($is_admin_logged_in) {
     $user_display_name = $_SESSION['user_name'] ?? 'Guest';
     $dashboard_link    = 'dashboard.php';
 }
+
+$current_user_id = $_SESSION['user_id'] ?? 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -168,6 +170,14 @@ if ($is_admin_logged_in) {
       <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
     </div>
   </footer>
+
+  <!-- Pass Session User Info to JavaScript -->
+  <script>
+    window.currentUser = {
+      id: <?php echo json_encode($current_user_id); ?>,
+      isAdmin: <?php echo json_encode($is_admin_logged_in); ?>
+    };
+  </script>
 
   <!-- Leaflet Map JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
