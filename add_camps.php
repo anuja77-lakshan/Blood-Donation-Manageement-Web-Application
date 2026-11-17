@@ -98,6 +98,12 @@ $current_user_id   = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
           </div>
         </div>
 
+        <!--Helpline Number-->
+        <div class="form-group full-width">
+          <label for="helplineNumber">Helpline / Contact Number <span>*</span></label>
+          <input type="text" id="helplineNumber" name="helplineNumber" placeholder="Enter Helpline Number" required>
+        </div>
+
         <div class="form-row three-cols">
           <div class="form-group">
             <label for="campDate">Date <span>*</span></label>
