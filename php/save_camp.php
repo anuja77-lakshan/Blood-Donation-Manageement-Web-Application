@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get input values
     $campName     = isset($_POST['campName']) ? trim($_POST['campName']) : '';
     $orgName      = isset($_POST['orgName']) ? trim($_POST['orgName']) : '';
+    $helpline     = isset($_POST['helplineNumber']) ? trim($_POST['helplineNumber']) : '1990';
     $campDate     = isset($_POST['campDate']) ? $_POST['campDate'] : '';
     $startTime    = isset($_POST['startTime']) ? $_POST['startTime'] : '';
     $endTime      = isset($_POST['endTime']) ? $_POST['endTime'] : '';
@@ -47,8 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $sql = "INSERT INTO blood_camps (camp_name, org_name, camp_date, start_time, end_time, location, latitude, longitude, cover_image) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO blood_camps (camp_name, org_name, contact_no, camp_date, start_time, end_time, location, latitude, longitude, cover_image) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
 
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Query prepare failed: " . $conn->error);
     }
     
-    $stmt->bind_param("ssssssdds", $campName, $orgName, $campDate, $startTime, $endTime, $campLocation, $latitude, $longitude, $imagePath);
+    $stmt->bind_param("sssssssdds", $campName, $orgName, $helpline, $campDate, $startTime, $endTime, $campLocation, $latitude, $longitude, $imagePath);
     
     if ($stmt->execute()) {
         header("Location: ../camps.php");
