@@ -18,27 +18,6 @@ require_once 'php/db.php';
 // User login name
 $userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Donor';
 
-// Visitor Tracking in Page 
-$conn->query("CREATE TABLE IF NOT EXISTS site_visitors (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    ip_address VARCHAR(100) NOT NULL,
-    visit_date DATE NOT NULL,
-    visited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE KEY unique_visit (ip_address, visit_date)
-)");
-
-$visitor_ip = !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
-$today_date = date('Y-m-d');
-
-// Record current visit
-$conn->query("INSERT IGNORE INTO site_visitors (ip_address, visit_date) VALUES ('$visitor_ip', '$today_date')");
-
-// Today's count
-$todayVisitors = 1;
-$resVisitors = $conn->query("SELECT COUNT(*) as total FROM site_visitors WHERE visit_date = '$today_date'");
-if ($resVisitors && $row = $resVisitors->fetch_assoc()) {
-    $todayVisitors = max(1, (int)$row['total']);
-}
 
 // Registered Donors Count
 $donorCount = 0;
