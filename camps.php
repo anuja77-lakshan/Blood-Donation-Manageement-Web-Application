@@ -164,12 +164,14 @@ $current_user_id = $_SESSION['user_id'] ?? 0;
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer-section">
-    <div class="full-screen-container footer-content">
-      <p>&copy; 2026 BloodLink. All Rights Reserved.</p>
+<!-- Footer -->
+<footer style="background-color: #050505; padding: 20px 0; width: 100%; text-align: center; margin-top: 40px; border-top: 1px solid #222;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <p style="margin: 0; color: #a0a0a0; font-size: 14px; font-family: Arial, sans-serif;">
+            &copy; 2026 BloodLink. All Rights Reserved.
+        </p>
     </div>
-  </footer>
+</footer>
 
   <!-- Pass Session User Info to JavaScript -->
   <script>
