@@ -51,7 +51,7 @@ $user_display_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'G
             outline: none !important;
             box-shadow: none !important;
             font-size: 24px;
-            color: #0f172a;
+            color: #111b32;
             cursor: pointer;
             padding: 4px;
             align-items: center;
